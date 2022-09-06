@@ -16,22 +16,22 @@
 #'
 #' @examples
 #' \dontrun{
-#' rf_csvbatch()
+#' rs_csvbatch()
 #' }
 #'
 #'
 #'
-rf_csvbatch <- function(input = "", outdir = "", outtype = "csv",  printgraph = TRUE){
+rs_csvbatch <- function(input = "", outdir = "", outtype = "csv",  printgraph = TRUE){
 
   # Read in the data from the files.
   ## A file is selected and all files in the folder matching the file extension will be loaded as a batch.
   ## The reffinder data is then calculated on these.
-  data <- rf_reffinder(rf_loadtxtdata())
+  data <- rs_reffinder(rs_loadtxtdata())
 
   # Selecting an output folder.
 
   if(outdir == ""){
-    outdir <- rfoutdirselect()
+    outdir <- rsoutdirselect()
   }
 
 
@@ -55,18 +55,18 @@ rf_csvbatch <- function(input = "", outdir = "", outtype = "csv",  printgraph = 
 
     ####
     # Get the desired type of graph from the user
-    graphtype <- rfgraphtypeselect()
+    graphtype <- rsgraphtypeselect()
 
     if(graphtype == "single"){
       # For single/individual graphs one for each data set must be created
       for (i in 1: length(nms)) {
 
         #temp <- data[i]
-        rf_graph(data[[i]], paste(outdir, "/", nms[i], sep = ""), outputPng = TRUE, forceSingle = TRUE)
+        rs_graph(data[[i]], paste(outdir, "/", nms[i], sep = ""), outputPng = TRUE, forceSingle = TRUE)
       }
 
     } else if(graphtype == "multi"){
-      rf_graph(data, paste(outdir, "/", paste(nms,collapse = '-'), sep = ""), outputPng = TRUE)
+      rs_graph(data, paste(outdir, "/", paste(nms,collapse = '-'), sep = ""), outputPng = TRUE)
     }
     ########
   }

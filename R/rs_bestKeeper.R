@@ -11,12 +11,12 @@
 #' ct_vals <- data.frame(matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20))
 #'
 #' names(ct_vals) <- c("gene1", "gene2", "gene3", "gene4", "gene5")
-#' bks <- rf_bestKeeper(ct_vals)
+#' bks <- rs_bestKeeper(ct_vals)
 #' bks
 #'
 #' @references Pfaffl MW, Tichopad A, Prgomet C, Neuvians TP. 2004. Determination of stable housekeeping genes, differentially regulated target genes and sample integrity: BestKeeper--Excel-based tool using pair-wise correlations. Biotechnology letters 26:509-515.
 #'
-rf_bestKeeper <- function(expression){
+rs_bestKeeper <- function(expression){
 
   # Make sure the input is in the form of a data frame
   input <- as.data.frame(expression)
@@ -38,11 +38,11 @@ rf_bestKeeper <- function(expression){
     bk[i,2] <- mean(abs(input[,i]-mean(input[,i])))
   }
 
-  bk <- rforderbystability(bk)
+  bk <- rsorderbystability(bk)
 
 
   # Write the ranking column
-  bk <- rfaddstabilityrank(bk, 2)
+  bk <- rsaddstabilityrank(bk, 2)
 
   return(bk)
 
