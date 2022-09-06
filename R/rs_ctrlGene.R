@@ -9,7 +9,7 @@
 # #' @note  This function was originally published by Shanliang Zhong as part of th ctrlGene package.
 # #' In this function, rounding of the rz table values has been removed for better ranking of the stabilities.
 # #'
-# #' This function has been deprecated please use rf_bestkeeperful() or see the ctrlGene package documentation for more functions pertaining to bestKeeper
+# #' This function has been deprecated please use rs_bestkeeperful() or see the ctrlGene package documentation for more functions pertaining to bestKeeper
 # #'
 # #' @param expression a matrix of expression levels. Each row corresponds to a sample and each column to a gene.
 # #' @param ctVal a logical value indicating data type. If ct-values are input, ctVal=TRUE, otherwise, ctVal=FALSE.
@@ -33,11 +33,11 @@
 # #'
 # #' names(ct_vals) <- c("gene1", "gene2", "gene3", "gene4", "gene5")
 # #'
-# #' rf_cpSta(ct_vals)
+# #' rs_cpSta(ct_vals)
 # #'
 # #' @importFrom psych geometric.mean
 # #'
-# rf_cpSta <- function (expression, ctVal = TRUE)
+# rs_cpSta <- function (expression, ctVal = TRUE)
 # {
 #   if (!ctVal) {
 #     expression = log2(expression)
@@ -70,7 +70,7 @@
 
 #' Determines stability of genes
 #'
-#' This function is a wrapper calling the bestKeeper function from the ctrlGene package which combines the results of rf_cpSta(), pearsonCor() and bki().
+#' This function is a wrapper calling the bestKeeper function from the ctrlGene package which combines the results of rs_cpSta(), pearsonCor() and bki().
 #'
 #' @note This function was originally published by Shanliang Zhong as part of th ctrlGene package.
 #'
@@ -83,14 +83,14 @@
 #' Pfaffl MW, Tichopad A, Prgomet C, Neuvians TP. Biotechnol Lett (2004) <doi: 10.1023/B:BILE.0000019559.84305.47>
 #' @examples
 #'
-#' data(rf_miRNA)
+#' data(rs_miRNA)
 #'
 #'
-#' rf_bestKeeperFull(as.data.frame(rf_miRNA))
-#' rf_bestKeeperFull(rf_miRNA)
+#' rs_bestKeeperFull(as.data.frame(rs_miRNA))
+#' rs_bestKeeperFull(rs_miRNA)
 #'
 #'
-rf_bestKeeperFull=function(expression,ctVal=TRUE)
+rs_bestKeeperFull=function(expression,ctVal=TRUE)
 {
   if(class(expression)[1] != "data.frame"){
     expression <- as.data.frame(expression)
@@ -109,10 +109,10 @@ rf_bestKeeperFull=function(expression,ctVal=TRUE)
 #                                                                                ctVal), HKG.vs.BestKeeper = bki(expression, ctVal))
 # return(rz)
 #
-# expression <- as.data.frame(as.data.frame(rf_miRNA))
+# expression <- as.data.frame(as.data.frame(rs_miRNA))
 #
-# rf_be
+# rs_be
 
 
-# test <- as.data.frame(rf_miRNA)
+# test <- as.data.frame(rs_miRNA)
 # class(test)
