@@ -1,0 +1,141 @@
+
+
+
+Center dialog boxes
+
+##############
+
+- Add tissue to all graphs, running multiraph will produce both kinds dependant on the input
+
+
+
+##############
+
+rf_graph - if filename is empty do not output png
+	reduces parameters
+
+
+
+
+
+
+rf_graph AND rf_graph2 has a problem when tissues are not named - FIXED write test next
+
+set.seed(100)
+ct_vals1 <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
+set.seed(200)
+ct_vals2 <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
+set.seed(300)
+ct_vals3 <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
+
+
+dimnames(ct_vals1)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
+dimnames(ct_vals2)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
+dimnames(ct_vals3)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
+
+
+ct_vals <- list(ct_vals1, ct_vals2, ct_vals3)
+ct_vals <- list(t1 = ct_vals1, t2 = ct_vals2, t3 = ct_vals3)
+
+rffndr <- rf_reffinder(ct_vals)
+reffinderlist <- rffndr
+reffinderlist <- reffinderlist[1]
+
+rf_graph2(rffndr, forceSingle = T)
+rf_graph2(rffndr, "testsetrand", forceSingle = T)
+
+#############################
+
+
+
+# rf_graph2
+  
+  - if filename is empty do not output png
+	reduces parameters
+  
+  set.seed(100)
+  ct_vals <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
+  dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
+  ## Not run: 
+  rffndr <- rf_reffinder(ct_vals)
+  
+  rf_graph2(rffndr, filename, outputPng = TRUE)
+  
+  ## End(Not run)
+  
+  
+  ###
+  data(tble2)
+  ## Not run: 
+  rf_graph(rf_reffinder(tble2))
+  
+  ## End(Not run)
+  
+ Correct output but error was encountered:
+  
+This is a single dataset we will run a single graph
+A png file was created: /home/patrick/Skrivebord/Tissue1_2022-08-03.pngSomething went wrong. No tables eligable for reffinder graphs was found.
+The input table(s) needs to be an output from the rf_reffinder function
+-- Set a break inside each if statement
+
+
+######################
+
+report file path to pngs to user
+
+
+
+################################333
+
+when loading data test for propper structure of data eliminate datasets that do not conform and warn user.
+
+
+
+#################################
+
+
+rfgraph error when force single:
+> rfdata <- rf_loadexceldata()
+> refout <- rf_reffinder(rfdata)
+
+> rf_graph(refout, forceSingle = T)
+No file name provided, attempting to substract name
+New file name given
+list of lists, maybe more than one dataset
+Fresh_Frozen
+[1] "Comprehensive Rank"
+Error in reffinderlist[[3]] : subscript out of bounds
+
+
+#################################
+
+
+Updata vignettes for source package
+
+
+#################################
+
+
+
+Graph group naming could remove underscores
+
+set.seed(100)
+ct_vals <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
+dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
+
+Blood_Plasma_Tumor <- rf_reffinder(ct_vals)
+
+rf_graph(Blood_Plasma_Tumor)
+
+$$ Solved 
+
+#################################
+
+
+
+
+
+
+
+
+

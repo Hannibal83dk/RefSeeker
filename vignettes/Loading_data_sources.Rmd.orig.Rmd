@@ -1,0 +1,130 @@
+---
+title: "Loading excel data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Loading_data_sources}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(reffindeR)
+```
+
+
+## Prepare Data
+
+Before loading data from excel, the file first need to be prepared:
+
+- Each sheet must contain only one data data set
+
+- Each column must be representing a gene/target and each row representing an individual sample.
+
+- Each column must be named.
+
+- Row names must be excluded
+
+Note that missing data is discouraged since this has not been tested and verified
+
+
+<img src="excelsheetdata.png" title="Excel file data structure example" alt="Excel example" width="99%" style="display: block; margin: auto;" />
+
+
+To load data from an excel file use rf_loadeceldata function.
+
+
+```{r eval=FALSE}
+exceldata <- rf_loadexceldata()
+```
+
+A dialog window will appear, allowing for selecting a file for processing.
+
+<img src="selectexcelfile.png" title="Selecting file dialog" alt="Excel example" width="99%" style="display: block; margin: auto;" />
+
+Excel data can also be loaded via provided file´ path
+```{r }
+exceldata <- rf_loadexceldata("../inst/exdata/exceltest/Reffinder_data_test.xlsx")
+
+exceldata
+```
+
+
+
+The result returned from a successful loading of data will is a list containing the data sets loaded from each sheet.
+
+Each individual data set can be selected using the list index or name.
+
+```{r eval=FALSE}
+exceldata$Fresh_Frozen
+```
+or
+```{r}
+exceldata[[1]]
+```
+
+The data can now be analysed by each algorithm or reffinder
+
+```{r eval = FALSE}
+rf_normfinder(exceldata$Fresh_Frozen)
+```
+
+```{r}
+rf_genorm(exceldata$Fresh_Frozen)
+```
+```{r}
+rf_bestKeeper(exceldata$Fresh_Frozen)
+```
+
+```{r}
+rf_deltaCt(exceldata$Fresh_Frozen)
+```
+
+Using rf_reffinder() provides the option of calculating all data sets in one line. The function returns a list-of-lists of two tables for each set.
+
+```{r}
+rfresults <- rf_reffinder(exceldata)
+rfresults
+
+```
+
+As can be seen on the output two table are created from each data set.
+- A stability table containing the stability values provided by each algorithm and reffinder.
+- A rank table containing the ranking of each gene/target from each algorithm.
+
+From here the results can be exported to new excel files, one excel file per data set will be created
+
+```{r}
+rf_exceltable(rfresults$Fresh_Frozen, "../inst/exdata/VignettesOutputs/excel_results", addDate = TRUE)
+
+```
+
+To create graphical representations of the data the rf_graph functions can be used.
+
+```{r fig.asp = 1, fig.width = 9, out.width="99%", fig.align='center'}
+
+rf_graph2(rfresults)
+
+```
+
+To create graph for each of the data sets use the forceSingle switch.
+To create a png file containing the graph, the outputPng must be set to TRUE. A file name can be provided to direct the output to a selected location.
+
+```{r fig.asp = 1, fig.width = 9, out.width="99%", fig.align='center'}
+
+rf_graph2(rfresults, "../inst/exdata/VignettesOutputs/FFPE_excel_results", outputPng = TRUE, forceSingle = TRUE)
+
+```
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

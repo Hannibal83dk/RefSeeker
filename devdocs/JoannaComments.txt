@@ -1,0 +1,87 @@
+Great job!!!
+
+	Some comments:
+	1.	Maybe a name of the package should be re-considered, as it is really close to RefFinder. Sometimes it might create problems.
+	2.	Regarding a batch of experiments. Preparing an excel file with multiple sheets can be a time-consuming task, it will be much easier for a potential user to provide a list of files, by for example:
+		filelist = list.files(pattern = "name.txt") and running next command that it will process all the files. The outcome of most of the software can be saved as a txt file and it will be a huge plus, if the user could avoid creating excel file.
+	3.	What about showing the options of creating nice, ready-to-publish tables?
+	
+	library(kableExtra)
+	library(flextable)
+	
+	rf_results$rankTable %>%    kbl() %>% kable_styling()
+	rf_results$rankTable %>% flextable() %>% theme_vanilla() %>% autofit() %>% save_as_docx(path="H:/miRNAvalidation/Reffinder_projects/rankTable.docx") 
+	
+	4.	Minor things: 
+		a.	the names of algorithms are written in a different way:
+			i.	In a vignette: It uses the RefFinder method which includes a stabilities calculated by four different algorithms: Normfinder, geNorm, bestKeeper and delta-Ct. 
+			ii.	When it creates tables: Delta Ct Bestkeeper Normfinder Genorm Comprehensive Rank
+				So it needs to be unified. Moreover, there should not be spaces for example: not Delta Ct, but Delta-Ct (or whatever name you decide for)
+		XX b.	You wrote “And viola! Now you can select the targets with the lowest stability value as refference genes for your expression studies”. Did you mean French voilà/voila:https://www.merriam-webster.com/dictionary/voil%C3%A0 
+		XX c.	There are some spelling errors, for example: No parameters is required, should be are required. If you send a description as a file, I can add more comments.
+
+
+
+##################
+
+
+Multigraph:
+Warning message:
+Unknown or uninitialised column: `stabilityTable`. -> rf_reffinder() has not been used to calculate stabilities. raw data input.
+
+
+Implement option to do batch as single data graph or as multigraph.
+	- maybe also option for outputting to a single excelfile/csv
+
+
+
+rf_graph need some check to see if a graph was initiated. if any of the ifs were activated
+
+
+
+rf_loadcsvdata:
+	- Some control over file extensions and which files are loaded from a given folder.
+		- all files in a folder is loaded and processed similarly
+	- Maybe a dialog to select files, or folders.
+
+
+
+
+
+
+
+
+ 											     rf_loaddata
+												 /     \	
+											      /	  \
+											     /	   \
+										    load csv	    load excel
+										        /   \           /	\
+										       /     \         /	 \
+											/       \       /		  \
+										   batch	single  single	Batch
+											\	   \	   /
+											 \	    \	  /
+											  \	  reffinder
+											   \		|
+												 single graph
+													|	
+												single excel or csv
+
+
+
+rf_graph:
+	- Add a lineshift between messages from the graphwrapper and the graph output message
+		> rf_graph(refResults, "TestOutput/refGraph", outputPng = TRUE)
+		I see multible data sets we should run the multigraphA png file was created: TestOutput/refGraph_2022-07-07.png
+
+
+
+
+csv batch:
+	- Add graph to batch output 
+
+
+
+
+

@@ -1,0 +1,28 @@
+Package: refSeeker
+Type: Package
+Title: A RefFinder stability ranking tool
+Version: 0.9.4
+Author: Patrick H.D. Petersen
+Maintainer: Patrick H.D. Petersen <dalsbo83@gmail.com>
+Description: Simple calculation and extraction of expression stablity and stablity ranking based on the RefFinder method.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.1
+# Remotes: 
+#    url: :http://moma.dk/files/r.NormOldStab5.txt
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Imports: 
+    ctrlGene,
+    ggplot2,
+    reshape2,
+    readxl,
+    openxlsx,
+    data.table
+Depends: 
+    R (>= 2.10)
+VignetteBuilder: knitr
+Config/testthat/edition: 3

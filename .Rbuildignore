@@ -1,0 +1,14 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^Output$
+^.*\.orig
+^doc$
+^Meta$
+^R\BuildScript.R
+^mantests
+^.*\vignettes\figure
+^JoannaComments.txt
+^.*\R\Normfinder2.R
+^devdocs$
+

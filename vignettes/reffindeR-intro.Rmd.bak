@@ -1,0 +1,157 @@
+---
+title: "Obtain stability ranking from raw expression data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Obtain stability ranking from raw expression data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+
+
+
+
+The reffindeR package provides a convenient way of analyzing target stabilities from raw Cp/Ct/Cq values expression data of set of samples.
+It uses the RefFinder method which includes a stabilities calculated by four different algorithms: Normfinder, geNorm, bestKeeper and delta-Ct.
+The target stabilities are then ranked and a geometric mean of the ranking from each algorithm is then calculated as the comprehensive ranking.
+
+The package include functions for easy import of raw data, extraction of stability values for each algorithm and an easy way of exporting these data either for further use. Either in the form of excel files or as csv files.
+
+After installation the library is loaded as all other packages.
+
+
+```r
+library(reffindeR)
+```
+
+
+The function contained in the RefFinder package has all been given the prefix "rf". Function that are meant to be used by user has the prefix "rf_".
+The "rf" without the underscore are mostly helpers for the other functions.
+
+
+## Data input requirements
+
+Input data can be loaded in various ways as long as the following requirements are met:
+
+- Needs to be in the form of matrices, data frames or a tibbles.
+
+- Each column must be representing a gene/target and each row representing an individual sample.
+
+- Each column must be named.
+
+- Row names must be excluded
+
+
+## Analysing a single expreiment
+
+A randomly generated example can be seen below:
+
+
+```r
+set.seed(100)
+ct_vals <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
+dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
+ct_vals
+#>          gene1    gene2    gene3    gene4    gene5
+#>  [1,] 24.49781 24.56191 24.89837 24.73800 25.89682
+#>  [2,] 25.13153 25.76406 26.40320 24.93116 24.95000
+#>  [3,] 24.92108 25.26196 23.22322 24.62112 23.65465
+#>  [4,] 25.88678 25.77340 25.62287 27.58196 23.06879
+#>  [5,] 25.11697 24.18562 24.47772 25.12983 25.70958
+#>  [6,] 25.31863 24.56155 26.32223 24.28698 24.84209
+#>  [7,] 24.41821 24.27978 24.63656 25.63799 25.21637
+#>  [8,] 25.71453 25.23094 26.31907 25.20169 25.81736
+#>  [9,] 24.17474 23.84227 25.04378 24.93008 26.72718
+#> [10,] 24.64014 25.24708 23.12134 24.90751 24.89623
+#> [11,] 25.08989 24.90889 24.55294 25.44890 24.44288
+#> [12,] 25.09627 26.75738 23.26140 23.93564 26.42830
+#> [13,] 24.79837 24.86207 25.17886 23.83758 24.10704
+#> [14,] 25.73984 24.88881 26.89747 26.64852 23.84243
+#> [15,] 25.12338 24.30999 22.72807 22.93790 24.46970
+#> [16,] 24.97068 24.77821 25.98046 25.01275 27.44568
+#> [17,] 24.61115 25.18291 23.60117 23.91247 24.16750
+#> [18,] 25.51086 25.41732 26.82487 25.27054 25.41352
+#> [19,] 24.08619 26.06540 26.38130 26.00845 23.82132
+#> [20,] 27.31030 25.97020 24.16115 22.92560 23.82597
+```
+
+To obtain the RefFinder results all just run:
+
+
+```r
+rf_results <- rf_reffinder(ct_vals)
+#> Warning in utils::download.file("https://moma.dk/files/r.NormOldStab5.txt", : URL https://moma.dk/files/r.NormOldStab5.txt: cannot open destfile '/media/patrick/Storage/
+#> reffindeR/exdata/r.NormOldStab5.txt', reason 'No such file or directory'
+#> Warning in utils::download.file("https://moma.dk/files/r.NormOldStab5.txt", : download had nonzero exit status
+#> Warning in file(filename, "r", encoding = encoding): cannot open file '/media/patrick/Storage/reffindeR/exdata/r.NormOldStab5.txt': No such file or directory
+#> Error in file(filename, "r", encoding = encoding): cannot open the connection
+rf_results
+#> Error in eval(expr, envir, enclos): object 'rf_results' not found
+```
+
+This produces a list of two tables. A table containing target stability values for each algorithm and a ranking table that ranks the most stable from 1 to N number of targets.
+
+
+To create an excel file containing the tables:
+
+```r
+rf_exceltable(rf_results, "./output/folder/sample_excel_tables")
+```
+
+The two tables will appear in the excel file as separate sheets with filter options.
+
+
+
+For a nice visualization of the stabilities, use:
+
+
+```r
+rf_graph(rf_results)
+#> Error in rf_graph(rf_results): object 'rf_results' not found
+```
+
+
+To print the graph as a Png file, just add a file name and set outputPng = TRUE:
+
+
+```r
+rf_graph(rf_results, "./output/folder/Sample stability", outputPng = TRUE)
+
+```
+
+
+Et voilà! Now you can select the targets with the lowest stability value as reference genes for your expression studies
+
+
+## Analysing a batch of experiments
+
+To analyse more sets in a batch, create an excel file containing one data set on each sheet, rename each sheet for easy identification of output files.
+run the following:
+
+```r
+rf_batchExcel()
+```
+
+No parameters are required, the wizard will guide you.
+
+- First a file select dialog window will appear - find and select the excel data file.
+
+- Second a dialog will appear to let you select an output folder - select working directory or browse for a folder.
+
+- Third excel files containing your stability and ranking tables and png-graphs will now appear in the selected output folder.
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
