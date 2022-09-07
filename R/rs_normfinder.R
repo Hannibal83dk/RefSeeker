@@ -98,7 +98,7 @@ rs_normfinder <- function(expression){
 rsadjustnmfRounding <- function(decimals = 3) {
 
   decimals <- as.character(decimals)
-  tx <- readLines(paste0(find.package("refSeeker", lib.loc = NULL, quiet = TRUE), "/exdata/r.NormOldStab5.txt"))
+  tx <- readLines(paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
 
   substring(tx[193], 41, 41) <- decimals
 
@@ -126,7 +126,7 @@ rsadjustnmfRounding <- function(decimals = 3) {
 
   substring(tx[196], 38, 38) <- decimals
 
-  writeLines(tx, con = paste0(find.package("refSeeker", lib.loc = NULL, quiet = TRUE), "/exdata/r.NormOldStab5.txt"))
+  writeLines(tx, con = paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
 
 }
 

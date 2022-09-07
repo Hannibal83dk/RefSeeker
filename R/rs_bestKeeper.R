@@ -2,6 +2,9 @@
 #'
 #' @param expression A matrix, data frame or tibble with columns for each genes and rows for each samples.
 #'
+#' @param decimals An integer value indicating result precision. Used for the rounding of results.
+#'
+#'
 #' @return A data frame with stability values - std dev +/- CP
 #' @export
 # #' @import ctrlGene
@@ -16,7 +19,7 @@
 #'
 #' @references Pfaffl MW, Tichopad A, Prgomet C, Neuvians TP. 2004. Determination of stable housekeeping genes, differentially regulated target genes and sample integrity: BestKeeper--Excel-based tool using pair-wise correlations. Biotechnology letters 26:509-515.
 #'
-rs_bestKeeper <- function(expression){
+rs_bestKeeper <- function(expression, decimals = 3){
 
   # Make sure the input is in the form of a data frame
   input <- as.data.frame(expression)
@@ -40,9 +43,12 @@ rs_bestKeeper <- function(expression){
 
   bk <- rsorderbystability(bk)
 
+  bk$MAD <- round(bk$MAD, digits = decimals)
 
   # Write the ranking column
   bk <- rsaddstabilityrank(bk, 2)
+
+
 
   return(bk)
 

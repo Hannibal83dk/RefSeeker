@@ -9,4 +9,7 @@
 library(testthat)
 library(refSeeker)
 
+# Setting HTTPUserAgent to prevent 406 unacceptable error when downloading Normfinder during tests
+options("HTTPUserAgent" = "RStudio Desktop (2022.7.1.554)")
+
 test_check("refSeeker")

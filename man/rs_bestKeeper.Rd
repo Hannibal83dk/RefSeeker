@@ -4,10 +4,12 @@
 \alias{rs_bestKeeper}
 \title{Calculates stabilites based on the bestKeeper method}
 \usage{
-rs_bestKeeper(expression)
+rs_bestKeeper(expression, decimals = 3)
 }
 \arguments{
 \item{expression}{A matrix, data frame or tibble with columns for each genes and rows for each samples.}
+
+\item{decimals}{An integer value indicating result precision. Used for the rounding of results.}
 }
 \value{
 A data frame with stability values - std dev +/- CP

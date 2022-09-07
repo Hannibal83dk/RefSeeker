@@ -4,10 +4,12 @@
 \alias{rs_genorm}
 \title{Gene expression stability by geNorm}
 \usage{
-rs_genorm(expression)
+rs_genorm(expression, decimals = 3)
 }
 \arguments{
 \item{expression}{A matrix, data frame or tibble with columns for each genes and rows for each samples.}
+
+\item{decimals}{An integer value indicating result precision. Used for the rounding of results.}
 }
 \value{
 Data frame with average pairwise variation for each gene

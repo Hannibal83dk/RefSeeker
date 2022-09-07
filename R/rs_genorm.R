@@ -5,7 +5,7 @@
 #'
 #'
 #' @param expression A matrix, data frame or tibble with columns for each genes and rows for each samples.
-#'
+#' @param decimals An integer value indicating result precision. Used for the rounding of results.
 #' @return Data frame with average pairwise variation for each gene
 #' @export
 #'
@@ -29,7 +29,7 @@
 #'
 #' @references Vandesompele J, De Preter K, Pattyn F, Poppe B, Van Roy N, De Paepe A, Speleman F. 2002. Accurate normalization of real-time quantitative RT-PCR data by geometric averaging of multiple internal control genes. Genome biology 3:RESEARCH0034.
 #'
-rs_genorm <- function(expression){
+rs_genorm <- function(expression, decimals = 3){
 
 
   gnex <- as.data.frame(expression)
@@ -43,7 +43,11 @@ rs_genorm <- function(expression){
 
   #gnrm <- rsorderbystability(gnrm)
 
+  gnrm$Avg.M <- round(gnrm$Avg.M, digits = decimals)
+
   gnrm <- rsaddstabilityrank(gnrm, 2)
+
+
 
   return(gnrm)
 
