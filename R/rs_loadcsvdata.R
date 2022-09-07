@@ -15,12 +15,12 @@
 #' @examples
 #'
 #' \dontrun{
-#' rf_loadcsvdata()
+#' rs_loadcsvdata()
 #' }
 #'
 #'
 #'
-rf_loadcsvdata <- function(filepath = ""){
+rs_loadcsvdata <- function(filepath = ""){
 
   # filepath = "./inst/exdata/csvtest/FFPE.csv"
 
@@ -84,12 +84,12 @@ rf_loadcsvdata <- function(filepath = ""){
 #' @examples
 #'
 #' \dontrun{
-#' rf_loadtxtdata()
+#' rs_loadtxtdata()
 #' }
 #'
 #'
 #'
-rf_loadtxtdata <- function(filepath = ""){
+rs_loadtxtdata <- function(filepath = ""){
 
   if(filepath == ""){
     filepath <- file.choose()

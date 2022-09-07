@@ -1,11 +1,11 @@
-# library(reffindeR)
+# library(refSeeker)
 #
 #
-# exceldata <- rf_loadexceldata()
+# exceldata <- rs_loadexceldata()
 #
 # file.choose()
 #
-# exceldata <- rf_loadexceldata("/media/patrick/Storage/reffindeR/inst/exdata/exceltest/Reffinder_data_test.xlsx")
+# exceldata <- rs_loadexceldata("/media/patrick/Storage/reffindeR/inst/exdata/exceltest/refSeeker_data_test.xlsx")
 #
 # exceldata$Fresh_Frozen
 # exceldata[[1]]
@@ -13,4 +13,4 @@
 #
 # rfder <- rf_reffinder(exceldata)
 #
-# rf_graph(rfder)
+# rs_graph(rfder)

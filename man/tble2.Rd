@@ -23,7 +23,7 @@ The web tool is provided by Fuliang Xie at github
 \examples{
 data(tble2)
 \dontrun{
-rf_reffinder(tble2)
+rs_reffinder(tble2)
 }
 
 }

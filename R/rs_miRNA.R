@@ -3,7 +3,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(rf_miRNA)
+#' @usage data(rs_miRNA)
 #'
 #' @format A tibble containing miRNA Cp values using miRNA ID as columns and samples as rows
 #'
@@ -12,14 +12,16 @@
 # #' @references Moore et al. (2013) Genetics 195:1077-1086
 # #' (\href{https://www.ncbi.nlm.nih.gov/pubmed/23979570}{PubMed})
 #'
-# #' @source \href{https://phenome.jax.org/projects/Moore1b}{QTL Archive}
+# #' @source
+#'
 #'
 #' @examples
 #'
-#' data(rf_miRNA)
+#'
+#' data(rs_miRNA)
 #'
 #' \dontrun{
-#' rf_reffinder(rf_miRNA)
+#' rs_reffinder(rs_miRNA)
 #' }
 
-"rf_miRNA"
+"rs_miRNA"

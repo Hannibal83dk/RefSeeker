@@ -11,7 +11,7 @@ test_that("deltaCt on matrix", {
 
   results <- data.frame(Target, `Average of STDEV`, `Stability Rank`, check.names = F)
 
-  expect_equal(rf_deltaCt(ct_vals), results)
+  expect_equal(rs_deltaCt(ct_vals), results)
 })
 
 
@@ -28,5 +28,5 @@ test_that("deltaCt on data.frame", {
 
   results <- data.frame(Target, `Average of STDEV`, `Stability Rank`, check.names = F)
 
-  expect_equal(rf_deltaCt(ct_vals), results)
+  expect_equal(rs_deltaCt(ct_vals), results)
 })

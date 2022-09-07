@@ -15,11 +15,11 @@
 #' @examples
 #'
 #' \dontrun{
-#' rf_loadexceldata()
+#' rs_loadexceldata()
 #' }
 #'
 #'
-rf_loadexceldata <- function(filepath = ""){
+rs_loadexceldata <- function(filepath = ""){
 
   datalist <- list()
 

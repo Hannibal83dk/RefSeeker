@@ -23,7 +23,7 @@
 #' @examples
 #' data(tble2)
 #' \dontrun{
-#' rf_reffinder(tble2)
+#' rs_reffinder(tble2)
 #' }
 #'
 

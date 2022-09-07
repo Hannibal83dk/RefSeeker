@@ -13,11 +13,11 @@ library(tcltk)
 #' @examples
 #'
 #'\dontrun{
-#' path <- rfoutdirselect()
+#' path <- rsoutdirselect()
 #'}
 #'
 #'
-rfoutdirselect <- function(){
+rsoutdirselect <- function(){
 
   dirselect <- ""
   dir <- tclVar("")
@@ -59,11 +59,11 @@ rfoutdirselect <- function(){
 #' @examples
 #'
 #'\dontrun{
-#' path <- rfoutdirselect()
+#' path <- rsoutdirselect()
 #'}
 #'
 #'
-rfgraphtypeselect <- function(){
+rsgraphtypeselect <- function(){
 
   selection <- ""
   dir <- tclVar("")
@@ -93,7 +93,7 @@ rfgraphtypeselect <- function(){
   return(selection)
 }
 
-#rfgraphtypeselect()
+#rsgraphtypeselect()
 
 
 
@@ -107,11 +107,11 @@ rfgraphtypeselect <- function(){
 #' @examples
 #'
 #'\dontrun{
-#' path <- rfoutdirselect()
+#' path <- rsoutdirselect()
 #'}
 #'
 #'
-rfexltypeselect <- function(){
+rsexltypeselect <- function(){
 
   selection <- ""
   dir <- tclVar("")
@@ -141,6 +141,6 @@ rfexltypeselect <- function(){
   return(selection)
 }
 
-# rfexltypeselect()
+# rsexltypeselect()
 
 

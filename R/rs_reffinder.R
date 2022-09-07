@@ -16,7 +16,7 @@
 #' dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 #'
 #' \dontrun{
-#' rffndr <- rffinder(ct_vals)
+#' rffndr <- rsfinder(ct_vals)
 #' rffndr
 #'
 #' }
@@ -27,10 +27,10 @@
 #'
 #'
 #'
-# data("rf_miRNA")
-# expression <- rf_miRNA
+# data("rs_miRNA")
+# expression <- rs_miRNA
 
-rffinder <- function(expression){
+rsfinder <- function(expression){
 
 
 
@@ -39,10 +39,10 @@ rffinder <- function(expression){
 
 
 
-  DC <- rf_deltaCt(expression)
-  GN <- rf_genorm(expression)
-  BK <- rf_bestKeeper(expression)
-  NF <- rf_normfinder(expression)
+  DC <- rs_deltaCt(expression)
+  GN <- rs_genorm(expression)
+  BK <- rs_bestKeeper(expression)
+  NF <- rs_normfinder(expression)
 
 
   names(DC) <- c("Gene", "Stability", "Rank")
@@ -130,7 +130,7 @@ rffinder <- function(expression){
 #'
 #' \dontrun{
 #'
-#' rffndr <- rf_reffinder(ct_vals)
+#' rffndr <- rs_reffinder(ct_vals)
 #' rffndr
 #'
 #' }
@@ -138,14 +138,14 @@ rffinder <- function(expression){
 # Add example with list
 #
 #
-rf_reffinder <- function(expression){
+rs_reffinder <- function(expression){
 
   if(class(expression)[1] == "list"){
 
     outputData <- list()
 
     for (i in 1:length(expression)){
-      outputData[[i]] <- rf_reffinder(expression[[i]])
+      outputData[[i]] <- rs_reffinder(expression[[i]])
       names(outputData)[i] <- names(expression)[i]
     }
 
@@ -153,7 +153,7 @@ rf_reffinder <- function(expression){
 
   }
 
-  return(rffinder(expression))
+  return(rsfinder(expression))
 
 }
 
