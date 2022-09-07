@@ -14,7 +14,7 @@
 #' ct_vals <- matrix(rnorm(5*20), ncol = 5, nrow = 20)
 #' dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 #'
-#' gnm <- rf_genorm(ct_vals)
+#' gnm <- rs_genorm(ct_vals)
 #' gnm
 #'
 #'########################
@@ -23,13 +23,13 @@
 #' ct_vals <- data.frame(matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20))
 #'
 #' names(ct_vals) <- c("gene1", "gene2", "gene3", "gene4", "gene5")
-#' gnm <- rf_genorm(ct_vals)
+#' gnm <- rs_genorm(ct_vals)
 #' gnm
 #'
 #'
 #' @references Vandesompele J, De Preter K, Pattyn F, Poppe B, Van Roy N, De Paepe A, Speleman F. 2002. Accurate normalization of real-time quantitative RT-PCR data by geometric averaging of multiple internal control genes. Genome biology 3:RESEARCH0034.
 #'
-rf_genorm <- function(expression){
+rs_genorm <- function(expression){
 
 
   gnex <- as.data.frame(expression)
@@ -41,9 +41,9 @@ rf_genorm <- function(expression){
 
   names(gnrm)[1] <- "Target"
 
-  #gnrm <- rforderbystability(gnrm)
+  #gnrm <- rsorderbystability(gnrm)
 
-  gnrm <- rfaddstabilityrank(gnrm, 2)
+  gnrm <- rsaddstabilityrank(gnrm, 2)
 
   return(gnrm)
 

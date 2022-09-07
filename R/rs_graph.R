@@ -2,7 +2,7 @@
 
 #' Wrapper for selecting single or multifaceted graph output.
 #'
-#' @param reffinderlist A reffinder list or a list of reffinder lists optained frpm rf_reffinder() function
+#' @param reffinderlist A reffinder list or a list of reffinder lists optained frpm rs_reffinder() function
 #' @param filename String. In case of outputPng == TRUE an optional file name may be selected. A relative path to output could also be included in file name
 #' @param outputPng Logical. Select whether to output the graph to a png file. if TRUE a file will be created in the working directory or a relative path given by file name.
 #' @param forceSingle If TRUE will make a single graph for each data set provided.
@@ -20,20 +20,20 @@
 #' ct_vals <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
 #' dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 #' \dontrun{
-#' rffndr <- rf_reffinder(ct_vals)
+#' rffndr <- rs_reffinder(ct_vals)
 #'
-#' rf_graph(rffndr)
+#' rs_graph(rffndr)
 #' }
 #'
 #'
 #' ###
 #' data(tble2)
 #' \dontrun{
-#' rf_graph(rf_reffinder(tble2))
+#' rs_graph(rs_reffinder(tble2))
 #' }
 #'
 
-rf_graph <- function(reffinderlist, filename = "", outputPng = FALSE, forceSingle = FALSE, width, height, units = "px", res = 250, ordering = "Comprehensive Rank"){
+rs_graph <- function(reffinderlist, filename = "", outputPng = FALSE, forceSingle = FALSE, width, height, units = "px", res = 250, ordering = "Comprehensive Rank"){
   # 2048, 2156, units = "px", res = 250
 
   # names <- names(reffinderlist)
@@ -65,7 +65,7 @@ rf_graph <- function(reffinderlist, filename = "", outputPng = FALSE, forceSingl
     cat("reffinderlist renamed\n")
 
     # cat("Creating graph\n")
-    # rf_graphmulti(reffinderlist, filename, outputPng)
+    # rs_graphmulti(reffinderlist, filename, outputPng)
 
     # cat("graph created\n")
   }
@@ -97,7 +97,7 @@ rf_graph <- function(reffinderlist, filename = "", outputPng = FALSE, forceSingl
 
 
 
-      rfgraphdraw(reffinderlist, filename, outputPng, width = width, height = height, units = "px", res = 250,  ordering = ordering)
+      rsgraphdraw(reffinderlist, filename, outputPng, width = width, height = height, units = "px", res = 250,  ordering = ordering)
 
     } else { # forceSingle is TRUE
 
@@ -117,7 +117,7 @@ rf_graph <- function(reffinderlist, filename = "", outputPng = FALSE, forceSingl
         cat(names[i])
         cat("\n")
 
-        rfgraphdraw(reffinderlist[i], paste(filename, names[i], sep = "_"), outputPng, width = width, height = height, units = "px", res = 250, ordering = ordering)
+        rsgraphdraw(reffinderlist[i], paste(filename, names[i], sep = "_"), outputPng, width = width, height = height, units = "px", res = 250, ordering = ordering)
       }
 
     }
@@ -128,7 +128,7 @@ rf_graph <- function(reffinderlist, filename = "", outputPng = FALSE, forceSingl
 
 }
 
-#rf_graph2(complex, outputPng = TRUE, forceSingle = TRUE)
+#rs_graph2(complex, outputPng = TRUE, forceSingle = TRUE)
 
 
 ##########################################################################
@@ -137,17 +137,17 @@ rf_graph <- function(reffinderlist, filename = "", outputPng = FALSE, forceSingl
 # dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 #
 #
-# exceldata <- rf_loadexceldata()
+# exceldata <- rs_loadexceldata()
 #
-# complex <- rf_reffinder(exceldata)
-#
-#
-#
-# simple <- rf_reffinder(ct_vals)
+# complex <- rs_reffinder(exceldata)
 #
 #
-# rfoutdirselect()
-# rf_graph2(simple, "/home/patrick/Skrivebord", )
+#
+# simple <- rs_reffinder(ct_vals)
+#
+#
+# rsoutdirselect()
+# rs_graph2(simple, "/home/patrick/Skrivebord", )
 
 # outputPng = TRUE
 #
@@ -155,7 +155,7 @@ rf_graph <- function(reffinderlist, filename = "", outputPng = FALSE, forceSingl
 #
 #
 #
-# simple <- rf_reffinder(ct_vals)
+# simple <- rs_reffinder(ct_vals)
 #
 # names(simple)
 # reffinderlist <- simple
@@ -200,19 +200,19 @@ rf_graph <- function(reffinderlist, filename = "", outputPng = FALSE, forceSingl
 #' ct_vals <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
 #' dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 #' \dontrun{
-#' rffndr <- rf_reffinder(ct_vals)
+#' rffndr <- rs_reffinder(ct_vals)
 #'
-#' rf_graphdraw(rffndr)
+#' rs_graphdraw(rffndr)
 #' }
 #'
 #'
 #' ###
 #' data(tble2)
 #' \dontrun{
-#' rf_graph(rf_reffinder(tble2))
+#' rs_graph(rs_reffinder(tble2))
 #' }
 
-rfgraphdraw <- function(reffinderlist, filename = "", outputPng = FALSE, width, height, units = "px", res = 250, ordering = "Comprehensive Rank"){
+rsgraphdraw <- function(reffinderlist, filename = "", outputPng = FALSE, width, height, units = "px", res = 250, ordering = "Comprehensive Rank"){
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop(

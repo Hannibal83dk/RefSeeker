@@ -16,13 +16,13 @@
 #' dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 #'
 #' \dontrun{
-#' rffndr <- rf_reffinder(ct_vals)
+#' rffndr <- rs_reffinder(ct_vals)
 #'
-#' rf_exceltable(rffndr)
+#' rs_exceltable(rffndr)
 #' }
 #'
 #'
-rf_exceltable <- function(reffinderlist, filename = "Stability-table", addDate = TRUE){
+rs_exceltable <- function(reffinderlist, filename = "Stability-table", addDate = TRUE){
 
   rfStability <- reffinderlist$stabilityTable
   rfRank <- reffinderlist$rankTable
@@ -31,7 +31,7 @@ rf_exceltable <- function(reffinderlist, filename = "Stability-table", addDate =
     filename <- paste(filename, Sys.Date(), sep = "")
   }
 
-  rfexcelfile(filename, rfStability, rfRank, overwrite = TRUE)
+  rsexcelfile(filename, rfStability, rfRank, overwrite = TRUE)
 
 }
 

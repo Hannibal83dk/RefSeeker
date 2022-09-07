@@ -20,7 +20,7 @@ rs_batchExcel <- function(){
 
   filepath <- file.choose()
 
-  outdir <- rfoutdirselect()
+  outdir <- rsoutdirselect()
 
   sheets <- excel_sheets(filepath)
 
@@ -67,16 +67,16 @@ rs_batchExcel2 <- function(input = "", outdir = "", printgraph = TRUE){
 
   rfres <- rs_reffinder(rs_loadexceldata(filepath))
 
-  outdir <- rfoutdirselect()
+  outdir <- rsoutdirselect()
 
 
   if(is.na(outdir)){outdir <- getwd()}
 
-  graphtype <- rfgraphtypeselect()
+  graphtype <- rsgraphtypeselect()
 
   nms <- names(rfres)
 
-  #exltype <- rfexltypeselect()
+  #exltype <- rsexltypeselect()
 
   if(graphtype == "single"){
 
