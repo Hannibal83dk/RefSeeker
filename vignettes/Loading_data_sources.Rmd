@@ -1,5 +1,5 @@
 ---
-title: "Loading excel data"
+title: "Loading expression data"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Loading_data_sources}
@@ -7,19 +7,32 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
-
-
-```r
-library(reffindeR)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
 
-## Prepare Data
+
+This vignette will show you how to prepare and import expression data into R using the refSeeker package.
+
+Data can be imported from several different file types, however, some requirements and limitations will be discussed for each type of file.
+
+Once data has been successfully loaded the stability analysis can be performed. Please refer to the <<INSERT NAME OF ANALYSIS VIGNETTE>> for further help with performing the stability analysis.
+
+```{r setup}
+library(refSeeker)
+```
+
+## Loading data from excel files
+
+### Prepare Data
 
 Before loading data from excel, the file first need to be prepared:
 
-- Each sheet must contain only one data data set
+- Each sheet must contain only one data set
 
 - Each column must be representing a gene/target and each row representing an individual sample.
 
@@ -33,194 +46,124 @@ Note that missing data is discouraged since this has not been tested and verifie
 <img src="excelsheetdata.png" title="Excel file data structure example" alt="Excel example" width="99%" style="display: block; margin: auto;" />
 
 
-To load data from an excel file use rf_loadeceldata function.
+To load data from an excel file use rs_loadexceldata function.
 
 
-
-```r
-exceldata <- rf_loadexceldata()
+```{r eval=FALSE}
+exceldata <- rs_loadexceldata()
 ```
 
 A dialog window will appear, allowing for selecting a file for processing.
 
 <img src="selectexcelfile.png" title="Selecting file dialog" alt="Excel example" width="99%" style="display: block; margin: auto;" />
 
-Excel data can also be loaded via provided file´ path
-
-```r
-exceldata <- rf_loadexceldata("../inst/exdata/exceltest/Reffinder_data_test.xlsx")
-#> Warning: internal error -3 in R_decompress1
-#> Error in eval(expr, envir, enclos): lazy-load database '/home/patrick/R/x86_64-pc-linux-gnu-library/4.2/reffindeR/R/reffindeR.rdb' is corrupt
+Excel data can also be loaded via provided file path
+```{r }
+exceldata <- rs_loadexceldata("../inst/exdata/vignetteInputs/Reffinder_data_test.xlsx")
 
 exceldata
-#> $Fresh_Frozen
-#> # A tibble: 19 × 10
-#>    UniSp2 UniSp4 UniSp6 `cel-miR-39-3p` UniSp3_IPC `hsa-miR-30c-5p` `hsa-miR-103a-3p` `hsa-miR-191-5p` `hsa-miR-23a-3p` `hsa-miR-451a`
-#>     <dbl>  <dbl>  <dbl>           <dbl>      <dbl>            <dbl>             <dbl>            <dbl>            <dbl>          <dbl>
-#>  1   26.4   33.4   18.3            26.9       18.9             24.7              23.8             25.3             22.7           28.1
-#>  2   25.9   33.5   18.8            27.2       18.9             25.1              24.9             26.0             23.4           26.4
-#>  3   24.7   32.5   19.5            27.8       18.8             23.9              23.3             26.6             22.8           28.5
-#>  4   25.5   32.7   18.7            27.1       18.9             24.2              23.1             25.2             22.9           29.4
-#>  5   26.0   33.2   19.2            27.7       18.9             25.5              24.0             27.1             24.8           28.2
-#>  6   27.0   34.5   19.6            27.9       18.7             26.8              24.5             25.6             24.8           29.9
-#>  7   25.8   32.8   18.7            26.9       18.8             24.4              23.1             24.9             23.2           29.8
-#>  8   25.2   31.8   18.4            26.8       18.7             22.7              23.7             24.9             22.5           28.2
-#>  9   25.7   33.4   18.6            27.0       18.8             24.1              23.7             25.5             23.5           29.1
-#> 10   25.4   33.3   18.7            27.1       18.6             24.4              23.8             23.8             22.9           28.5
-#> 11   25.7   33.4   18.5            27.0       19.1             23.3              22.9             26.0             22.7           28.1
-#> 12   27.0   34.1   19.6            27.8       18.5             24.2              24.3             25.1             23.0           27.9
-#> 13   25.3   32.4   18.8            27.0       18.8             23.6              23.9             25.1             24.1           28.4
-#> 14   25.8   33.0   18.6            26.8       18.6             24.7              24.8             27.0             24.6           29.6
-#> 15   27.4   35.1   18.8            27.1       18.8             25.6              23.9             26.6             26.1           29.6
-#> 16   26.4   34.6   18.7            27.2       18.6             24.5              24.7             25.9             23.0           29.1
-#> 17   26.7   34.6   18.6            26.7       19.1             24.7              25.6             26.7             23.7           28.2
-#> 18   25.5   32.8   19.6            27.6       18.7             24.9              24.3             25.9             23.6           27.6
-#> 19   25.5   32.5   19.6            27.9       18.7             25.2              25.3             25.5             22.6           26.5
-#> 
-#> $FFPE
-#> # A tibble: 20 × 10
-#>    UniSp2 UniSp4 UniSp6 `cel-miR-39-3p` UniSp3_IPC `hsa-miR-30c-5p` `hsa-miR-103a-3p` `hsa-miR-191-5p` `hsa-miR-23a-3p` `hsa-miR-451a`
-#>     <dbl>  <dbl>  <dbl>           <dbl>      <dbl>            <dbl>             <dbl>            <dbl>            <dbl>          <dbl>
-#>  1   24.9   32.4   19.6            28.3       18.8             27.1              25.6             27.8             26.1           31.5
-#>  2   25.0   32.3   19.2            27.8       18.9             27.4              27.6             28.9             26.5           31.5
-#>  3   24.6   32.2   19.5            27.9       18.8             26.5              25.3             28.1             25.7           31.9
-#>  4   23.8   31.0   18.7            27.0       18.7             25.8              25.3             27.2             24.6           32.4
-#>  5   24.1   31.5   19.0            27.9       18.8             27.3              25.5             28.3             26.2           32.1
-#>  6   24.8   32.1   19.8            28.1       18.7             28.4              26.5             27.7             27.1           33.6
-#>  7   23.8   31.3   19.0            27.5       18.6             26.1              24.9             26.7             24.7           31.2
-#>  8   24.8   32.0   18.4            27.9       18.7             26.8              27.6             28.8             26.2           32.9
-#>  9   24.2   31.2   18.9            27.4       18.7             26.5              25.9             27.9             25.9           28.8
-#> 10   26.4   33.5   18.7            27.4       18.8             28.0              28.2             28.1             26.9           33.5
-#> 11   23.1   31.0   18.7            27.2       19.0             25.8              25.3             27.9             24.9           32.0
-#> 12   24.4   31.7   18.8            27.1       18.8             25.7              25.9             26.6             24.8           28.9
-#> 13   26.7   33.2   19.0            27.3       18.7             28.2              28.1             29.7             28.6           33.4
-#> 14   24.9   32.1   19.5            27.7       18.8             26.6              26.2             28.6             26.2           31.1
-#> 15   25.3   32.6   19.6            27.9       18.7             27.0              25.0             28.0             27.1           27.5
-#> 16   24.9   31.7   19.6            27.7       18.8             26.6              26.6             27.8             24.9           29.0
-#> 17   25.5   32.7   19.4            27.8       18.9             25.8              26.5             27.5             24.3           27.3
-#> 18   25.6   33.4   19.1            27.8       19.0             26.7              28.0             28.8             26.0           29.4
-#> 19   25.4   32.9   18.7            27.1       18.9             24.5              27.9             27.9             25.4           27.3
-#> 20   25.6   32.7   19.0            27.3       19.0             26.3              27.0             26.7             24.1           29.1
-#> 
-#> $Plasma
-#> # A tibble: 20 × 10
-#>    UniSp2 UniSp4 UniSp6 `cel-miR-39-3p` UniSp3_IPC `hsa-miR-30c-5p` `hsa-miR-103a-3p` `hsa-miR-191-5p` `hsa-miR-23a-3p` `hsa-miR-451a`
-#>     <dbl>  <dbl>  <dbl>           <dbl>      <dbl>            <dbl>             <dbl>            <dbl>            <dbl>          <dbl>
-#>  1   22.2   29.8   18.1            27.1       18.3             31.0              28.4             28.9             27.9           26.4
-#>  2   21.0   28.3   18.5            27.0       18.4             28.4              26.1             26.5             26.0           25.2
-#>  3   21.0   28.5   18.7            27.1       18.3             26.8              23.7             24.5             23.2           25.2
-#>  4   21.5   28.9   18.7            27.0       18.4             28.8              25.5             25.4             25.2           26.9
-#>  5   22.5   29.6   18.4            26.8       18.5             30.1              27.7             28.0             27.2           27.1
-#>  6   19.5   26.8   18.6            27.1       18.6             24.9              22.7             23.7             22.6           22.1
-#>  7   23.2   30.1   18.5            26.8       18.8             28.7              25.6             26.6             26.1           26.6
-#>  8   22.4   30.0   18.8            27.2       18.6             30.5              27.8             27.9             27.2           26.1
-#>  9   21.7   28.3   18.6            27.0       18.7             24.4              21.0             22.4             21.9           23.9
-#> 10   22.2   28.7   18.5            26.8       18.7             27.5              24.2             25.4             24.5           25.4
-#> 11   20.5   27.7   18.6            26.7       18.2             25.2              22.3             23.7             22.3           26.8
-#> 12   22.3   29.1   18.8            26.9       18.7             28.4              25.6             26.1             25.5           25.5
-#> 13   22.6   28.9   19.0            27.0       18.8             26.5              23.1             24.4             23.6           26.9
-#> 14   22.6   29.6   18.7            27.0       18.7             27.9              24.9             26.0             25.2           27.5
-#> 15   22.0   29.6   18.7            26.8       18.8             28.2              26.2             27.0             26.5           26.7
-#> 16   22.5   29.6   18.8            27.1       18.7             26.7              24.1             25.4             24.4           25.6
-#> 17   20.9   28.1   19.2            26.7       18.2             25.9              23.2             24.3             23.2           25.4
-#> 18   19.1   26.6   18.0            26.3       18.1             25.0              22.7             23.4             21.9           23.4
-#> 19   20.7   28.2   17.9            26.8       18.1             26.6              25.5             25.8             25.1           22.2
-#> 20   21.4   29.0   18.2            26.3       18.2             28.4              26.4             26.8             25.8           26.5
 ```
 
 
 
-The result returned from a successful loading of data will is a list containing the data sets loaded from each sheet.
+The result returned from a successful loading of data is a list containing the data sets loaded from each sheet.
 
 Each individual data set can be selected using the list index or name.
 
-
-```r
+```{r eval=FALSE}
 exceldata$Fresh_Frozen
 ```
 or
-
-```r
+```{r}
 exceldata[[1]]
-#> # A tibble: 19 × 10
-#>    UniSp2 UniSp4 UniSp6 `cel-miR-39-3p` UniSp3_IPC `hsa-miR-30c-5p` `hsa-miR-103a-3p` `hsa-miR-191-5p` `hsa-miR-23a-3p` `hsa-miR-451a`
-#>     <dbl>  <dbl>  <dbl>           <dbl>      <dbl>            <dbl>             <dbl>            <dbl>            <dbl>          <dbl>
-#>  1   26.4   33.4   18.3            26.9       18.9             24.7              23.8             25.3             22.7           28.1
-#>  2   25.9   33.5   18.8            27.2       18.9             25.1              24.9             26.0             23.4           26.4
-#>  3   24.7   32.5   19.5            27.8       18.8             23.9              23.3             26.6             22.8           28.5
-#>  4   25.5   32.7   18.7            27.1       18.9             24.2              23.1             25.2             22.9           29.4
-#>  5   26.0   33.2   19.2            27.7       18.9             25.5              24.0             27.1             24.8           28.2
-#>  6   27.0   34.5   19.6            27.9       18.7             26.8              24.5             25.6             24.8           29.9
-#>  7   25.8   32.8   18.7            26.9       18.8             24.4              23.1             24.9             23.2           29.8
-#>  8   25.2   31.8   18.4            26.8       18.7             22.7              23.7             24.9             22.5           28.2
-#>  9   25.7   33.4   18.6            27.0       18.8             24.1              23.7             25.5             23.5           29.1
-#> 10   25.4   33.3   18.7            27.1       18.6             24.4              23.8             23.8             22.9           28.5
-#> 11   25.7   33.4   18.5            27.0       19.1             23.3              22.9             26.0             22.7           28.1
-#> 12   27.0   34.1   19.6            27.8       18.5             24.2              24.3             25.1             23.0           27.9
-#> 13   25.3   32.4   18.8            27.0       18.8             23.6              23.9             25.1             24.1           28.4
-#> 14   25.8   33.0   18.6            26.8       18.6             24.7              24.8             27.0             24.6           29.6
-#> 15   27.4   35.1   18.8            27.1       18.8             25.6              23.9             26.6             26.1           29.6
-#> 16   26.4   34.6   18.7            27.2       18.6             24.5              24.7             25.9             23.0           29.1
-#> 17   26.7   34.6   18.6            26.7       19.1             24.7              25.6             26.7             23.7           28.2
-#> 18   25.5   32.8   19.6            27.6       18.7             24.9              24.3             25.9             23.6           27.6
-#> 19   25.5   32.5   19.6            27.9       18.7             25.2              25.3             25.5             22.6           26.5
 ```
+
+## Loading data from csv, tsv or txt files
+
+# Prepare data
+
+To prepare data for import using text file based files it is recommended to create a separate folder to hold the data files.
+
+When loading data the load function will look for all the files of the same type in the folder containing the selected/provided file. This means that if a csv file is selected for import the function will try to import all csv files in that folder. This could lead to unwanted results if the wrong csv file is imported alongside the correct ones.
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
 
 The data can now be analysed by each algorithm or reffinder
 
-
-```r
-rf_normfinder(exceldata$Fresh_Frozen)
+```{r}
+rs_normfinder(exceldata$Fresh_Frozen)
 ```
 
-
-```r
-rf_genorm(exceldata$Fresh_Frozen)
-#> Warning: internal error -3 in R_decompress1
-#> Error in eval(expr, envir, enclos): lazy-load database '/home/patrick/R/x86_64-pc-linux-gnu-library/4.2/reffindeR/R/reffindeR.rdb' is corrupt
+```{r}
+rs_genorm(exceldata$Fresh_Frozen)
+```
+```{r}
+rs_bestKeeper(exceldata$Fresh_Frozen)
 ```
 
-```r
-rf_bestKeeper(exceldata$Fresh_Frozen)
-#> Warning: internal error -3 in R_decompress1
-#> Error in eval(expr, envir, enclos): lazy-load database '/home/patrick/R/x86_64-pc-linux-gnu-library/4.2/reffindeR/R/reffindeR.rdb' is corrupt
+```{r}
+rs_deltaCt(exceldata$Fresh_Frozen)
 ```
 
+Using rs_reffinder() provides the option of calculating all data sets in one line. The function returns a list-of-lists of two tables for each set.
 
-```r
-rf_deltaCt(exceldata$Fresh_Frozen)
-#> Warning: internal error -3 in R_decompress1
-#> Error in eval(expr, envir, enclos): lazy-load database '/home/patrick/R/x86_64-pc-linux-gnu-library/4.2/reffindeR/R/reffindeR.rdb' is corrupt
-```
+```{r}
+rsresults <- rs_reffinder(exceldata)
+rsresults
 
-Using rf_reffinder() provides the option of calculating all data sets in one line. The function returns a list-of-lists of two tables for each set.
-
-
-```r
-rf_reffinder(exceldata)
-#> Warning: internal error -3 in R_decompress1
-#> Error in eval(expr, envir, enclos): lazy-load database '/home/patrick/R/x86_64-pc-linux-gnu-library/4.2/reffindeR/R/reffindeR.rdb' is corrupt
 ```
 
 As can be seen on the output two table are created from each data set.
+
 - A stability table containing the stability values provided by each algorithm and reffinder.
+
 - A rank table containing the ranking of each gene/target from each algorithm.
 
 From here the results can be exported to new excel files, one excel file per data set will be created
 
+```{r}
+rs_exceltable(rsresults$Fresh_Frozen, "../inst/exdata/VignettesOutputs/excel_results", addDate = TRUE)
 
-```r
-rf_exceltable(exceldata[[1]], "../inst/exdata/VignettesOutputs/excel_results", addDate = TRUE)
-#> Warning: internal error -3 in R_decompress1
-#> Error in eval(expr, envir, enclos): lazy-load database '/home/patrick/R/x86_64-pc-linux-gnu-library/4.2/reffindeR/R/reffindeR.rdb' is corrupt
-
-
-getwd()
-#> [1] "/media/patrick/Storage/reffindeR/vignettes"
 ```
 
+To create graphical representations of the data the rs_graph() function can be used.
 
+```{r fig.asp = 1, fig.width = 9, out.width="99%", fig.align='center'}
 
+rs_graph(rsresults)
+
+```
+
+To create graph for each of the data sets use the forceSingle switch.
+To create a png file containing the graph, the outputPng must be set to TRUE. A file name can be provided to direct the output to a selected location.
+The hight and width of the graphs can be controlled by the arguments to rs_graph(): height and width 
+
+```{r fig.show='hide'}
+
+rs_graph(rsresults, "../inst/exdata/VignettesOutputs/refSeeker_excel_results", outputPng = TRUE, forceSingle = TRUE, width = 1024)
+
+```
+
+![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Fresh_Frozen_2022-09-08.png){width=30%} ![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_FFPE_2022-09-08.png){width=30%} ![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Plasma_2022-09-08.png){width=30%}
 <br>
 <br>
 <br>

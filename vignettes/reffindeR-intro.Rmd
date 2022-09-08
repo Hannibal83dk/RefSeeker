@@ -9,26 +9,30 @@ vignette: >
 
 
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
 
 
-
-The reffindeR package provides a convenient way of analyzing target stabilities from raw Cp/Ct/Cq values expression data of set of samples.
-It uses the RefFinder method which includes a stabilities calculated by four different algorithms: Normfinder, geNorm, bestKeeper and delta-Ct.
+The refSeeker package provides a convenient way of analyzing target stabilities from raw Cp/Ct/Cq values expression data of set of samples.
+It uses the refSeeker method which includes a stabilities calculated by four different algorithms: Normfinder, geNorm, bestKeeper and delta-Ct.
 The target stabilities are then ranked and a geometric mean of the ranking from each algorithm is then calculated as the comprehensive ranking.
 
 The package include functions for easy import of raw data, extraction of stability values for each algorithm and an easy way of exporting these data either for further use. Either in the form of excel files or as csv files.
 
 After installation the library is loaded as all other packages.
 
-
-```r
-library(reffindeR)
+```{r setup}
+library(refSeeker)
 ```
 
 
-The function contained in the RefFinder package has all been given the prefix "rf". Function that are meant to be used by user has the prefix "rf_".
-The "rf" without the underscore are mostly helpers for the other functions.
+The function contained in the refSeeker package has all been given the prefix "rs". Function that are meant to be used by user has the prefix "rs_".
+The "rs" without the underscore are mostly helpers for the other functions.
 
 
 ## Data input requirements
@@ -48,68 +52,26 @@ Input data can be loaded in various ways as long as the following requirements a
 
 A randomly generated example can be seen below:
 
-
-```r
+```{r data example 1}
 set.seed(100)
 ct_vals <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
 dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 ct_vals
-#>          gene1    gene2    gene3    gene4    gene5
-#>  [1,] 24.49781 24.56191 24.89837 24.73800 25.89682
-#>  [2,] 25.13153 25.76406 26.40320 24.93116 24.95000
-#>  [3,] 24.92108 25.26196 23.22322 24.62112 23.65465
-#>  [4,] 25.88678 25.77340 25.62287 27.58196 23.06879
-#>  [5,] 25.11697 24.18562 24.47772 25.12983 25.70958
-#>  [6,] 25.31863 24.56155 26.32223 24.28698 24.84209
-#>  [7,] 24.41821 24.27978 24.63656 25.63799 25.21637
-#>  [8,] 25.71453 25.23094 26.31907 25.20169 25.81736
-#>  [9,] 24.17474 23.84227 25.04378 24.93008 26.72718
-#> [10,] 24.64014 25.24708 23.12134 24.90751 24.89623
-#> [11,] 25.08989 24.90889 24.55294 25.44890 24.44288
-#> [12,] 25.09627 26.75738 23.26140 23.93564 26.42830
-#> [13,] 24.79837 24.86207 25.17886 23.83758 24.10704
-#> [14,] 25.73984 24.88881 26.89747 26.64852 23.84243
-#> [15,] 25.12338 24.30999 22.72807 22.93790 24.46970
-#> [16,] 24.97068 24.77821 25.98046 25.01275 27.44568
-#> [17,] 24.61115 25.18291 23.60117 23.91247 24.16750
-#> [18,] 25.51086 25.41732 26.82487 25.27054 25.41352
-#> [19,] 24.08619 26.06540 26.38130 26.00845 23.82132
-#> [20,] 27.31030 25.97020 24.16115 22.92560 23.82597
 ```
 
-To obtain the RefFinder results all just run:
+To obtain the refSeeker results all just run:
 
-
-```r
-rf_results <- rf_reffinder(ct_vals)
-#> Warning: restarting interrupted promise evaluation
-#> Warning: internal error -3 in R_decompress1
-#> Error in eval(expr, envir, enclos): lazy-load database '/home/patrick/R/x86_64-pc-linux-gnu-library/4.2/reffindeR/R/reffindeR.rdb' is corrupt
-rf_results
-#> $stabilityTable
-#>    Gene Delta Ct Bestkeeper Normfinder    Genorm Comprehensive Rank
-#> 1 gene2    1.292  0.5745787       0.79 0.8261784              1.189
-#> 2 gene1    1.295  0.4882019       0.79 0.8261784              1.414
-#> 3 gene4    1.402  0.7966583       0.98 1.1802810              3.000
-#> 4 gene3    1.453  1.1156080       1.07 1.2761133              4.229
-#> 5 gene5    1.614  0.9170279       1.33 1.4112053              4.729
-#> 
-#> $rankTable
-#>    Gene Delta Ct Bestkeeper Normfinder Genorm Comprehensive Rank
-#> 1 gene2        1          2          1      1                  1
-#> 2 gene1        2          1          2      1                  2
-#> 3 gene4        3          3          3      3                  3
-#> 4 gene3        4          5          4      4                  4
-#> 5 gene5        5          4          5      5                  5
+```{r}
+rs_results <- rs_reffinder(ct_vals)
+rs_results
 ```
 
 This produces a list of two tables. A table containing target stability values for each algorithm and a ranking table that ranks the most stable from 1 to N number of targets.
 
 
 To create an excel file containing the tables:
-
-```r
-rf_exceltable(rf_results, "./output/folder/sample_excel_tables")
+```{r eval=FALSE}
+rs_exceltable(rs_results, "./output/folder/sample_excel_tables")
 ```
 
 The two tables will appear in the excel file as separate sheets with filter options.
@@ -118,19 +80,16 @@ The two tables will appear in the excel file as separate sheets with filter opti
 
 For a nice visualization of the stabilities, use:
 
+```{r refSeeker-intro_fig, fig.asp = 1, fig.width = 9, out.width="99%", fig.align='center'}
+rs_graph(rs_results)
 
-```r
-rf_graph(rf_results)
-#> Warning: internal error -3 in R_decompress1
-#> Error in eval(expr, envir, enclos): lazy-load database '/home/patrick/R/x86_64-pc-linux-gnu-library/4.2/reffindeR/R/reffindeR.rdb' is corrupt
 ```
 
 
 To print the graph as a Png file, just add a file name and set outputPng = TRUE:
 
-
-```r
-rf_graph(rf_results, "./output/folder/Sample stability", outputPng = TRUE)
+```{r eval=FALSE}
+rs_graph(rs_results, "./output/folder/Sample stability", outputPng = TRUE)
 
 ```
 
@@ -142,9 +101,8 @@ Et voilà! Now you can select the targets with the lowest stability value as ref
 
 To analyse more sets in a batch, create an excel file containing one data set on each sheet, rename each sheet for easy identification of output files.
 run the following:
-
-```r
-rf_batchExcel()
+```{r eval=FALSE}
+rs_batchExcel()
 ```
 
 No parameters are required, the wizard will guide you.
