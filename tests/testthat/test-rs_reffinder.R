@@ -12,8 +12,8 @@ test_that("reffinder works with data.frames", {
   write(getwd(), "~/R/testlog.txt", append = TRUE)
 
 
-  expect_equal(res[[1]], read.csv(paste0(testrefpath(), "/rs_reffinder_df1.csv"), check.names = FALSE))
-  expect_equal(res[[2]], read.csv(paste0(testrefpath(), "/rs_reffinder_df2.csv"), check.names = FALSE))
+  expect_equal(res[[1]], read.csv(paste0(testrefpath(), "/testref/rs_reffinder_df1.csv"), check.names = FALSE))
+  expect_equal(res[[2]], read.csv(paste0(testrefpath(), "/testref/rs_reffinder_df2.csv"), check.names = FALSE))
 
 })
 
@@ -29,8 +29,8 @@ test_that("reffinder works with matrices", {
   write(getwd(), "~/R/testlog.txt", append = TRUE)
 
 
-  expect_equal(res[[1]], read.csv(paste0(testrefpath(), "/rs_reffinder_df1.csv"), check.names = FALSE))
-  expect_equal(res[[2]], read.csv(paste0(testrefpath(), "/rs_reffinder_df2.csv"), check.names = FALSE))
+  expect_equal(res[[1]], read.csv(paste0(testrefpath(), "/testref/rs_reffinder_df1.csv"), check.names = FALSE))
+  expect_equal(res[[2]], read.csv(paste0(testrefpath(), "/testref/rs_reffinder_df2.csv"), check.names = FALSE))
 
 })
 
@@ -43,8 +43,8 @@ test_that("reffinder works with tibble", {
 
   tb_res <- rs_reffinder(tb_vals)
 
-  expect_equal(tb_res[[1]], read.csv(paste0(testrefpath(), "/rs_reffinder_df1.csv"), check.names = FALSE))
-  expect_equal(tb_res[[2]], read.csv(paste0(testrefpath(), "/rs_reffinder_df2.csv"), check.names = FALSE))
+  expect_equal(tb_res[[1]], read.csv(paste0(testrefpath(), "/testref/rs_reffinder_df1.csv"), check.names = FALSE))
+  expect_equal(tb_res[[2]], read.csv(paste0(testrefpath(), "/testref/rs_reffinder_df2.csv"), check.names = FALSE))
 
 })
 

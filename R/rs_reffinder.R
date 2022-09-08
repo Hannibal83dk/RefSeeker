@@ -145,7 +145,7 @@ rs_reffinder <- function(expression){
     outputData <- list()
 
     for (i in 1:length(expression)){
-      outputData[[i]] <- rs_reffinder(expression[[i]])
+      outputData[[i]] <- rsfinder(expression[[i]])
       names(outputData)[i] <- names(expression)[i]
     }
 

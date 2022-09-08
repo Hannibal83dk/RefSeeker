@@ -16,7 +16,7 @@ testrefpath <- function(){
 
   path <- dir(searchdir, pattern = "exdata", recursive = TRUE, include.dirs = TRUE, full.names = TRUE)
 
-  path <- paste0(path,"/testref")
+  #path <- paste0(path,"/testref")
 
   #write(path[1], "~/R/testlog.txt", append = TRUE)
 
