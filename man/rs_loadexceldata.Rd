@@ -2,12 +2,16 @@
 % Please edit documentation in R/rs_loadexceldata.R
 \name{rs_loadexceldata}
 \alias{rs_loadexceldata}
+\alias{rs_loadodsdata()}
+\alias{rs_loadodsdata}
 \title{Load one or more datasets from an excel file}
 \usage{
 rs_loadexceldata(filepath = "")
+
+rs_loadodsdata(filepath = "")
 }
 \arguments{
-\item{filepath}{a path to output the data files}
+\item{filepath}{a path to an excel or ods file. If left blank, a dialog will appear to select this interactivly.}
 }
 \value{
 A list containing expression data for each sheet in the excel file
@@ -22,4 +26,7 @@ rs_loadexceldata()
 }
 
 
+\dontrun{
+rs_loadodsdata()
+}
 }

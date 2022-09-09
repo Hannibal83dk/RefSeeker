@@ -42,7 +42,7 @@ test_that("imports works for excel", {
   ## rs_loadtxtdata
 
 
-  loadeddata <- rs_loadexceldata ( paste0(testrefpath(), "/exceltest/Reffinder_data_test.xlsx") )
+  loadeddata <- rs_loadexceldata ( paste0(testrefpath(), "/excel-ods-test/Reffinder_data_test.xlsx") )
 
   # Create refference file
    # writeLines(capture.output(loadeddata[[1]]), paste0(testrefpath(), "/testref/rs_loadexceldata1.txt"))
@@ -54,4 +54,23 @@ test_that("imports works for excel", {
   expect_equal(capture.output(loadeddata[[3]]), readLines(paste0(testrefpath(), "/testref/rs_loadexceldata3.txt")) )
 
 })
+
+
+test_that("imports works for ods", {
+  ## rs_loadtxtdata
+
+  loadeddata <- rs_loadodsdata ( paste0(testrefpath(), "/excel-ods-test/Reffinder_data_test.ods") )
+
+  # Create refference file
+  # writeLines(capture.output(loadeddata[[1]]), paste0(testrefpath(), "/testref/rs_loadodsdata1.txt"))
+  # writeLines(capture.output(loadeddata[[2]]), paste0(testrefpath(), "/testref/rs_loadodsdata2.txt"))
+  # writeLines(capture.output(loadeddata[[3]]), paste0(testrefpath(), "/testref/rs_loadodsdata3.txt"))
+
+  expect_equal(capture.output(loadeddata[[1]]), readLines(paste0(testrefpath(), "/testref/rs_loadodsdata1.txt")) )
+  expect_equal(capture.output(loadeddata[[2]]), readLines(paste0(testrefpath(), "/testref/rs_loadodsdata2.txt")) )
+  expect_equal(capture.output(loadeddata[[3]]), readLines(paste0(testrefpath(), "/testref/rs_loadodsdata3.txt")) )
+
+})
+
+
 
