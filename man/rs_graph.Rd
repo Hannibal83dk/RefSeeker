@@ -7,7 +7,6 @@
 rs_graph(
   reffinderlist,
   filename = "",
-  outputPng = FALSE,
   forceSingle = FALSE,
   width,
   height,
@@ -19,9 +18,7 @@ rs_graph(
 \arguments{
 \item{reffinderlist}{A reffinder list or a list of reffinder lists optained frpm rs_reffinder() function}
 
-\item{filename}{String. In case of outputPng == TRUE an optional file name may be selected. A relative path to output could also be included in file name}
-
-\item{outputPng}{Logical. Select whether to output the graph to a png file. if TRUE a file will be created in the working directory or a relative path given by file name.}
+\item{filename}{String. A name of the output file. Can contain an optional relative path.}
 
 \item{forceSingle}{If TRUE will make a single graph for each data set provided.}
 
@@ -36,7 +33,7 @@ rs_graph(
 \item{ordering}{Used to control sorting of the x axis, use "Gene","Delta Ct","Bestkeeper","Normfinder","Genorm" or "Comprehensive Rank".}
 }
 \value{
-Creates a plot shown in the active device, usually the plots pane. Optionally outputs the plot to a file, see param; outputPng
+Creates a plot shown in the active device, usually the plots pane. Optionally outputs the plot to a file if filename has been given.
 }
 \description{
 Wrapper for selecting single or multifaceted graph output.

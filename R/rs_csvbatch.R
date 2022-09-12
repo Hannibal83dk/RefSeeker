@@ -62,11 +62,11 @@ rs_csvbatch <- function(input = "", outdir = "", outtype = "csv",  printgraph = 
       for (i in 1: length(nms)) {
 
         #temp <- data[i]
-        rs_graph(data[[i]], paste(outdir, "/", nms[i], sep = ""), outputPng = TRUE, forceSingle = TRUE)
+        rs_graph(data[[i]], paste(outdir, "/", nms[i], sep = ""), forceSingle = TRUE)
       }
 
     } else if(graphtype == "multi"){
-      rs_graph(data, paste(outdir, "/", paste(nms,collapse = '-'), sep = ""), outputPng = TRUE)
+      rs_graph(data, paste(outdir, "/", paste(nms,collapse = '-'), sep = ""))
     }
     ########
   }

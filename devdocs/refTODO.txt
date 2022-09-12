@@ -3,9 +3,7 @@
 
 Center dialog boxes
 
-##############
 
-- Add tissue to all graphs, running multiraph will produce both kinds dependant on the input
 
 
 
@@ -87,7 +85,7 @@ report file path to pngs to user
 
 ################################333
 
-when loading data test for propper structure of data eliminate datasets that do not conform and warn user.
+when loading data, test for propper structure of data eliminate datasets that do not conform and warn user.
 
 
 
@@ -130,6 +128,11 @@ rf_graph(Blood_Plasma_Tumor)
 $$ Solved 
 
 #################################
+
+
+Rework the batch functions. include ods and check cvs maybe aliases for tsv or others
+
+Allow for selection of graph type in function calls e.g. rs_batchExcel3 <- function(filepath = "", outdir = "", printgraph = c("FALSE", "multi", "single){ code;;}
 
 
 

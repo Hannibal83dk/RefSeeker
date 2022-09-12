@@ -1,5 +1,5 @@
 ---
-title: "Loading expression data"
+title: "Loading_data_sources"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Loading_data_sources}
@@ -26,7 +26,10 @@ Once data has been successfully loaded the stability analysis can be performed. 
 library(refSeeker)
 ```
 
-## Loading data from excel files
+## Loading data from excel or ODS files
+
+The procedure for loading excel or ODS file are exactly the same. The example provided below for excel files therefore also apply for ods. For sake of coherence, the rs_loadodsdata() function can replace the rs_loadexceldata(). However, this is actually not a requirement since the two functions are synonymous aliases for the same function.
+
 
 ### Prepare Data
 
@@ -78,6 +81,8 @@ or
 exceldata[[1]]
 ```
 
+
+
 ## Loading data from csv, tsv or txt files
 
 # Prepare data
@@ -107,66 +112,3 @@ When loading data the load function will look for all the files of the same type
 
 
 
-The data can now be analysed by each algorithm or reffinder
-
-```{r}
-rs_normfinder(exceldata$Fresh_Frozen)
-```
-
-```{r}
-rs_genorm(exceldata$Fresh_Frozen)
-```
-```{r}
-rs_bestKeeper(exceldata$Fresh_Frozen)
-```
-
-```{r}
-rs_deltaCt(exceldata$Fresh_Frozen)
-```
-
-Using rs_reffinder() provides the option of calculating all data sets in one line. The function returns a list-of-lists of two tables for each set.
-
-```{r}
-rsresults <- rs_reffinder(exceldata)
-rsresults
-
-```
-
-As can be seen on the output two table are created from each data set.
-
-- A stability table containing the stability values provided by each algorithm and reffinder.
-
-- A rank table containing the ranking of each gene/target from each algorithm.
-
-From here the results can be exported to new excel files, one excel file per data set will be created
-
-```{r}
-rs_exceltable(rsresults$Fresh_Frozen, "../inst/exdata/VignettesOutputs/excel_results", addDate = TRUE)
-
-```
-
-To create graphical representations of the data the rs_graph() function can be used.
-
-```{r fig.asp = 1, fig.width = 9, out.width="99%", fig.align='center'}
-
-rs_graph(rsresults)
-
-```
-
-To create graph for each of the data sets use the forceSingle switch.
-To create a png file containing the graph, the outputPng must be set to TRUE. A file name can be provided to direct the output to a selected location.
-The hight and width of the graphs can be controlled by the arguments to rs_graph(): height and width 
-
-```{r fig.show='hide'}
-
-rs_graph(rsresults, "../inst/exdata/VignettesOutputs/refSeeker_excel_results", outputPng = TRUE, forceSingle = TRUE, width = 1024)
-
-```
-
-![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Fresh_Frozen_2022-09-08.png){width=30%} ![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_FFPE_2022-09-08.png){width=30%} ![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Plasma_2022-09-08.png){width=30%}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>

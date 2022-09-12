@@ -1,55 +1,28 @@
-rfexcelfile	Creates an excel workbook in the working directory containing the provided tables as sheets
 
-rfexltypeselect	Dialog window to select an excel file type
+rsaddstabilityrank	Adds a ranking colum to at stability table. If two targets have equal stabilities they are given the same rank.
 
-rffinder	Calculate reffinder stability tables
-
-rfgraphtypeselect	Dialog window to select a graph type
-
-rforderbystability	Orders a expression stability data frame by stability value
-
-rfoutdirselect	Dialog window to select a folder for output files
-
-rf_batchExcel	Creates batch output from selected excel file
-
-rf_batchExcel2	Creates batch output from selected excel file
-
-rf_bestKeeper	Calculates stabilites based on the bestKeeper method
-
-rf_bestKeeperFull	Determines stability of genes
-
-rf_csvbatch	Creates batch output from selected comma separated txt files
-test made
-
-
-rf_deltaCt	Calculates expression stabilities by the Delta-Ct method
-
-rf_exceltable	Output excel workbook containing stability and ranking as separate sheets
-
-rf_genorm	Gene expression stability by geNorm
-
-rf_graph	Wrapper for selecting single or multifaceted graph output.
-
- - rf_graph2	Wrapper for selecting single or multifaceted graph output.
-
-rf_graphmulti	Multifaceted bar graph of stability values from multiple data sets
-
-rf_graphsingle	Bar graph of stability values from a single data set
-
-rf_loadcsvdata	Read in csv files for processing
-
-rf_loadexceldata	Load one or more datasets from an excel file
-
-rf_loadtxtdata	Read in reffinder data files with auto delimiter detection
-
-rf_miRNA	miRNA expression data from ovarian cancer patients
-
-rf_normfinder	Gene expresssion stabilities by NormFinder
-
-rf_reffinder	Calculate reffinder stability tables from data frame, tibble or matrix or a list of these
-
-
-tble2	Expression test data extracted from original RefFinder web tool. - Will be depricated due to possible mlegal issues
+✓	rsexcelfile		Creates an excel workbook in the working directory containing the provided tables as sheets
+	rsexltypeselect		Dialog window to select an excel file type
+✓	rsfinder		Calculate reffinder stability tables
+rsgraphdraw		Multifaceted bar graph of stability values from multiple data sets
+rsgraphtypeselect	Dialog window to select a graph type
+✓	rsorderbystability	Orders a expression stability data frame by stability value
+rsoutdirselect		Dialog window to select a folder for output files
+rs_batchExcel		Creates batch output from selected excel file
+rs_batchExcel2		Creates batch output from selected excel file
+✓	rs_bestKeeper		Calculates stabilites based on the bestKeeper method
+rs_bestKeeperFull	Determines stability of genes
+✓	rs_csvbatch		Creates batch output from selected comma separated txt files
+✓	rs_deltaCt		Calculates expression stabilities by the Delta-Ct method
+✓	rs_exceltable		Output excel workbook containing stability and ranking as separate sheets
+✓	rs_genorm		Gene expression stability by geNorm
+rs_graph		Wrapper for selecting single or multifaceted graph output.
+✓	rs_loadcsvdata		Read in csv files for processing
+✓	rs_loadexceldata	Load one or more datasets from an excel file
+✓	rs_loadtxtdata		Read in reffinder data files with auto delimiter detection
+rs_miRNA		miRNA expression data from ovarian cancer patients
+✓	rs_normfinder		Gene expresssion stabilities by NormFinder
+✓	rs_reffinder		Calculate reffinder stability tables from data frame, tibble or matrix or a list of these
 
 
 
@@ -58,3 +31,7 @@ tble2	Expression test data extracted from original RefFinder web tool. - Will be
 
 
 
+
+rsadjustnmfRounding	Adjust rounding in the normfinder algorithm to 3 decimals
+tble2			Expression test data extracted from original RefFinder web tool.
+testrefpath		find the path to the testref folder containing reffences for checking results during testing

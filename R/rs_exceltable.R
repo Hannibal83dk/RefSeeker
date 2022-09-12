@@ -28,7 +28,7 @@ rs_exceltable <- function(reffinderlist, filename = "Stability-table", addDate =
   rfRank <- reffinderlist$rankTable
 
   if(addDate == TRUE){
-    filename <- paste(filename, Sys.Date(), sep = "")
+    filename <- paste0(filename, "_", Sys.Date())
   }
 
   rsexcelfile(filename, rfStability, rfRank, overwrite = TRUE)

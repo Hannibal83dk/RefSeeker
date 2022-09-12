@@ -32,7 +32,7 @@ rs_batchExcel <- function(){
     ref_temp <- rs_reffinder(temp_data)
     rs_exceltable(ref_temp, paste(outdir, "/", sheets[i], sep = ""))
     cat("\n")
-    rs_graph(ref_temp, paste(outdir, "/", sheets[i], sep = ""), outputPng = TRUE)
+    rs_graph(ref_temp, paste(outdir, "/", sheets[i], sep = ""))
     cat("\n")
   }
 }
@@ -80,14 +80,14 @@ rs_batchExcel2 <- function(input = "", outdir = "", printgraph = TRUE){
 
   if(graphtype == "single"){
 
-    for (i in 1: length(nms)) {
+    for (i in 1:length(nms)) {
 
       temp <- rfres[i]
-      rs_graph(rfres[[i]], paste(outdir, "/", nms[i], sep = ""), outputPng = TRUE, forceSingle =TRUE)
+      rs_graph(rfres[[i]], paste0(outdir, "/", nms[i]), forceSingle =TRUE)
     }
 
   } else if(graphtype == "multi"){
-    rs_graph(rfres, paste(outdir, "/", tools::file_path_sans_ext(basename(filepath)), sep = ""), outputPng = TRUE)
+    rs_graph(rfres, paste(outdir, "/", tools::file_path_sans_ext(basename(filepath)), sep = ""))
   }
 
 
@@ -97,4 +97,73 @@ rs_batchExcel2 <- function(input = "", outdir = "", printgraph = TRUE){
 
   }
 }
+
+
+
+
+
+########################3333
+
+#' Creates batch output from selected excel file
+#'
+#' @param filepath A path to an excel file containing properly formatted reffinder data tables. This means column representing genes/targets and rows representing samples,
+#' data being Ct/Cp/Cq values, with no missing data since the validity of these results have not been confirmed.
+#'
+#' @param outdir A selected output directory, if not set a dialog will appear to allow selection for output directory
+#' @param printgraph If TRUE print a graph of the result in the output folder
+#'
+#' @return Nothing. Creates excel files and graphs with stabilities for each sheet of a selected excel file
+#' @export
+#'
+#'
+#' @import readxl
+#'
+#'
+#' @examples
+#' \dontrun{
+#' rs_batchExcel()
+#' }
+#'
+#'
+#'
+#'
+rs_batchExcel3 <- function(filepath = "", outdir = "", printgraph = TRUE){
+
+  if(filepath == "") filepath <- file.choose()
+
+  rfres <- rs_reffinder(rs_loadexceldata(filepath))
+
+  if(outdir == "") outdir <- rsoutdirselect()
+
+
+  if(is.na(outdir)){outdir <- getwd()}
+
+  graphtype <- rsgraphtypeselect()
+
+  nms <- names(rfres)
+
+  #exltype <- rsexltypeselect()
+
+  if(graphtype == "single"){
+
+
+      rs_graph(rfres, paste0(outdir,"/"), forceSingle =TRUE)
+
+  } else if(graphtype == "multi"){
+    rs_graph(rfres, paste0(outdir, "/", tools::file_path_sans_ext(basename(filepath))))
+  }
+
+
+  for (i in 1: length(nms)) {
+
+    rs_exceltable(rfres[[i]], paste(outdir, "/", nms[i], sep = ""))
+
+  }
+}
+
+
+
+
+
+
 

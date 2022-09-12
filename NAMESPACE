@@ -2,6 +2,7 @@
 
 export(rs_batchExcel)
 export(rs_batchExcel2)
+export(rs_batchExcel3)
 export(rs_bestKeeper)
 export(rs_bestKeeperFull)
 export(rs_csvbatch)
