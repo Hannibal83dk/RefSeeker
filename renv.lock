@@ -1,0 +1,337 @@
+{
+  "R": {
+    "Version": "4.2.1",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://cloud.r-project.org"
+      }
+    ]
+  },
+  "Packages": {
+    "bit64": {
+      "Source": "Repository",
+      "Package": "bit64",
+      "Version": "4.0.5",
+      "Repository": "CRAN"
+    },
+    "bit": {
+      "Source": "Repository",
+      "Package": "bit",
+      "Version": "4.0.4",
+      "Repository": "CRAN"
+    },
+    "cellranger": {
+      "Source": "Repository",
+      "Package": "cellranger",
+      "Version": "1.1.0",
+      "Repository": "CRAN"
+    },
+    "cli": {
+      "Source": "Repository",
+      "Package": "cli",
+      "Version": "3.3.0",
+      "Repository": "CRAN"
+    },
+    "clipr": {
+      "Source": "Repository",
+      "Package": "clipr",
+      "Version": "0.8.0",
+      "Repository": "CRAN"
+    },
+    "colorspace": {
+      "Source": "Repository",
+      "Package": "colorspace",
+      "Version": "2.0-3",
+      "Repository": "CRAN"
+    },
+    "cpp11": {
+      "Source": "Repository",
+      "Package": "cpp11",
+      "Version": "0.4.2",
+      "Repository": "CRAN"
+    },
+    "crayon": {
+      "Source": "Repository",
+      "Package": "crayon",
+      "Version": "1.5.1",
+      "Repository": "CRAN"
+    },
+    "ctrlGene": {
+      "Source": "Repository",
+      "Package": "ctrlGene",
+      "Version": "1.0.1",
+      "Repository": "CRAN"
+    },
+    "data.table": {
+      "Source": "Repository",
+      "Package": "data.table",
+      "Version": "1.14.2",
+      "Repository": "CRAN"
+    },
+    "digest": {
+      "Source": "Repository",
+      "Package": "digest",
+      "Version": "0.6.29",
+      "Repository": "CRAN"
+    },
+    "ellipsis": {
+      "Source": "Repository",
+      "Package": "ellipsis",
+      "Version": "0.3.2",
+      "Repository": "CRAN"
+    },
+    "fansi": {
+      "Source": "Repository",
+      "Package": "fansi",
+      "Version": "1.0.3",
+      "Repository": "CRAN"
+    },
+    "farver": {
+      "Source": "Repository",
+      "Package": "farver",
+      "Version": "2.1.1",
+      "Repository": "CRAN"
+    },
+    "ggplot2": {
+      "Source": "Repository",
+      "Package": "ggplot2",
+      "Version": "3.3.6",
+      "Repository": "CRAN"
+    },
+    "glue": {
+      "Source": "Repository",
+      "Package": "glue",
+      "Version": "1.6.2",
+      "Repository": "CRAN"
+    },
+    "gtable": {
+      "Source": "Repository",
+      "Package": "gtable",
+      "Version": "0.3.0",
+      "Repository": "CRAN"
+    },
+    "hms": {
+      "Source": "Repository",
+      "Package": "hms",
+      "Version": "1.1.1",
+      "Repository": "CRAN"
+    },
+    "isoband": {
+      "Source": "Repository",
+      "Package": "isoband",
+      "Version": "0.2.5",
+      "Repository": "CRAN"
+    },
+    "labeling": {
+      "Source": "Repository",
+      "Package": "labeling",
+      "Version": "0.4.2",
+      "Repository": "CRAN"
+    },
+    "lifecycle": {
+      "Source": "Repository",
+      "Package": "lifecycle",
+      "Version": "1.0.1",
+      "Repository": "CRAN"
+    },
+    "magrittr": {
+      "Source": "Repository",
+      "Package": "magrittr",
+      "Version": "2.0.3",
+      "Repository": "CRAN"
+    },
+    "mnormt": {
+      "Source": "Repository",
+      "Package": "mnormt",
+      "Version": "2.1.0",
+      "Repository": "CRAN"
+    },
+    "munsell": {
+      "Source": "Repository",
+      "Package": "munsell",
+      "Version": "0.5.0",
+      "Repository": "CRAN"
+    },
+    "openxlsx": {
+      "Source": "Repository",
+      "Package": "openxlsx",
+      "Version": "4.2.5",
+      "Repository": "CRAN"
+    },
+    "pillar": {
+      "Source": "Repository",
+      "Package": "pillar",
+      "Version": "1.8.0",
+      "Repository": "CRAN"
+    },
+    "pkgconfig": {
+      "Source": "Repository",
+      "Package": "pkgconfig",
+      "Version": "2.0.3",
+      "Repository": "CRAN"
+    },
+    "plyr": {
+      "Source": "Repository",
+      "Package": "plyr",
+      "Version": "1.8.7",
+      "Repository": "CRAN"
+    },
+    "prettyunits": {
+      "Source": "Repository",
+      "Package": "prettyunits",
+      "Version": "1.1.1",
+      "Repository": "CRAN"
+    },
+    "progress": {
+      "Source": "Repository",
+      "Package": "progress",
+      "Version": "1.2.2",
+      "Repository": "CRAN"
+    },
+    "psych": {
+      "Source": "Repository",
+      "Package": "psych",
+      "Version": "2.2.5",
+      "Repository": "CRAN"
+    },
+    "purrr": {
+      "Source": "Repository",
+      "Package": "purrr",
+      "Version": "0.3.4",
+      "Repository": "CRAN"
+    },
+    "R6": {
+      "Source": "Repository",
+      "Package": "R6",
+      "Version": "2.5.1",
+      "Repository": "CRAN"
+    },
+    "RColorBrewer": {
+      "Source": "Repository",
+      "Package": "RColorBrewer",
+      "Version": "1.1-3",
+      "Repository": "CRAN"
+    },
+    "Rcpp": {
+      "Source": "Repository",
+      "Package": "Rcpp",
+      "Version": "1.0.9",
+      "Repository": "CRAN"
+    },
+    "readODS": {
+      "Source": "Repository",
+      "Package": "readODS",
+      "Version": "1.7.0",
+      "Repository": "CRAN"
+    },
+    "readr": {
+      "Source": "Repository",
+      "Package": "readr",
+      "Version": "2.1.2",
+      "Repository": "CRAN"
+    },
+    "readxl": {
+      "Source": "Repository",
+      "Package": "readxl",
+      "Version": "1.4.0",
+      "Repository": "CRAN"
+    },
+    "rematch": {
+      "Source": "Repository",
+      "Package": "rematch",
+      "Version": "1.0.1",
+      "Repository": "CRAN"
+    },
+    "reshape2": {
+      "Source": "Repository",
+      "Package": "reshape2",
+      "Version": "1.4.4",
+      "Repository": "CRAN"
+    },
+    "rlang": {
+      "Source": "Repository",
+      "Package": "rlang",
+      "Version": "1.0.4",
+      "Repository": "CRAN"
+    },
+    "scales": {
+      "Source": "Repository",
+      "Package": "scales",
+      "Version": "1.2.0",
+      "Repository": "CRAN"
+    },
+    "stringi": {
+      "Source": "Repository",
+      "Package": "stringi",
+      "Version": "1.7.8",
+      "Repository": "CRAN"
+    },
+    "stringr": {
+      "Source": "Repository",
+      "Package": "stringr",
+      "Version": "1.4.0",
+      "Repository": "CRAN"
+    },
+    "tibble": {
+      "Source": "Repository",
+      "Package": "tibble",
+      "Version": "3.1.8",
+      "Repository": "CRAN"
+    },
+    "tidyselect": {
+      "Source": "Repository",
+      "Package": "tidyselect",
+      "Version": "1.1.2",
+      "Repository": "CRAN"
+    },
+    "tzdb": {
+      "Source": "Repository",
+      "Package": "tzdb",
+      "Version": "0.3.0",
+      "Repository": "CRAN"
+    },
+    "utf8": {
+      "Source": "Repository",
+      "Package": "utf8",
+      "Version": "1.2.2",
+      "Repository": "CRAN"
+    },
+    "vctrs": {
+      "Source": "Repository",
+      "Package": "vctrs",
+      "Version": "0.4.1",
+      "Repository": "CRAN"
+    },
+    "viridisLite": {
+      "Source": "Repository",
+      "Package": "viridisLite",
+      "Version": "0.4.0",
+      "Repository": "CRAN"
+    },
+    "vroom": {
+      "Source": "Repository",
+      "Package": "vroom",
+      "Version": "1.5.7",
+      "Repository": "CRAN"
+    },
+    "withr": {
+      "Source": "Repository",
+      "Package": "withr",
+      "Version": "2.5.0",
+      "Repository": "CRAN"
+    },
+    "xml2": {
+      "Source": "Repository",
+      "Package": "xml2",
+      "Version": "1.3.3",
+      "Repository": "CRAN"
+    },
+    "zip": {
+      "Source": "Repository",
+      "Package": "zip",
+      "Version": "2.2.0",
+      "Repository": "CRAN"
+    }
+  }
+}

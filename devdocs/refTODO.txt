@@ -136,6 +136,29 @@ Allow for selection of graph type in function calls e.g. rs_batchExcel3 <- funct
 
 
 
+################################
+
+Remove redundat rs_excelbatch functions.
+Remove import of readxl in rs_excelbatch functions
+
+
+################################
+
+
+
+Add multi data analysis to Normfinder
+
+
+#################################
+
+
+Write tests for betskeeper full and normfinder full
+
+
+#################################
+
+
+
 
 
 

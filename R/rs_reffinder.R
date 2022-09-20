@@ -38,11 +38,24 @@ rsfinder <- function(expression){
   genes <- names(expression)
 
 
-
+  starttime <- Sys.time()
   DC <- rs_deltaCt(expression)
+  cat(paste("\nDelta-Ct completed", round(difftime(Sys.time(), starttime, units = "secs"), 3), "secs"))
+
+  starttime <- Sys.time()
   GN <- rs_genorm(expression)
+  cat(paste("\ngeNorm completed",  round(difftime(Sys.time(), starttime, units = "secs"), 3), "secs"))
+
+
+  starttime <- Sys.time()
   BK <- rs_bestKeeper(expression)
+  cat(paste("\nBestKeeper completed",  round(difftime(Sys.time(), starttime, units = "secs"), 3), "secs"))
+
+
+
+  starttime <- Sys.time()
   NF <- rs_normfinder(expression)
+  cat(paste("\nNormfinder completed",  round(difftime(Sys.time(), starttime, units = "secs"), 3), "secs\n"))
 
 
   names(DC) <- c("Gene", "Stability", "Rank")

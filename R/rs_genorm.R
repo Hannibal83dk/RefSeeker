@@ -32,7 +32,7 @@
 rs_genorm <- function(expression, decimals = 3){
 
 
-  gnex <- as.data.frame(expression)
+  #gnex <- as.data.frame(expression)
   gnrm <- ctrlGene::geNorm2(expression)
   # gnrm$Avg.M <- round(gnrm$Avg.M, 3)
 

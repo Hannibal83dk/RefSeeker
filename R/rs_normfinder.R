@@ -132,3 +132,50 @@ rsadjustnmfRounding <- function(decimals = 3) {
 
 
 
+
+#' Title
+#'
+#' @param expressionA matrix, data frame or tibble with columns for each genes and rows for each samples.
+#' @param Groups Does the data consist of different treatment groups, if so indicate group ID in the last column of the expression data set
+#' @param ctVal Is the provided expression data ca values or relative log(2) transformed values?
+#' @param pStabLim Stability limit, report only stabilities above this value
+#'
+#' @return A list of lists of result tables depending on the Groups parameter
+#' @export
+#'
+#'
+#' @references Andersen C.L., Ledet-Jensen J., Ørntoft T.: Normalization of real-time quantitative RT-PCR data: a model based variance estimation approach to identify genes suited for normalization - applied to bladder- and colon-cancer data-sets.
+#' Cancer Research. 2004 (64): 5245-5250
+#'
+# #' @examples
+rs_normfinderFull <- function(expression, Groups=TRUE, ctVal=TRUE, pStabLim=0.25){
+  if(!file.exists(
+    paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt")
+
+  )){
+
+    utils::download.file("https://moma.dk/files/r.NormOldStab5.txt",
+                         paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"),
+                         quiet = FALSE)
+
+    rsadjustnmfRounding(decimals = 3)
+  }
+  # source the r.NormOldStab5.txt
+  source(paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
+
+  ###################################################################################################################
+
+  # write the temporary txt file table for the normfinderfuncton
+  utils::write.table(data.frame(t(expression)), "expression_temp.txt")
+
+  # Calculate the stabilities and save in Results
+  Results = Normfinder("expression_temp.txt", Groups = Groups, ctVal = ctVal, pStabLim = pStabLim)
+
+  # Remove the temporary txt file
+  unlink("expression_temp.txt")
+
+  return(Results)
+}
+
+
+
