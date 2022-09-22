@@ -1,7 +1,7 @@
 
 
 
-Center dialog boxes
+Center dialog boxes - Not nessesary at this point, will require additional dependencies e.g. gWidgets2 or gWidgets2tcltk
 
 
 
@@ -9,12 +9,12 @@ Center dialog boxes
 
 ##############
 
-rf_graph - if filename is empty do not output png
+rf_graph - if filename is empty do not output png - DONE
 	reduces parameters
 
 
 
-
+#######################
 
 
 rf_graph AND rf_graph2 has a problem when tissues are not named - FIXED write test next
@@ -46,7 +46,7 @@ rf_graph2(rffndr, "testsetrand", forceSingle = T)
 
 
 
-# rf_graph2
+# rf_graph2 - FIXED - rs_graph updated and rs_graph2 deleted
   
   - if filename is empty do not output png
 	reduces parameters
@@ -79,13 +79,16 @@ The input table(s) needs to be an output from the rf_reffinder function
 
 ######################
 
-report file path to pngs to user
+report file path to pngs to user - DONE
 
 
 
 ################################333
 
-when loading data, test for propper structure of data eliminate datasets that do not conform and warn user.
+
+
+when loading data, test for propper structure of data eliminate datasets that do not conform and warn user. 	- DONE for batch
+														- Missing csv and friends
 
 
 
@@ -141,9 +144,7 @@ Allow for selection of graph type in function calls e.g. rs_batchExcel3 <- funct
 Remove redundat rs_excelbatch functions.
 Remove import of readxl in rs_excelbatch functions
 
-
 ################################
-
 
 
 Add multi data analysis to Normfinder
@@ -156,6 +157,55 @@ Write tests for betskeeper full and normfinder full
 
 
 #################################
+
+
+Edit vignette to no missing data allowed
+
+
+
+#################################
+
+
+Create namingconcention on algorithms - geNorm, RefFinder, Normfinder, BestKeeper, delta-Ct
+
+
+#################################
+
+
+Create a quick single analysis function
+
+
+Combine all batch analysis functions - include manual selection of one or more folders
+				     - include option for output format
+
+
+#################################
+
+
+Make Readexcel package and readODS package required only if needed
+
+##################################
+
+Posibility of adding color to graph, add a color parameter
+
+a few standard colors like "red" "green" or a vector  of colors or a vector of colors in hex to assign each targets
+
+
+
+###################################
+
+
+Add publishable table formats for outputs
+
+
+###################################
+
+
+Consider changing name to RefSeeker
+
+
+###################################
+
 
 
 
