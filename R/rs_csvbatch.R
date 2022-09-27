@@ -1,5 +1,4 @@
 
-
 #' Creates batch output from selected comma separated txt files
 #'
 #' @param input A path to a file txt-like files (txt, csv, tsv etc.) containing a properly formatted reffinder data table. All files with the same file extension in that folder will be loaded as a data set. (See vignette about preparing and loading txt-like files)

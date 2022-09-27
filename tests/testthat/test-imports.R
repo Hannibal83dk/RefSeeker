@@ -1,21 +1,30 @@
 
 
+
+####################################################
+
+## Test for deprecated functions
+
 test_that("imports works for csv", {
-  ## rs_loadtxtdata
+## rs_loadtxtdata
+  suppressWarnings(
+    loadeddata <- rs_loadtxtdata( paste0(testrefpath(),"/csvtest/", list.files(paste0(testrefpath(),"/csvtest" ), pattern = "*.csv")) )
+  )
 
-    loadeddata <- rs_loadtxtdata( paste0(testrefpath(), "/csvtest/FFPE.csv") )
+  # Create refference file
+  # writeLines(capture.output(loadeddata), paste0(testrefpath(), "/testref/rs_loadtxtdata.txt"))
 
-    # Create refference file
-    # writeLines(capture.output(loadeddata), paste0(testrefpath(), "/testref/rs_loadtxtdata.txt"))
-
-    expect_equal(capture.output(loadeddata), readLines(paste0(testrefpath(), "/testref/rs_loadtxtdata.txt")) )
+  expect_equal(capture.output(loadeddata), readLines(paste0(testrefpath(), "/testref/rs_loadtxtdata.txt")) )
 
 })
 
 test_that("imports works for tsv", {
   ## rs_loadtxtdata
 
-  loadeddata <- rs_loadtxtdata( paste0(testrefpath(), "/tsvtest/FFPE.tsv") )
+  #loadeddata <- rs_loadtxtdata( paste0(testrefpath(), "/tsvtest/FFPE.tsv") )
+  suppressWarnings(
+    loadeddata <- rs_loadtxtdata( paste0(testrefpath(),"/tsvtest/", list.files(paste0(testrefpath(),"/tsvtest" ), pattern = "*.tsv")) )
+  )
 
   # Create refference file
   # writeLines(capture.output(loadeddata), paste0(testrefpath(), "/testref/rs_loadtxtdata.txt"))
@@ -27,8 +36,24 @@ test_that("imports works for tsv", {
 
 test_that("imports works for txt", {
   ## rs_loadtxtdata
+  suppressWarnings(
+  #loadeddata <- rs_loadtxtdata( paste0(testrefpath(), "/txttest/FFPE.txt") )
+    loadeddata <- rs_loadtxtdata( paste0(testrefpath(),"/txttest/", list.files(paste0(testrefpath(),"/txttest" ), pattern = "*.txt")) )
+  )
+  # Create refference file
+  # writeLines(capture.output(loadeddata), paste0(testrefpath(), "/testref/rs_loadtxtdata.txt"))
 
-  loadeddata <- rs_loadtxtdata( paste0(testrefpath(), "/txttest/FFPE.txt") )
+  expect_equal(capture.output(loadeddata), readLines(paste0(testrefpath(), "/testref/rs_loadtxtdata.txt")) )
+
+})
+#########################################################
+
+
+test_that("imports works for csv", {
+  ## rs_loadtxtdata
+  #suppressWarnings(
+    loadeddata <- rs_load.table( paste0(testrefpath(),"/csvtest/", list.files(paste0(testrefpath(),"/csvtest" ), pattern = "*.csv")) )
+  #)
 
   # Create refference file
   # writeLines(capture.output(loadeddata), paste0(testrefpath(), "/testref/rs_loadtxtdata.txt"))
@@ -38,6 +63,40 @@ test_that("imports works for txt", {
 })
 
 
+test_that("imports works for tsv", {
+  ## rs_loadtxtdata
+
+  #loadeddata <- rs_loadtxtdata( paste0(testrefpath(), "/tsvtest/FFPE.tsv") )
+  suppressWarnings(
+    loadeddata <- rs_load.table( paste0(testrefpath(),"/tsvtest/", list.files(paste0(testrefpath(),"/tsvtest" ), pattern = "*.tsv")) )
+  )
+
+  # Create refference file
+  # writeLines(capture.output(loadeddata), paste0(testrefpath(), "/testref/rs_loadtxtdata.txt"))
+
+  expect_equal(capture.output(loadeddata), readLines(paste0(testrefpath(), "/testref/rs_loadtxtdata.txt")) )
+
+})
+
+
+test_that("imports works for txt", {
+  ## rs_loadtxtdata
+  suppressWarnings(
+    #loadeddata <- rs_loadtxtdata( paste0(testrefpath(), "/txttest/FFPE.txt") )
+    loadeddata <- rs_load.table( paste0(testrefpath(),"/txttest/", list.files(paste0(testrefpath(),"/txttest" ), pattern = "*.txt")) )
+  )
+  # Create refference file
+  # writeLines(capture.output(loadeddata), paste0(testrefpath(), "/testref/rs_loadtxtdata.txt"))
+
+  expect_equal(capture.output(loadeddata), readLines(paste0(testrefpath(), "/testref/rs_loadtxtdata.txt")) )
+
+})
+
+
+
+
+
+#########################################################
 test_that("imports works for excel", {
   ## rs_loadtxtdata
 

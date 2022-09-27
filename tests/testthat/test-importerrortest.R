@@ -6,7 +6,7 @@ test_that("BasicDataset format ", {
 test_that("missingDataIsCaughtWhenLoading", {
 
   expect_warning(
-    rs_loadcsvdata("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/csverrortest/Reffinder_Plasma_error_test.txt"),
+    rs_load.table("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/csverrortest/Reffinder_Plasma_error_test.txt"),
     "Caution: Missing data located in: Reffinder_Plasma_error_test \nMissing data is discauraged and may lead to errors"
   )
 
@@ -17,7 +17,7 @@ test_that("missingDataIsCaughtWhenLoading", {
 test_that("missingDataIsCaughtWhenLoading", {
 
   expect_warning(
-    rs_loadcsvdata("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/csverrortest/Reffinder_FFPE_error_test.csv"),
+    rs_load.table("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/csverrortest/Reffinder_FFPE_error_test.csv"),
     "Non numeric columns found in: Reffinder_FFPE_error_test \nPlease make sure columns represent target RNA species and rows represent samples"
   )
 
