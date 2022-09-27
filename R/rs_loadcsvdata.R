@@ -63,6 +63,8 @@ rs_loadcsvdata <- function(filepath = ""){
   # test files for correct format
   ## can they be evluated?
 
+  rsdatatest(inputdatalist)
+
   return(inputdatalist)
 
 }
@@ -130,6 +132,8 @@ rs_loadtxtdata <- function(filepath = ""){
   # test files for correct format
   ## can they be evluated?
 
+
+  rsdatatest(inputdatalist)
   return(inputdatalist)
 
 }

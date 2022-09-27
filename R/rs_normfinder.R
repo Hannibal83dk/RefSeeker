@@ -135,7 +135,7 @@ rsadjustnmfRounding <- function(decimals = 3) {
 
 #' Title
 #'
-#' @param expressionA matrix, data frame or tibble with columns for each genes and rows for each samples.
+#' @param expression A matrix, data frame or tibble with columns for each genes and rows for each samples.
 #' @param Groups Does the data consist of different treatment groups, if so indicate group ID in the last column of the expression data set
 #' @param ctVal Is the provided expression data ca values or relative log(2) transformed values?
 #' @param pStabLim Stability limit, report only stabilities above this value

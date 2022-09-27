@@ -88,7 +88,8 @@ report file path to pngs to user - DONE
 
 
 when loading data, test for propper structure of data eliminate datasets that do not conform and warn user. 	- DONE for batch
-														- Missing csv and friends
+														- Missing csv and friends - DONE
+														- Tests written - DONE
 
 
 
@@ -207,7 +208,30 @@ Consider changing name to RefSeeker
 ###################################
 
 
+In rs_graph add option to only select top X amount of targets for print
 
+
+
+###################################
+
+
+
+rs_batch add with selection
+
+
+##################################
+
+
+autographing  autoadjust width baased on number of targets
+
+
+###################################
+
+
+
+
+
+##################################
 
 
 

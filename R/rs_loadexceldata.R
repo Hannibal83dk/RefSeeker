@@ -57,47 +57,11 @@ rs_loadexceldata <- function(filepath = ""){
 
     names(datalist) <- sub(" ", "_", sheets)
   }
-  
-  
-  
-  
-# Testing for missing values
-  for (i in 1:length(datalist)) {
-    #datalist[[i]][5,2] <- NA
-    
-    if(FALSE %in% complete.cases(datalist[[i]])){
-      warning(paste("Caution: Missing data located in ", names(datalist[i])))
 
-    }
-    
-  }
 
-  # Testing columns for outliers. More than 20% is may be indicative of transposed data table.
-  ## Note this test is not based on anything other than the authers idea of how to test for columns not representing targets
-  
-  caution = FALSE
-  for (i in 1:length(datalist)) {
-    for (j in 1:ncol(datalist[[i]])) {
-      
-      # cat(paste("\nTesting: [", names(datalist[i]), "-", names(datalist[[i]])[j],"]"))
-      box <- boxplot(datalist[[i]][j])
-      
-      if(length(box$out)/box$n > 0.2){
-        #cat(" - Caution, more than 20% outliers detected")
-        caution <- TRUE
-      } else {#cat("- OK")
-        }
+  rsdatatest(datalist)
 
-    }
-    
-  }
-  
-  if(caution){
-    
-    warning("Caution, more than 20% outliers were detected in some colums.
-            \rPlease check that targets(Gene/mRNA/miRNA) are represented as columns and samples as rows")
-  }
-  
+
   #cat("\nPlease note: These tests are not a guarantee for (im)prober structure of dataset(s)")
 
   return(datalist)
@@ -114,7 +78,34 @@ rs_loadodsdata <- rs_loadexceldata
 
 
 
-  
 
+#' Tests imported data for correct format
+#'
+#' @param expression Imported list of expression data sets
+#'
+#' @return void outputs warnings if discrepancies are found
+#'
+#' @note This is a simple test for missing data and character columns, correctness of data format is not guarantied if no warnings are given
+#'
+# #' @examples
+rsdatatest <- function(expression){
 
+  # Testing for missing values
+  for (i in 1:length(expression)) {
+    if(FALSE %in% stats::complete.cases(expression[[i]])){
+      warning(paste("Caution: Missing data located in:", names(expression[i]), "\nMissing data is discauraged and may lead to errors"))
+    }
+  }
+
+  # testing for non numeric columns. Making sure data is not transposed
+  for (i in 1:length(expression)) {
+    for (j in 1:ncol(expression[[i]])) {
+      if(!is.numeric(expression[[i]][[j]])){
+
+        warning(paste("Non numeric columns found in:", names(expression[i]),"\nPlease make sure columns represent target RNA species and rows represent samples"))
+        break()
+      }
+    }
+  }
+}
 
