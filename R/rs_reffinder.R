@@ -4,10 +4,10 @@
 
 
 #' Calculate reffinder stability tables
-#' @description Uses Normfinder, GeNorm, bestKeeper and delta-Ct methods to calculate ranked stabilities and the comprehensive ranking from reffinder
-#' @param expression A matrix, data frame or tibble with columns for each genes and rows for each samples.
+#' @description Uses Normfinder, geNorm, BestKeeper and delta-Ct methods to calculate ranked stabilities and the comprehensive ranking from reffinder
+#' @param expression A matrix, data frame or tibble with columns for each targets and rows for each samples.
 #'
-#' @return A list of two data frame tables containing ranked stabilities and stability values from Normfinder, GeNorm, bestKeeper and the reffinders comprehensive ranking
+#' @return A list of two data frame tables containing ranked stabilities and stability values from Normfinder, geNorm, BestKeeper and the reffinders comprehensive ranking
 #' @export
 #'
 #' @examples
@@ -35,11 +35,11 @@ rsfinder <- function(expression){
 
 
   expression <- as.data.frame(expression)
-  genes <- names(expression)
+  targets <- names(expression)
 
 
   #starttime <- Sys.time()
-  DC <- rs_deltaCt(expression)
+  DC <- rs_deltact(expression)
   #cat(paste("\nDelta-Ct completed", round(difftime(Sys.time(), starttime, units = "secs"), 3), "secs"))
 
   #starttime <- Sys.time()
@@ -48,7 +48,7 @@ rsfinder <- function(expression){
 
 
   #starttime <- Sys.time()
-  BK <- rs_bestKeeper(expression)
+  BK <- rs_bestkeeper(expression)
   #cat(paste("\nBestKeeper completed",  round(difftime(Sys.time(), starttime, units = "secs"), 3), "secs"))
 
 
@@ -58,48 +58,48 @@ rsfinder <- function(expression){
   #cat(paste("\nNormfinder completed",  round(difftime(Sys.time(), starttime, units = "secs"), 3), "secs\n"))
 
 
-  names(DC) <- c("Gene", "Stability", "Rank")
-  names(BK) <- c("Gene", "Stability", "Rank")
-  names(NF) <- c("Gene", "Stability", "Rank")
-  names(GN) <- c("Gene", "Stability", "Rank")
+  names(DC) <- c("Target", "Stability", "Rank")
+  names(BK) <- c("Target", "Stability", "Rank")
+  names(NF) <- c("Target", "Stability", "Rank")
+  names(GN) <- c("Target", "Stability", "Rank")
   #################################################################################
 
-  stabilityTable <- data.frame(matrix(nrow = length(genes), ncol = 6))
+  stabilityTable <- data.frame(matrix(nrow = length(targets), ncol = 6))
 
-  names(stabilityTable) <- c("Gene", "Delta Ct", "Bestkeeper", "Normfinder", "Genorm", "Comprehensive Rank")
+  names(stabilityTable) <- c("Target", "delta-Ct", "BestKeeper", "Normfinder", "geNorm", "Comprehensive Rank")
 
-  DC$Gene <- factor(DC$Gene, levels = genes)
-  BK$Gene <- factor(BK$Gene, levels = genes)
-  NF$Gene <- factor(NF$Gene, levels = genes)
-  GN$Gene <- factor(GN$Gene, levels = genes)
+  DC$Target <- factor(DC$Target, levels = targets)
+  BK$Target <- factor(BK$Target, levels = targets)
+  NF$Target <- factor(NF$Target, levels = targets)
+  GN$Target <- factor(GN$Target, levels = targets)
 
-  DC <- DC[order(DC$Gene),]
-  BK <- BK[order(BK$Gene),]
-  NF <- NF[order(NF$Gene),]
-  GN <- GN[order(GN$Gene),]
+  DC <- DC[order(DC$Target),]
+  BK <- BK[order(BK$Target),]
+  NF <- NF[order(NF$Target),]
+  GN <- GN[order(GN$Target),]
 
 
 
-  stabilityTable$Gene <- genes
+  stabilityTable$Target <- targets
 
   # Order the tables based on gene position, necessary to add stability in correct order
-  stabilityTable$'Delta Ct' <- DC$Stability
-  stabilityTable$Bestkeeper <- BK$Stability
+  stabilityTable$'delta-Ct'<- DC$Stability
+  stabilityTable$BestKeeper <- BK$Stability
   stabilityTable$Normfinder <- NF$Stability
-  stabilityTable$Genorm <- GN$Stability
+  stabilityTable$geNorm <- GN$Stability
 
   #################################################################################
 
-  rankTable <- data.frame(matrix(nrow = length(genes), ncol = 5))
+  rankTable <- data.frame(matrix(nrow = length(targets), ncol = 5))
 
-  names(rankTable) <- c("Gene", "Delta Ct", "Bestkeeper", "Normfinder", "Genorm")
+  names(rankTable) <- c("Target", "delta-Ct", "BestKeeper", "Normfinder", "geNorm")
 
-  rankTable$Gene <- genes
+  rankTable$Target <- targets
 
-  rankTable$'Delta Ct' <- DC$Rank
-  rankTable$Bestkeeper <- BK$Rank
+  rankTable$'delta-Ct' <- DC$Rank
+  rankTable$BestKeeper <- BK$Rank
   rankTable$Normfinder <- NF$Rank
-  rankTable$Genorm <- GN$Rank
+  rankTable$geNorm <- GN$Rank
 
   for (i in 1:nrow(rankTable)){
 
@@ -111,13 +111,13 @@ rsfinder <- function(expression){
   row.names(stabilityTable) <- NULL
 
 
-  rankTable <- rankTable[order(rankTable$Gene),]
+  rankTable <- rankTable[order(rankTable$Target),]
   row.names(rankTable) <- NULL
 
-  order(stabilityTable$Gene)
+  order(stabilityTable$Target)
 
 
-  rankTable$'Comprehensive Rank' <- order(stabilityTable$Gene)
+  rankTable$'Comprehensive Rank' <- order(stabilityTable$Target)
   rankTable <- rankTable[order(rankTable$'Comprehensive Rank'),]
   row.names(rankTable) <- NULL
 
@@ -130,7 +130,7 @@ rsfinder <- function(expression){
 #'
 #' @param expression A data frame, tibble or matrix or a list of these
 #'
-#' @return A list of two data frame tables containing ranked stabilities and stability values from Normfinder, GeNorm, bestKeeper and the reffinders comprehensive ranking.
+#' @return A list of two data frame tables containing ranked stabilities and stability values from Normfinder, geNorm, BestKeeper and the reffinders comprehensive ranking.
 #' if a list is passed a list of lists containing the above data for each data set
 #' @export
 #'

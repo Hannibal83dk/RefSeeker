@@ -9,7 +9,11 @@ test_that("reffinder works with data.frames", {
 
   res <- rs_reffinder(ct_vals)
 
-  write(getwd(), "~/R/testlog.txt", append = TRUE)
+  #write(getwd(), "~/R/testlog.txt", append = TRUE)
+
+  # rewrite reference
+  #write.csv(res[[1]], paste0(testrefpath(), "/testref/rs_reffinder_df1.csv"), row.names = FALSE)
+  #write.csv(res[[2]], paste0(testrefpath(), "/testref/rs_reffinder_df2.csv"), row.names = FALSE)
 
 
   expect_equal(res[[1]], read.csv(paste0(testrefpath(), "/testref/rs_reffinder_df1.csv"), check.names = FALSE))

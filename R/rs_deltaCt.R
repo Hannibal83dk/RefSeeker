@@ -13,7 +13,7 @@
 #' ct_vals <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
 #' dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 #'
-#' dct <- rs_deltaCt(ct_vals)
+#' dct <- rs_deltact(ct_vals)
 #' dct
 #'
 #'########################
@@ -22,13 +22,13 @@
 #' ct_vals <- data.frame(matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20))
 #'
 #' names(ct_vals) <- c("gene1", "gene2", "gene3", "gene4", "gene5")
-#' dct <- rs_deltaCt(ct_vals)
+#' dct <- rs_deltact(ct_vals)
 #' dct
 #'
 #' @references Silver N, Best S, Jiang J, Thein SL. 2006. Selection of housekeeping genes for gene expression studies in human reticulocytes using real-time PCR. BMC molecular biology 7:33.
 #'
 #'
-rs_deltaCt <- function(expression){
+rs_deltact <- function(expression){
 
   # Convert to matrix
   expression <- as.matrix(expression)

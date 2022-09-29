@@ -1,4 +1,4 @@
-#' Calculates stabilites based on the bestKeeper method
+#' Calculates stabilites based on the BestKeeper method
 #'
 #' @param expression A matrix, data frame or tibble with columns for each genes and rows for each samples.
 #'
@@ -14,12 +14,12 @@
 #' ct_vals <- data.frame(matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20))
 #'
 #' names(ct_vals) <- c("gene1", "gene2", "gene3", "gene4", "gene5")
-#' bks <- rs_bestKeeper(ct_vals)
+#' bks <- rs_bestkeeper(ct_vals)
 #' bks
 #'
 #' @references Pfaffl MW, Tichopad A, Prgomet C, Neuvians TP. 2004. Determination of stable housekeeping genes, differentially regulated target genes and sample integrity: BestKeeper--Excel-based tool using pair-wise correlations. Biotechnology letters 26:509-515.
 #'
-rs_bestKeeper <- function(expression, decimals = 3){
+rs_bestkeeper <- function(expression, decimals = 3){
 
   # Make sure the input is in the form of a data frame
   input <- as.data.frame(expression)

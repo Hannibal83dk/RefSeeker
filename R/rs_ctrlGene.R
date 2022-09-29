@@ -86,11 +86,11 @@
 #' data(rs_miRNA)
 #'
 #'
-#' rs_bestKeeperFull(as.data.frame(rs_miRNA))
-#' rs_bestKeeperFull(rs_miRNA)
+#' rs_bestkeeperFull(as.data.frame(rs_miRNA))
+#' rs_bestkeeperFull(rs_miRNA)
 #'
 #'
-rs_bestKeeperFull=function(expression,ctVal=TRUE)
+rs_bestkeeperFull=function(expression,ctVal=TRUE)
 {
   if(class(expression)[1] != "data.frame"){
     expression <- as.data.frame(expression)

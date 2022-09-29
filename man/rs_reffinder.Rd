@@ -10,7 +10,7 @@ rs_reffinder(expression)
 \item{expression}{A data frame, tibble or matrix or a list of these}
 }
 \value{
-A list of two data frame tables containing ranked stabilities and stability values from Normfinder, GeNorm, bestKeeper and the reffinders comprehensive ranking.
+A list of two data frame tables containing ranked stabilities and stability values from Normfinder, geNorm, BestKeeper and the reffinders comprehensive ranking.
 if a list is passed a list of lists containing the above data for each data set
 }
 \description{

@@ -14,7 +14,7 @@ test_that("deltaCt on matrix", {
 
   results <- data.frame(Target, `Average of STDEV`, `Stability Rank`, check.names = F)
 
-  expect_equal(rs_deltaCt(ct_vals), results)
+  expect_equal(rs_deltact(ct_vals), results)
 })
 
 
@@ -31,7 +31,7 @@ test_that("deltaCt on data.frame", {
 
   results <- data.frame(Target, `Average of STDEV`, `Stability Rank`, check.names = F)
 
-  expect_equal(rs_deltaCt(ct_vals), results)
+  expect_equal(rs_deltact(ct_vals), results)
 })
 
 
@@ -50,7 +50,7 @@ test_that("deltaCt on tibble", {
 
   results <- data.frame(Target, `Average of STDEV`, `Stability Rank`, check.names = F)
 
-  expect_equal(rs_deltaCt(ct_vals), results)
+  expect_equal(rs_deltact(ct_vals), results)
 })
 
 
@@ -63,7 +63,7 @@ test_that("bestkeeper on matrix", {
   ct_vals <- matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20)
   dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 
-  res <- rs_bestKeeper(ct_vals)
+  res <- rs_bestkeeper(ct_vals)
 
   ## Creating reference file
   # write.csv(res, paste0(testrefpath(), "/testref/rs_bestkeeper.csv"), row.names = FALSE)
@@ -81,7 +81,7 @@ test_that("bestkeeper on data.frame", {
   ct_vals <- data.frame(matrix(rnorm(5*20, mean = 25), ncol = 5, nrow = 20))
   dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 
-  res <- rs_bestKeeper(ct_vals)
+  res <- rs_bestkeeper(ct_vals)
 
   ## Creating reference file
   # write.csv(res, paste0(testrefpath(), "/testref/rs_bestkeeper.csv"), row.names = FALSE)
@@ -101,7 +101,7 @@ test_that("bestkeeper on tibble", {
   ct_vals <- tibble::as_tibble(ct_vals)
 
 
-  res <- rs_bestKeeper(ct_vals)
+  res <- rs_bestkeeper(ct_vals)
 
   ## Creating reference file
   # write.csv(res, paste0(testrefpath(), "/testref/rs_bestkeeper.csv"), row.names = FALSE)

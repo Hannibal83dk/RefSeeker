@@ -4,17 +4,17 @@
 \alias{rs_exceltable}
 \title{Output excel workbook containing stability and ranking as separate sheets}
 \usage{
-rs_exceltable(reffinderlist, filename = "Stability-table", addDate = TRUE)
+rs_exceltable(refseekerlist, filename = "Stability-table", addDate = TRUE)
 }
 \arguments{
-\item{reffinderlist}{A reffinderlist created by the reffinder function}
+\item{refseekerlist}{A RefSeekerlist created by the rs_reffinder function}
 
 \item{filename}{A file name to identify the data}
 
 \item{addDate}{Possibility to automatically add date to output file name}
 }
 \value{
-Nothing, outpust an excel file in the working directory or an output folder selected by the file name
+Nothing, output an excel file in the working directory or an output folder selected by the file name
 }
 \description{
 Output excel workbook containing stability and ranking as separate sheets

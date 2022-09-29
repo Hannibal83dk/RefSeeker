@@ -106,17 +106,10 @@ New file name given
 list of lists, maybe more than one dataset
 Fresh_Frozen
 [1] "Comprehensive Rank"
-Error in reffinderlist[[3]] : subscript out of bounds
+Error in reffinderlist[[3]] : subscript out of bounds		- Seems fixed
 
 
 #################################
-
-
-Updata vignettes for source package
-
-
-#################################
-
 
 
 Graph group naming could remove underscores
@@ -136,7 +129,7 @@ $$ Solved
 
 Rework the batch functions. include ods and check cvs maybe aliases for tsv or others
 
-Allow for selection of graph type in function calls e.g. rs_batchExcel3 <- function(filepath = "", outdir = "", printgraph = c("FALSE", "multi", "single){ code;;}
+Allow for selection of graph type in function calls e.g. rs_batchExcel3 <- function(filepath = "", outdir = "", printgraph = c("FALSE", "multi", "single), ){ code;;}
 
 
 
@@ -167,7 +160,7 @@ Edit vignette to no missing data allowed
 #################################
 
 
-Create namingconcention on algorithms - geNorm, RefFinder, Normfinder, BestKeeper, delta-Ct
+Create namingconvention on algorithms - geNorm, RefFinder, Normfinder, BestKeeper, delta-Ct
 
 
 #################################
@@ -227,6 +220,11 @@ autographing  autoadjust width baased on number of targets
 
 ###################################
 
+
+Update vignettes for source package - text based data has been changed to rs_load.table()
+
+
+#################################
 
 
 

@@ -12,7 +12,8 @@ rs_graph(
   height,
   units = "px",
   res = 250,
-  ordering = "Comprehensive Rank"
+  ordering = "Comprehensive Rank",
+  filetype = "png"
 )
 }
 \arguments{

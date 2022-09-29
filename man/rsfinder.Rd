@@ -7,13 +7,13 @@
 rsfinder(expression)
 }
 \arguments{
-\item{expression}{A matrix, data frame or tibble with columns for each genes and rows for each samples.}
+\item{expression}{A matrix, data frame or tibble with columns for each targets and rows for each samples.}
 }
 \value{
-A list of two data frame tables containing ranked stabilities and stability values from Normfinder, GeNorm, bestKeeper and the reffinders comprehensive ranking
+A list of two data frame tables containing ranked stabilities and stability values from Normfinder, geNorm, BestKeeper and the reffinders comprehensive ranking
 }
 \description{
-Uses Normfinder, GeNorm, bestKeeper and delta-Ct methods to calculate ranked stabilities and the comprehensive ranking from reffinder
+Uses Normfinder, geNorm, BestKeeper and delta-Ct methods to calculate ranked stabilities and the comprehensive ranking from reffinder
 }
 \examples{
 set.seed(100)

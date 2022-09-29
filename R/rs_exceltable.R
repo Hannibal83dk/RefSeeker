@@ -2,12 +2,12 @@
 #'
 #' Output excel workbook containing stability and ranking as separate sheets
 #'
-#' @param reffinderlist A reffinderlist created by the reffinder function
+#' @param refseekerlist A RefSeekerlist created by the rs_reffinder function
 #'
 #' @param filename A file name to identify the data
 #' @param addDate Possibility to automatically add date to output file name
 #'
-#' @return Nothing, outpust an excel file in the working directory or an output folder selected by the file name
+#' @return Nothing, output an excel file in the working directory or an output folder selected by the file name
 #' @export
 #'
 #' @examples
@@ -22,16 +22,38 @@
 #' }
 #'
 #'
-rs_exceltable <- function(reffinderlist, filename = "Stability-table", addDate = TRUE){
+rs_exceltable <- function(refseekerlist, filename = "Stability-table", addDate = TRUE){
 
-  rfStability <- reffinderlist$stabilityTable
-  rfRank <- reffinderlist$rankTable
 
-  if(addDate == TRUE){
-    filename <- paste0(filename, "_", Sys.Date())
+  if(!is.null(refseekerlist$stabilityTable)){ # Simple one dimensional list, just one data set (refseekerlist$stabilityTable exists)
+
+    rsStability <- refseekerlist$stabilityTable
+    rsRank <- refseekerlist$rankTable
+
+    if(addDate == TRUE){
+      filename <- paste0(filename, "_", Sys.Date())
+    }
+
+    rsexcelfile(filename, rsStability, rsRank, overwrite = TRUE)
   }
 
-  rsexcelfile(filename, rfStability, rfRank, overwrite = TRUE)
+
+  if(!is.null(refseekerlist[[1]]$stabilityTable)){ # A list of lists of results tables (refseekerlist[[1]]$stabilityTable exists)
+
+    for (i in 1:length(refseekerlist)) {
+
+      rsStability <- refseekerlist[[i]]$stabilityTable
+      rsRank <- refseekerlist[[i]]$rankTable
+
+      newfilename <- paste0(filename, "_", names(refseekerlist[i]))
+
+      if(addDate == TRUE){
+        newfilename <- paste0(newfilename, "_", Sys.Date())
+      }
+
+      rsexcelfile(newfilename, rsStability, rsRank, overwrite = TRUE)
+    }
+
+  }
 
 }
-
