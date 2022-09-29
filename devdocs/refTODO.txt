@@ -87,7 +87,7 @@ report file path to pngs to user - DONE
 
 
 
-when loading data, test for propper structure of data eliminate datasets that do not conform and warn user. 	- DONE for batch
+when loading data, test for prober structure of data eliminate datasets that do not conform and warn user. 	- DONE for batch
 														- Missing csv and friends - DONE
 														- Tests written - DONE
 
@@ -129,13 +129,13 @@ $$ Solved
 
 Rework the batch functions. include ods and check cvs maybe aliases for tsv or others
 
-Allow for selection of graph type in function calls e.g. rs_batchExcel3 <- function(filepath = "", outdir = "", printgraph = c("FALSE", "multi", "single), ){ code;;}
+Allow for selection of graph type in function calls e.g. rs_batchExcel3 <- function(filepath = "", outdir = "", printgraph = c("FALSE", "multi", "single), ){ code;;} - DONE
 
 
 
 ################################
 
-Remove redundat rs_excelbatch functions.
+Remove redundat rs_excelbatch functions. - DONE
 Remove import of readxl in rs_excelbatch functions
 
 ################################
@@ -160,7 +160,7 @@ Edit vignette to no missing data allowed
 #################################
 
 
-Create namingconvention on algorithms - geNorm, RefFinder, Normfinder, BestKeeper, delta-Ct
+Create namingconvention on algorithms - geNorm, RefFinder, Normfinder, BestKeeper, delta-Ct - DONE
 
 
 #################################
@@ -178,12 +178,13 @@ Combine all batch analysis functions - include manual selection of one or more f
 
 Make Readexcel package and readODS package required only if needed
 
+
 ##################################
+
 
 Posibility of adding color to graph, add a color parameter
 
 a few standard colors like "red" "green" or a vector  of colors or a vector of colors in hex to assign each targets
-
 
 
 ###################################
@@ -202,7 +203,6 @@ Consider changing name to RefSeeker
 
 
 In rs_graph add option to only select top X amount of targets for print
-
 
 
 ###################################
@@ -226,13 +226,28 @@ Update vignettes for source package - text based data has been changed to rs_loa
 
 #################################
 
+Fix sorting based on targets, seems to change compaired to input file
 
+
+##################################
+
+
+Fix csv, tsv, txt and ods export. Not working from at least from wizzard. makes xlsx instead
+
+
+##################################
+
+
+fix ymax in graphs, set to max value of data.
 
 
 ##################################
 
 
 
+
+
+##################################
 
 
 

@@ -5,21 +5,23 @@
 \title{Wrapper for selecting single or multifaceted graph output.}
 \usage{
 rs_graph(
-  reffinderlist,
+  refseekerlist,
   filename = "",
+  filetype = "png",
   forceSingle = FALSE,
   width,
   height,
   units = "px",
   res = 250,
-  ordering = "Comprehensive Rank",
-  filetype = "png"
+  ordering = "Comprehensive Rank"
 )
 }
 \arguments{
-\item{reffinderlist}{A reffinder list or a list of reffinder lists optained frpm rs_reffinder() function}
+\item{refseekerlist}{A refseekerlist list or a list of refseekerlist lists obtained frpm rs_reffinder() function}
 
 \item{filename}{String. A name of the output file. Can contain an optional relative path.}
+
+\item{filetype}{Selection of image file type may be "png", "tiff", "jpeg".}
 
 \item{forceSingle}{If TRUE will make a single graph for each data set provided.}
 
@@ -31,7 +33,7 @@ rs_graph(
 
 \item{res}{Integer value parameter passed to the PNG graphics device. The nominal resolution in ppi which will be recorded in the bitmap file, if a positive integer. Also used for units other than the default, and to convert points to pixels.}
 
-\item{ordering}{Used to control sorting of the x axis, use "Gene","Delta Ct","Bestkeeper","Normfinder","Genorm" or "Comprehensive Rank".}
+\item{ordering}{Used to control sorting of the x axis, use "Target","delta-Ct","BestKeeper","Normfinder","geNorm" or "Comprehensive Rank".}
 }
 \value{
 Creates a plot shown in the active device, usually the plots pane. Optionally outputs the plot to a file if filename has been given.

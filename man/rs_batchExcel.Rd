@@ -4,7 +4,15 @@
 \alias{rs_batchExcel}
 \title{Creates batch output from selected excel file}
 \usage{
-rs_batchExcel()
+rs_batchExcel(filepath = "", outdir = "", graphtype = "")
+}
+\arguments{
+\item{filepath}{A path to an excel file containing properly formatted reffinder data tables. This means column representing genes/targets and rows representing samples,
+data being Ct/Cp/Cq values, with no missing data since the validity of these results have not been confirmed.}
+
+\item{outdir}{A selected output directory, if not set a dialog will appear to allow selection for output directory}
+
+\item{graphtype}{Select the type of graph, may be set to: "none", "multi or "single". Can be left or set to empty: "". To allow for selection by dialog.}
 }
 \value{
 Nothing. Creates excel files and graphs with stabilities for each sheet of a selected excel file
@@ -16,7 +24,6 @@ Creates batch output from selected excel file
 \dontrun{
 rs_batchExcel()
 }
-
 
 
 }

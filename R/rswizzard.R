@@ -41,7 +41,7 @@ rs_wizzard <- function(){
 
   results <- rs_reffinder(datalist)
 
-  rs_graph(reffinderlist = results, filename = paste0(answer[2],"/testing"), forceSingle = (answer[3] == "individual"), ordering = answer[4])
+  rs_graph(refseekerlist = results, filename = paste0(answer[2],"/testing"), forceSingle = (answer[3] == "individual"), ordering = answer[4])
 
 
   rs_exceltable(results, paste0(answer[2],"/testing"))

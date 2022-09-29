@@ -19,7 +19,7 @@ Orders a expression stability data frame by stability value
 ct_vals <- matrix(rnorm(5*20), ncol = 5, nrow = 20)
 dimnames(ct_vals)[[2]] <-  c("gene1", "gene2", "gene3", "gene4", "gene5")
 
-dct <- rs_deltaCt(ct_vals)
+dct <- rs_deltact(ct_vals)
 
 dct <- rsorderbystability(dct)
 dct

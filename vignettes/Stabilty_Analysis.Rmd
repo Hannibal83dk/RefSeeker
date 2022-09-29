@@ -93,11 +93,11 @@ rs_normfinder(inputData$Fresh_Frozen)
 rs_genorm(inputData$Fresh_Frozen)
 ```
 ```{r}
-rs_bestKeeper(inputData$Fresh_Frozen)
+rs_bestkeeper(inputData$Fresh_Frozen)
 ```
 
 ```{r}
-rs_deltaCt(inputData$Fresh_Frozen)
+rs_deltact(inputData$Fresh_Frozen)
 ```
 
 Using rs_reffinder() provides the option of calculating all data sets in one line. The function returns a list-of-lists of two tables for each set.

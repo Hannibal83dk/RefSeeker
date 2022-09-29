@@ -2,15 +2,17 @@
 
 #' Wrapper for selecting single or multifaceted graph output.
 #'
-#' @param reffinderlist A reffinder list or a list of reffinder lists optained frpm rs_reffinder() function
+#' @param refseekerlist A refseekerlist list or a list of refseekerlist lists obtained frpm rs_reffinder() function
 #' @param filename String. A name of the output file. Can contain an optional relative path.
 #' @param forceSingle If TRUE will make a single graph for each data set provided.
-#'
+#' @param filetype Selection of image file type may be "png", "tiff", "jpeg".
 #' @param width Integer value parameter passed to the PNG graphics device. Width of the output png. True width is dependent on the selected units-type.
 #' @param height Integer value parameter passed to the PNG graphics device. Height of the output png. True Height is dependent on the selected units-type
 #' @param units Integer value parameter passed to the PNG graphics device. The units in which height and width are given. Can be "px" (pixels, the default), "in" (inches), "cm" or "mm".
 #' @param res Integer value parameter passed to the PNG graphics device. The nominal resolution in ppi which will be recorded in the bitmap file, if a positive integer. Also used for units other than the default, and to convert points to pixels.
-#' @param ordering Used to control sorting of the x axis, use "Gene","Delta Ct","Bestkeeper","Normfinder","Genorm" or "Comprehensive Rank".
+#'
+#' @param ordering Used to control sorting of the x axis, use "Target","delta-Ct","BestKeeper","Normfinder","geNorm" or "Comprehensive Rank".
+#'
 #' @return Creates a plot shown in the active device, usually the plots pane. Optionally outputs the plot to a file if filename has been given.
 #' @export
 #'
@@ -32,59 +34,59 @@
 #' }
 #'
 
-rs_graph <- function(reffinderlist, filename = "", forceSingle = FALSE, width, height, units = "px", res = 250, ordering = "Comprehensive Rank", filetype = "png"){
+rs_graph <- function(refseekerlist, filename = "", filetype = "png", forceSingle = FALSE, width, height, units = "px", res = 250, ordering = "Comprehensive Rank"){
   # 2048, 2156, units = "px", res = 250
 
-  # names <- names(reffinderlist)
+  # names <- names(refseekerlist)
 
   # if(filename==""){
   #   cat("No file name provided, attempting to substract name\n")
-  #   filename <- deparse(substitute(reffinderlist))
+  #   filename <- deparse(substitute(refseekerlist))
   #   cat("New file name given\n")
   # }
 
 
-  # reffinderlist = rfres
+  # refseekerlist = rfres
   # filename <- paste0(outdir, "/")
   # forceSingle = TRUE
 
   # Check to see if the provided list is a list of list or "just" a list (one data set).
   ## Will evaluate to TRUE if we are dealing with a simple list (one data set).
-  if(!is.null(reffinderlist$stabilityTable)){
+  if(!is.null(refseekerlist$stabilityTable)){
     cat("simplelist, only one dataset\n")
 
 
-    # name <- deparse(substitute(reffinderlist))
+    # name <- deparse(substitute(refseekerlist))
     # cat(name)
-    name <- deparse(substitute(reffinderlist))
+    name <- deparse(substitute(refseekerlist))
 
-    reffinderlist <- list(reffinderlist)
+    refseekerlist <- list(refseekerlist)
 
-    cat("\nreffinderlist converted\n")
+    cat("\nrefseekerlist converted\n")
 
 
     cat(name)
-    names(reffinderlist) <- gsub("_", " ", name)
+    names(refseekerlist) <- gsub("_", " ", name)
 
 
-    cat("\nreffinderlist renamed\n")
+    cat("\nrefseekerlist renamed\n")
 
 
   }
 
 
-  if(!is.null(reffinderlist[[1]]$stabilityTable)){
+  if(!is.null(refseekerlist[[1]]$stabilityTable)){
 
     cat("list of lists, maybe more than one dataset\n")
 
-    names(reffinderlist) <- gsub("_", " ", names(reffinderlist))
+    names(refseekerlist) <- gsub("_", " ", names(refseekerlist))
 
 
     if (forceSingle == FALSE) {
 
       if(filename != ""){
         if (missing(width)) {
-          width = length(reffinderlist) * 675 +
+          width = length(refseekerlist) * 675
           cat(paste("width set to", width, "\n"))
         }
 
@@ -95,11 +97,11 @@ rs_graph <- function(reffinderlist, filename = "", forceSingle = FALSE, width, h
         }
       }
 
-      rsgraphdraw(reffinderlist, filename, width = width, height = height, units = units, res = res,  ordering = ordering, filetype = filetype)
+      rsgraphdraw(refseekerlist, filename, width = width, height = height, units = units, res = res,  ordering = ordering, filetype = filetype)
 
     } else { # forceSingle is TRUE
 
-      names <- names(reffinderlist)
+      names <- names(refseekerlist)
 
 
       if (missing(width)) {
@@ -116,7 +118,7 @@ rs_graph <- function(reffinderlist, filename = "", forceSingle = FALSE, width, h
         cat(names[i])
         cat("\n")
 
-        rsgraphdraw(reffinderlist[i], paste0(filename, "_", gsub(" ", "_", names[i])), width = width, height = height, units = "px", res = 250, ordering = ordering, filetype = filetype)
+        rsgraphdraw(refseekerlist[i], paste0(filename, "_", gsub(" ", "_", names[i])), width = width, height = height, units = "px", res = 250, ordering = ordering, filetype = filetype)
       }
 
     }
@@ -130,18 +132,16 @@ rs_graph <- function(reffinderlist, filename = "", forceSingle = FALSE, width, h
 
 #' Multifaceted bar graph of stability values from multiple data sets
 #'
-#' @param reffinderlist A list of data frames from multiple data sets generated by the reffinder function
+#' @param refseekerlist A list of data frames from multiple data sets generated by the reffinder function
 #'
 #' @param filename A file name to identify the data. Do not need file extension. Can contain a path if working directory is not the desired destination.
-#'
+#' @param filetype Selection of image file type may be "png", "tiff", "jpeg".
 #' @param width Parameter passed to the PNG graphics device. Width of the output png. True width is dependent on the selected units-type
 #' @param height Parameter passed to the PNG graphics device. Height of the output png. True Height is dependent on the selected units-type
 #' @param units Parameter passed to the PNG graphics device. The units in which height and width are given. Can be "px" (pixels, the default), "in" (inches), "cm" or "mm".
 #' @param res Parameter passed to the PNG graphics device. The nominal resolution in ppi which will be recorded in the bitmap file, if a positive integer. Also used for units other than the default, and to convert points to pixels.
 #' @param ordering Used to control sorting of the x axis, use "Target","Delta-Ct","BestKeeper","Normfinder","geNorm" or "Comprehensive Rank".
-#' @param reffinderlist
-#' @param filename
-#' @param filetype
+
 #'Gene Delta Ct Bestkeeper Normfinder Genorm Comprehensive Rank
 #' @return Creates a png file with the bar graph and put it in an Output folder in the working directory
 #'
@@ -166,7 +166,7 @@ rs_graph <- function(reffinderlist, filename = "", forceSingle = FALSE, width, h
 #' rs_graph(rs_reffinder(tble2))
 #' }
 
-rsgraphdraw <- function(reffinderlist, filename = "", width, height, units = "px", res = 250, ordering = "Comprehensive Rank", filetype = "png"){
+rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png", width, height, units = "px", res = 250, ordering = "Comprehensive Rank"){
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop(
@@ -179,13 +179,13 @@ rsgraphdraw <- function(reffinderlist, filename = "", width, height, units = "px
 
   if(ordering[1] != "Targetorder"){
 
-    for (i in 1:length(reffinderlist)) {
+    for (i in 1:length(refseekerlist)) {
 
-      algonames <- names(reffinderlist[[i]]$stabilityTable)
+      algonames <- names(refseekerlist[[i]]$stabilityTable)
 
       sortcol <- which(algonames == ordering[1])
 
-      reffinderlist[[i]]$stabilityTable <- reffinderlist[[i]]$stabilityTable[order(reffinderlist[[i]]$stabilityTable[,sortcol]),]
+      refseekerlist[[i]]$stabilityTable <- refseekerlist[[i]]$stabilityTable[order(refseekerlist[[i]]$stabilityTable[,sortcol]),]
     }
 
   }
@@ -195,16 +195,16 @@ rsgraphdraw <- function(reffinderlist, filename = "", width, height, units = "px
 
   rftable <- data.frame()
   ## Adding specific identifiers for each stability value
-  if(is.null(names(reffinderlist))){ # Target names have not been provided
+  if(is.null(names(refseekerlist))){ # Target names have not been provided
 
     # Add identifier to tables and add them to the new rftable
     ## If dataset are not named, use ID numbers
-    for (i in 1:length(reffinderlist)) {
+    for (i in 1:length(refseekerlist)) {
       # Add identifier
-      reffinderlist[[i]]$stabilityTable$dataID <- paste0("ID_", i)
+      refseekerlist[[i]]$stabilityTable$dataID <- paste0("ID_", i)
 
       # Add the tables to the rftable
-      rftable <- rbind(rftable, reffinderlist[[i]]$stabilityTable)
+      rftable <- rbind(rftable, refseekerlist[[i]]$stabilityTable)
 
 
 
@@ -213,11 +213,11 @@ rsgraphdraw <- function(reffinderlist, filename = "", width, height, units = "px
 
   } else{ # Target names have been provided
     # Add identifier to tables and add them to the new rftable
-    for (i in 1:length(reffinderlist)) {
+    for (i in 1:length(refseekerlist)) {
       # Add identifier
-      reffinderlist[[i]]$stabilityTable$dataID <- names(reffinderlist)[i]
+      refseekerlist[[i]]$stabilityTable$dataID <- names(refseekerlist)[i]
       # Add the tables to the rftable
-      rftable <- rbind(rftable,reffinderlist[[i]]$stabilityTable)
+      rftable <- rbind(rftable,refseekerlist[[i]]$stabilityTable)
     }
 
   }

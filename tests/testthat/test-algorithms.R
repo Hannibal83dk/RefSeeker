@@ -70,8 +70,6 @@ test_that("bestkeeper on matrix", {
 
   expect_equal(res, read.csv(paste0(testrefpath(), "/testref/rs_bestkeeper.csv"), check.names = FALSE))
 
-
-
 })
 
 

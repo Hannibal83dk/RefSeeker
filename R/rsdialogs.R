@@ -66,7 +66,7 @@ rsoutdirselect <- function(){
 rsgraphtypeselect <- function(){
 
   selection <- ""
-  dir <- tclVar("")
+  #dir <- tclVar("")
   tt <- tktoplevel()
 
   tkwm.title(tt,"Select graph type")
@@ -82,14 +82,14 @@ rsgraphtypeselect <- function(){
     tkdestroy(tt)
   }
 
-  choosewd.but <- tkbutton(tt, text="Single graphs", command=slctsnge)
+  selsingle.but <- tkbutton(tt, text="Single graphs", command=slctsnge)
 
-  fldrslct.but <- tkbutton(tt, text="A multigraph", command=slctmlt)
+  selmulti.but <- tkbutton(tt, text="A multigraph", command=slctmlt)
 
   tkgrid(tklabel(tt,text=paste(" Please select the graph type.\n\n A single graph for each dataset or \n a faceted graph compairing all datasets \n")), columnspan = 2, pady = 15)
 
-  tkgrid(choosewd.but, fldrslct.but, pady= 10, padx= 10)
-
+  tkgrid(selsingle.but, selmulti.but, pady= 10, padx= 10)
+  tkwait.window(tt)
   return(selection)
 }
 
@@ -185,8 +185,8 @@ rsdialog <- function(){
   img <- "png"
   image <- tclVar("png")
 
-  datout <- "excel"
-  dataout <- "excel"
+  datout <- "xlsx"
+  dataout <- tclVar("xlsx")
 
 
 
@@ -220,7 +220,7 @@ rsdialog <- function(){
   imgradio4press <- function(){img <<- "none"}
 
   # table type radio functions
-  tabradio1press <- function(){datout <<- "excel"}
+  tabradio1press <- function(){datout <<- "xlsx"}
   tabradio2press <- function(){datout <<- "ods"}
   tabradio3press <- function(){datout <<- "csv"}
   tabradio4press <- function(){datout <<- "tsv"}
@@ -266,15 +266,15 @@ rsdialog <- function(){
   imgradio1 <- tkradiobutton(tt, text = "PNG", variable = image, value = "png", command = imgradio1press)
   imgradio2 <- tkradiobutton(tt, text = "TIFF", variable = image, value = "tiff", command = imgradio2press)
   imgradio3 <- tkradiobutton(tt, text = "JPEG", variable = image, value = "jpeg", command = imgradio3press)
-  imgradio4 <- tkradiobutton(tt, text = "None", variable = image, value = "none", command = imgradio4press)
+  imgradio4 <- tkradiobutton(tt, text = "None", variable = image, value = "none", command = imgradio4press, state = "disable")
 
 
   # Data output radio
   tabradio1 <- tkradiobutton(tt, text = "XLSX", variable = dataout, value = "xlsx", command = tabradio1press)
-  tabradio2 <- tkradiobutton(tt, text = "ODS", variable = dataout, value = "ods", command = tabradio2press)
-  tabradio3 <- tkradiobutton(tt, text = "CSV", variable = dataout, value = "csv", command = tabradio3press)
-  tabradio4 <- tkradiobutton(tt, text = "TSV", variable = dataout, value = "tsv", command = tabradio4press)
-  tabradio5 <- tkradiobutton(tt, text = "TXT", variable = dataout, value = "txt", command = tabradio5press)
+  tabradio2 <- tkradiobutton(tt, text = "ODS", variable = dataout, value = "ods", command = tabradio2press, state = "disable")
+  tabradio3 <- tkradiobutton(tt, text = "CSV", variable = dataout, value = "csv", command = tabradio3press, state = "disable")
+  tabradio4 <- tkradiobutton(tt, text = "TSV", variable = dataout, value = "tsv", command = tabradio4press, state = "disable")
+  tabradio5 <- tkradiobutton(tt, text = "TXT", variable = dataout, value = "txt", command = tabradio5press, state = "disable")
 
 
   q.but <- tkbutton(tt, text = "Quit", command = quit)
@@ -285,7 +285,6 @@ rsdialog <- function(){
   tkgrid(tklabel(tt, text = "Output directory:"), outdirlabel, fldrslct.but, columnspan = 7, pady = 10, padx = 10)
 
   tkgrid(tklabel(tt, text = "Select type of graph:"), graphradio1, graphradio2, columnspan = 7, pady = 10, padx = 10, sticky = "w")
-
 
   tkgrid(tklabel(tt, text = "Select ordering of x-axis:"), sortradio1, sortradio2, sortradio3, sortradio4, sortradio5, sortradio6, columnspan = 7, pady = 10, padx = 10, sticky = "w")
 
