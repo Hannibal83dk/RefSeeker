@@ -22,6 +22,7 @@
 #'
 rs_csvbatch <- function(input = "", outdir = "", outtype = "csv",  printgraph = TRUE){
 
+  #warning("This function has been depricated please use rs_wizard instead")
   # Read in the data from the files.
   ## A file is selected and all files in the folder matching the file extension will be loaded as a batch.
   ## The reffinder data is then calculated on these.

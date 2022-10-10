@@ -244,7 +244,7 @@ fix ymax in graphs, set to max value of data.
 ##################################
 
 
-
+wizard is spelled with one z - change wizzard function name
 
 
 ##################################

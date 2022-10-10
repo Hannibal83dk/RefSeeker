@@ -1,6 +1,23 @@
 
 
 
+
+
+
+
+
+#
+#
+# rs_loaddata() <- function(files = ""){
+#
+#
+#
+#
+#
+#
+# }
+
+
 #' Load one or more datasets from an excel file
 #'
 #' @param filepath a path to an excel or ods file. If left blank, a dialog will appear to select this interactivly.

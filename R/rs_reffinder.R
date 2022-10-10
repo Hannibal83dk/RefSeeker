@@ -33,10 +33,12 @@
 rsfinder <- function(expression){
 
 
+  #Targetfacor <- factor(names(expression), levels = names(expression))
+
 
   expression <- as.data.frame(expression)
-  targets <- names(expression)
-
+  #targets <- names(expression)
+  targets <- factor(names(expression), levels = names(expression))
 
   #starttime <- Sys.time()
   DC <- rs_deltact(expression)
@@ -114,8 +116,6 @@ rsfinder <- function(expression){
   rankTable <- rankTable[order(rankTable$Target),]
   row.names(rankTable) <- NULL
 
-  order(stabilityTable$Target)
-
 
   rankTable$'Comprehensive Rank' <- order(stabilityTable$Target)
   rankTable <- rankTable[order(rankTable$'Comprehensive Rank'),]
@@ -153,6 +153,8 @@ rsfinder <- function(expression){
 #
 rs_reffinder <- function(expression){
 
+  message("Please note that the target names has been factorized based on the appearance in the input dataset")
+
   if(class(expression)[1] == "list"){
 
     outputData <- list()
@@ -165,6 +167,8 @@ rs_reffinder <- function(expression){
     return(outputData)
 
   }
+
+
 
   return(rsfinder(expression))
 

@@ -12,7 +12,9 @@
 #' @param res Integer value parameter passed to the PNG graphics device. The nominal resolution in ppi which will be recorded in the bitmap file, if a positive integer. Also used for units other than the default, and to convert points to pixels.
 #'
 #' @param ordering Used to control sorting of the x axis, use "Target","delta-Ct","BestKeeper","Normfinder","geNorm" or "Comprehensive Rank".
-#'
+#' @param colors A data frame mapping target names to a hex color with targets in column 1 and colors in columns 2
+#'  target1       "#2271b2"
+#'  target2       "#d55e00"
 #' @return Creates a plot shown in the active device, usually the plots pane. Optionally outputs the plot to a file if filename has been given.
 #' @export
 #'
@@ -34,7 +36,12 @@
 #' }
 #'
 
-rs_graph <- function(refseekerlist, filename = "", filetype = "png", forceSingle = FALSE, width, height, units = "px", res = 250, ordering = "Comprehensive Rank"){
+rs_graph <- function(refseekerlist, filename = "",
+                     filetype = "png",
+                     forceSingle = FALSE,
+                     width, height, units = "px", res = 250,
+                     ordering = "Comprehensive Rank",
+                     colors = ""){
   # 2048, 2156, units = "px", res = 250
 
   # names <- names(refseekerlist)
@@ -84,7 +91,7 @@ rs_graph <- function(refseekerlist, filename = "", filetype = "png", forceSingle
 
     if (forceSingle == FALSE) {
 
-      if(filename != ""){
+      # if(filename != ""){
         if (missing(width)) {
           width = length(refseekerlist) * 675
           cat(paste("width set to", width, "\n"))
@@ -95,9 +102,9 @@ rs_graph <- function(refseekerlist, filename = "", filetype = "png", forceSingle
           cat(paste("height set to", height, "\n"))
 
         }
-      }
+     # }
 
-      rsgraphdraw(refseekerlist, filename, width = width, height = height, units = units, res = res,  ordering = ordering, filetype = filetype)
+      rsgraphdraw(refseekerlist, filename, width = width, height = height, units = units, res = res,  ordering = ordering, filetype = filetype, colors = colors)
 
     } else { # forceSingle is TRUE
 
@@ -118,7 +125,7 @@ rs_graph <- function(refseekerlist, filename = "", filetype = "png", forceSingle
         cat(names[i])
         cat("\n")
 
-        rsgraphdraw(refseekerlist[i], paste0(filename, "_", gsub(" ", "_", names[i])), width = width, height = height, units = "px", res = 250, ordering = ordering, filetype = filetype)
+        rsgraphdraw(refseekerlist[i], paste0(filename, "_", gsub(" ", "_", names[i])), width = width, height = height, units = "px", res = 250, ordering = ordering, filetype = filetype, colors = colors)
       }
 
     }
@@ -141,6 +148,9 @@ rs_graph <- function(refseekerlist, filename = "", filetype = "png", forceSingle
 #' @param units Parameter passed to the PNG graphics device. The units in which height and width are given. Can be "px" (pixels, the default), "in" (inches), "cm" or "mm".
 #' @param res Parameter passed to the PNG graphics device. The nominal resolution in ppi which will be recorded in the bitmap file, if a positive integer. Also used for units other than the default, and to convert points to pixels.
 #' @param ordering Used to control sorting of the x axis, use "Target","Delta-Ct","BestKeeper","Normfinder","geNorm" or "Comprehensive Rank".
+#' @param colors A data frame mapping target names to a hex color with targets in column 1 and colors in columns 2
+#'  target1       "#2271b2"
+#'  target2       "#d55e00"
 
 #'Gene Delta Ct Bestkeeper Normfinder Genorm Comprehensive Rank
 #' @return Creates a png file with the bar graph and put it in an Output folder in the working directory
@@ -166,7 +176,10 @@ rs_graph <- function(refseekerlist, filename = "", filetype = "png", forceSingle
 #' rs_graph(rs_reffinder(tble2))
 #' }
 
-rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png", width, height, units = "px", res = 250, ordering = "Comprehensive Rank"){
+rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png",
+                        width, height, units = "px", res = 250, ordering = "Comprehensive Rank",
+                        colors = c("")
+  ){                    #c("#2271b2",  "#d55e00", "#d55e00", "#d55e00", "#d55e00", "#d55e00", "#2271b2", "#359b73", "#2271b2", "#2271b2")
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop(
@@ -176,8 +189,9 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png", width, h
     )
   }
 
+  #print(refseekerlist)
 
-  if(ordering[1] != "Targetorder"){
+  #if(ordering[1] != "Targetorder"){
 
     for (i in 1:length(refseekerlist)) {
 
@@ -188,7 +202,7 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png", width, h
       refseekerlist[[i]]$stabilityTable <- refseekerlist[[i]]$stabilityTable[order(refseekerlist[[i]]$stabilityTable[,sortcol]),]
     }
 
-  }
+  #}
 
 
 
@@ -251,24 +265,80 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png", width, h
 
   # Create ghost data frame to hold invisible values for setting the first 4 rows max value to the same value
   ghostframe <- rftable
-  ghostframe$Stability <- 3
+  #ghostframe$Stability <- 3
 
 
-  p <- ggplot2::ggplot(rftable, ggplot2::aes_string('TargetID', 'Stability')) +
-    ggplot2::geom_bar(stat = "identity") +
-    # Invisible layer, alpha set to 0
-    ggplot2::geom_point(aes_string('TargetID', 'Stability'), ghostframe, alpha = 0) +
-    ggplot2::facet_grid(algorithm ~ dataID, scales = "free") +
-    ggplot2::scale_x_discrete(labels = function(x){gsub("__.+$", "", x)}) + # Remove prefix on target names
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = element_text(angle = 270, vjust = 0.2, hjust=0)) +
-    ggplot2::ylab("Stability value") +
-    ggplot2::xlab("Target")
+  p <- ggplot2::ggplot(rftable, ggplot2::aes_string('TargetID', 'Stability', fill = "TargetID")) +
+          ggplot2::geom_bar(stat = "identity") +
+          # Invisible layer, alpha set to 0
+          ggplot2::geom_point(aes_string('TargetID', 'Stability'), ghostframe, alpha = 0) +
+          ggplot2::facet_grid(algorithm ~ dataID, scales = "free") +
+          ggplot2::scale_x_discrete(labels = function(x){gsub("__.+$", "", x)}) + # Remove prefix on target names
+          ggplot2::theme_bw() +
+          ggplot2::theme(axis.text.x = element_text(angle = 270, vjust = 0.2, hjust=0)) +
+          ggplot2::ylab("Stability value") +
+          ggplot2::xlab("Target") +
+          ggplot2::theme(legend.position="none")
+          #ggplot2::scale_fill_manual(values=c("#000000", "#000000",  "#2271b2", "#2271b2","#359b73", "#d55e00", "#d55e00", "#d55e00", "#d55e00", "#d55e00"))
+
+
+  # A set of custom colors was provided as a vector
+  if( length(colors) == length(unique(rftable$Target)) ){
+
+    colors <- data.frame(target = unique(rftable$Target[order(rftable$Target)]),
+                         color = colors)
+
+    message("Please note colors has been applied to tagets based on factorization. \nThis factorization is likely provided by the rs_reffinder() function and obtained based on appearence of targets in the input data. \nIf multiple datasets are provided and a multigraph has been selected, a custom color scheme can be provided by a full lenght color vector.")
+    }
+
+  if(is.data.frame(colors)){
+
+    #colors <- colortable
+
+    #order <- unique(rftable$TargetID)
+    temp <- rftable[rftable$algorithm == "Comprehensive Rank", ]
+
+    temp$color <- NA
+
+    for (i in 1:nrow(colors)) {
+      for (j in 1:nrow(temp)) {
+        if(  temp$Target[j] == colors$target[i] ){
+          temp$color[j] = colors$color[i]
+        }
+      }
+    }
+
+    #names(colors) <- c("target", "color")
+
+    #colors$target <- factor(colors$target, levels = order)
+
+    #colors <- colors[ order(colors$target) , ]
+
+
+    colors <- temp$color
+
+  }
+
+
+  # If no colors are provided the default empty string still counts as one
+  if( length(colors)==1 && colors=="" ){
+    p <- p + ggplot2::scale_fill_manual(values=c( rep("grey45" , length(unique(rftable$TargetID))) ))
+  }
+
+  # One color provided meaning all bars should have this color
+  if(length(colors)==1 && colors !=""){
+      p <- p + ggplot2::scale_fill_manual(values=c( rep(colors , length(unique(rftable$TargetID))) ))
+  }
+
+  # A set of custom colors was provided as a vector
+  if( length(colors) == length(unique(rftable$TargetID)) ){
+    p <- p + ggplot2::scale_fill_manual(values=colors)
+  }
 
 
   print( p )
-
-
+  # color = ""
+  # colors = "#000000"
   if(filename != "") {
 
     path <- paste0(filename, "_", Sys.Date(),".", filetype)

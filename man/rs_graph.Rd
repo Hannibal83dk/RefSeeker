@@ -13,7 +13,8 @@ rs_graph(
   height,
   units = "px",
   res = 250,
-  ordering = "Comprehensive Rank"
+  ordering = "Comprehensive Rank",
+  colors = ""
 )
 }
 \arguments{
@@ -34,6 +35,10 @@ rs_graph(
 \item{res}{Integer value parameter passed to the PNG graphics device. The nominal resolution in ppi which will be recorded in the bitmap file, if a positive integer. Also used for units other than the default, and to convert points to pixels.}
 
 \item{ordering}{Used to control sorting of the x axis, use "Target","delta-Ct","BestKeeper","Normfinder","geNorm" or "Comprehensive Rank".}
+
+\item{colors}{A data frame mapping target names to a hex color with targets in column 1 and colors in columns 2
+target1       "#2271b2"
+target2       "#d55e00"}
 }
 \value{
 Creates a plot shown in the active device, usually the plots pane. Optionally outputs the plot to a file if filename has been given.

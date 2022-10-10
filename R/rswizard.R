@@ -10,9 +10,10 @@
 #' @examples
 #'
 #' \dontrun{
-#' rs_wizzard()
+#' rs_wizard()
 #' }
-rs_wizzard <- function(){
+rs_wizard <- function(){
+
   answer <- rsdialog()
 
   outdir <- answer[2]
