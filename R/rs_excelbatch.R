@@ -101,81 +101,81 @@
 
 
 
-
-
-########################3333
-
-#' Creates batch output from selected excel file
-#'
-#' @param filepath A path to an excel file containing properly formatted reffinder data tables. This means column representing genes/targets and rows representing samples,
-#' data being Ct/Cp/Cq values, with no missing data since the validity of these results have not been confirmed.
-#'
-#' @param outdir A selected output directory, if not set a dialog will appear to allow selection for output directory
-#' @param graphtype Select the type of graph, may be set to: "none", "multi or "single". Can be left or set to empty: "". To allow for selection by dialog.
-# #' @param ... Additional parameter to pass to the rs_graph function.
-#'
-#' @return Nothing. Creates excel files and graphs with stabilities for each sheet of a selected excel file
-#' @export
 #'
 #'
-# #' @import readxl
+#' ########################3333
+#'
+#' #' Creates batch output from selected excel file
+#' #'
+#' #' @param filepath A path to an excel file containing properly formatted reffinder data tables. This means column representing genes/targets and rows representing samples,
+#' #' data being Ct/Cp/Cq values, with no missing data since the validity of these results have not been confirmed.
+#' #'
+#' #' @param outdir A selected output directory, if not set a dialog will appear to allow selection for output directory
+#' #' @param graphtype Select the type of graph, may be set to: "none", "multi or "single". Can be left or set to empty: "". To allow for selection by dialog.
+#' # #' @param ... Additional parameter to pass to the rs_graph function.
+#' #'
+#' #' @return Nothing. Creates excel files and graphs with stabilities for each sheet of a selected excel file
+#' #' @export
+#' #'
+#' #'
+#' # #' @import readxl
+#' #'
+#' #'
+#' #'
+#' #'
+#' #' @examples
+#' #' \dontrun{
+#' #' rs_batchExcel()
+#' #' }
+#' #'
+#' #'
+#' rs_batchExcel <- function(filepath = "", outdir = "", graphtype = ""){
 #'
 #'
+#'   # Selection of input file if none given
+#'   if(filepath == "") filepath <- file.choose()
+#'
+#'   rfres <- rs_reffinder(rs_loadexceldata(filepath))
+#'
+#'   # Selection of output directory if none given
+#'   if(outdir == "") outdir <- rsoutdirselect()
+#'
+#'   if(is.na(outdir)){outdir <- getwd()}
+#'
+#'   # Selection of graph type if none given
+#'   if(graphtype == "") graphtype <- rsgraphtypeselect()
+#'
+#'   nms <- names(rfres)
+#'
+#'   #exltype <- rsexltypeselect()
+#'   if(graphtype!="none"){ # If graph type is not "none" something should be printet
+#'
+#'     if(graphtype == "single"){
+#'
+#'       rs_graph(rfres, paste0(outdir,"/"), forceSingle = TRUE)
+#'
+#'     } else if(graphtype == "multi"){
+#'       rs_graph(rfres, paste0(outdir, "/", tools::file_path_sans_ext(basename(filepath)))    )
+#'     }
+#'
+#'   }
 #'
 #'
-#' @examples
-#' \dontrun{
-#' rs_batchExcel()
+#'   for (i in 1: length(nms)) {
+#'
+#'     rs_exceltable(rfres[[i]], paste(outdir, "/", nms[i], sep = ""))
+#'
+#'   }
 #' }
 #'
 #'
-rs_batchExcel <- function(filepath = "", outdir = "", graphtype = ""){
-
-
-  # Selection of input file if none given
-  if(filepath == "") filepath <- file.choose()
-
-  rfres <- rs_reffinder(rs_loadexceldata(filepath))
-
-  # Selection of output directory if none given
-  if(outdir == "") outdir <- rsoutdirselect()
-
-  if(is.na(outdir)){outdir <- getwd()}
-
-  # Selection of graph type if none given
-  if(graphtype == "") graphtype <- rsgraphtypeselect()
-
-  nms <- names(rfres)
-
-  #exltype <- rsexltypeselect()
-  if(graphtype!="none"){ # If graph type is not "none" something should be printet
-
-    if(graphtype == "single"){
-
-      rs_graph(rfres, paste0(outdir,"/"), forceSingle = TRUE)
-
-    } else if(graphtype == "multi"){
-      rs_graph(rfres, paste0(outdir, "/", tools::file_path_sans_ext(basename(filepath)))    )
-    }
-
-  }
-
-
-  for (i in 1: length(nms)) {
-
-    rs_exceltable(rfres[[i]], paste(outdir, "/", nms[i], sep = ""))
-
-  }
-}
-
-
-#rs_batchExcel(graphtype = "multi")
-
-
-
-
-
-
-
+#' #rs_batchExcel(graphtype = "multi")
+#'
+#'
+#'
+#'
+#'
+#'
+#'
 
 

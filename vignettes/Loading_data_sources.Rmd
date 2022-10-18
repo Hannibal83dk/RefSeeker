@@ -26,14 +26,17 @@ Once data has been successfully loaded the stability analysis can be performed. 
 library(refSeeker)
 ```
 
-## Loading data from excel or ODS files
+## Loading data from spreadsheetes (excel or ODS) or text based (csv, tsv, txt) files.
 
-The procedure for loading excel or ODS file are exactly the same. The example provided below for excel files therefore also apply for ods. For sake of coherence, the rs_loadodsdata() function can replace the rs_loadexceldata(). However, this is actually not a requirement since the two functions are synonymous aliases for the same function.
+
+Behind the scenes separate functions exist for importing from different sources but using the rs_loaddata() will handle the correct function calls based on the file extensions of the selected files.
 
 
 ### Prepare Data
 
-Before loading data from excel, the file first need to be prepared:
+Before loading data from any file first need to be prepared:
+
+Excel and ods files:
 
 - Each sheet must contain only one data set
 
@@ -41,7 +44,18 @@ Before loading data from excel, the file first need to be prepared:
 
 - Each column must be named.
 
-- Row names must be excluded
+- Row names must be excluded.
+
+csv, tsv or txt:
+
+- Each file can only contain one data set.
+
+- Each column must be representing a gene/target and each row representing an individual sample.
+
+- Each column must be named.
+
+- Row names must be excluded.
+
 
 Note that missing data is discouraged since this has not been tested and verified
 
@@ -49,20 +63,20 @@ Note that missing data is discouraged since this has not been tested and verifie
 <img src="excelsheetdata.png" title="Excel file data structure example" alt="Excel example" width="99%" style="display: block; margin: auto;" />
 
 
-To load data from an excel file use rs_loadexceldata function.
+To load data one or more files use rsloaddata().
 
 
 ```{r eval=FALSE}
-exceldata <- rs_loadexceldata()
+exceldata <- rsloaddata()
 ```
 
-A dialog window will appear, allowing for selecting a file for processing.
+If no file path is provided, a dialog window will appear, allowing for selecting one or more files.
 
 <img src="selectexcelfile.png" title="Selecting file dialog" alt="Excel example" width="99%" style="display: block; margin: auto;" />
 
 Excel data can also be loaded via provided file path
 ```{r }
-exceldata <- rs_loadexceldata("../inst/exdata/vignetteInputs/Reffinder_data_test.xlsx")
+exceldata <- rs_loaddata("../inst/exdata/vignetteInputs/Reffinder_data_test.xlsx")
 
 exceldata
 ```

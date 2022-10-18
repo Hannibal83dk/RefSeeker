@@ -32,6 +32,7 @@
 #'
 rs_load.table <- function(files = ""){
 
+  warning("Use of this function is discouraged, please consider using rs_loaddata() instead")
   # filepath = "./inst/exdata/csvtest/FFPE.csv"
 
   if(any(files == "")){

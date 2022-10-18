@@ -1,4 +1,12 @@
 
+
+
+
+
+
+
+
+
 #' Creates batch output from selected comma separated txt files
 #'
 #' @param input A path to a file txt-like files (txt, csv, tsv etc.) containing a properly formatted reffinder data table. All files with the same file extension in that folder will be loaded as a data set. (See vignette about preparing and loading txt-like files)
@@ -22,7 +30,7 @@
 #'
 rs_csvbatch <- function(input = "", outdir = "", outtype = "csv",  printgraph = TRUE){
 
-  #warning("This function has been depricated please use rs_wizard instead")
+  #warning("This function has been deprecated please use rs_wizard instead")
   # Read in the data from the files.
   ## A file is selected and all files in the folder matching the file extension will be loaded as a batch.
   ## The reffinder data is then calculated on these.
@@ -34,7 +42,6 @@ rs_csvbatch <- function(input = "", outdir = "", outtype = "csv",  printgraph = 
     outdir <- rsoutdirselect()
   }
 
-
   # If no output folder is detected the working directory is selected.
   if(is.na(outdir)){outdir <- getwd()}
 
@@ -44,6 +51,9 @@ rs_csvbatch <- function(input = "", outdir = "", outtype = "csv",  printgraph = 
   # For each data set, print two csv files, stabiltiy value and stability ranking
   for (i in 1:length(data)) {
     utils::write.csv(data[[i]][1], paste0(outdir, "/", nms[i], "_StabilityTable_", Sys.Date(), ".txt"))
+
+
+
     cat(paste("csv file created at: ", paste0(outdir, "/", nms[i], "_StabilityTable_", Sys.Date(), ".txt"), "\n"))
 
     utils::write.csv(data[[i]][2], paste0(outdir, "/", nms[i] ,"_RankTable_",Sys.Date(), ".txt"))

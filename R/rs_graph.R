@@ -15,6 +15,8 @@
 #' @param colors A data frame mapping target names to a hex color with targets in column 1 and colors in columns 2
 #'  target1       "#2271b2"
 #'  target2       "#d55e00"
+#'
+#' @param  orientation Selection of the orientation of the bars in the graph. May be "horizontal" or "vertical". Actually anything other than "horizontal" will be interpreted as vertical.
 #' @return Creates a plot shown in the active device, usually the plots pane. Optionally outputs the plot to a file if filename has been given.
 #' @export
 #'
@@ -41,7 +43,8 @@ rs_graph <- function(refseekerlist, filename = "",
                      forceSingle = FALSE,
                      width, height, units = "px", res = 250,
                      ordering = "Comprehensive Rank",
-                     colors = ""){
+                     colors = "",
+                     orientation = "horizontal"){
   # 2048, 2156, units = "px", res = 250
 
   # names <- names(refseekerlist)
@@ -93,46 +96,91 @@ rs_graph <- function(refseekerlist, filename = "",
 
       # if(filename != ""){
         if (missing(width)) {
-          width = length(refseekerlist) * 675
+
+          if(orientation == "horizontal"){
+            width <- 2400
+          } else { width = length(refseekerlist) * (nrow(refseekerlist[[1]][[1]]) * 67.5) }
+
           cat(paste("width set to", width, "\n"))
         }
 
         if (missing(height)) {
-          height = 2156
+
+          if(orientation == "horizontal"){
+            height <- length(refseekerlist) * (nrow(refseekerlist[[1]][[1]]) * 67.5) * 0.7
+          } else { height = 2156 }
+
           cat(paste("height set to", height, "\n"))
 
         }
      # }
 
-      rsgraphdraw(refseekerlist, filename, width = width, height = height, units = units, res = res,  ordering = ordering, filetype = filetype, colors = colors)
+      # return(list(refseekerlist, filename,
+      #             width = width,
+      #             height = height,
+      #             units = units,
+      #             res = res,
+      #             ordering = ordering,
+      #             filetype = filetype,
+      #             colors = colors,
+      #             orientation = orientation))
+
+
+      rsgraphdraw(refseekerlist, filename, width = width, height = height, units = units, res = res,  ordering = ordering, filetype = filetype, colors = colors, orientation = orientation)
+
 
     } else { # forceSingle is TRUE
 
       names <- names(refseekerlist)
 
 
-      if (missing(width)) {
-        width = 675
-      }
-
-      if (missing(height)) {
-        height = 2156
-      }
-
-
       for (i in 1:length(names)) {
+
+
+        if (missing(width)) {
+
+          if(orientation == "horizontal") {
+
+            width = 2156
+
+          } else {  width = 70 * nrow( refseekerlist[[i]][[1]] ) }
+
+        }
+
+
+
+
+        if (missing(height)) {
+
+          if(orientation == "horizontal") {
+
+            height = 70 * nrow( refseekerlist[[i]][[1]] )
+
+          } else { height = 2156 }
+        }
+
 
         cat(names[i])
         cat("\n")
 
-        rsgraphdraw(refseekerlist[i], paste0(filename, "_", gsub(" ", "_", names[i])), width = width, height = height, units = "px", res = 250, ordering = ordering, filetype = filetype, colors = colors)
+
+        # return(list(refseekerlist[i],
+        #             paste0(filename, "_", gsub(" ", "_", names[i])),
+        #             width = width,
+        #             height = height,
+        #             units = units,
+        #             res = res,
+        #             ordering = ordering,
+        #             filetype = filetype,
+        #             colors = colors,
+        #             orientation = orientation))
+
+        rsgraphdraw(refseekerlist[i], paste0(filename, "_", gsub(" ", "_", names[i])), width = width, height = height, units = units, res = res, ordering = ordering, filetype = filetype, colors = colors, orientation = orientation)
       }
 
     }
 
-
   }
-
 
 }
 
@@ -151,7 +199,7 @@ rs_graph <- function(refseekerlist, filename = "",
 #' @param colors A data frame mapping target names to a hex color with targets in column 1 and colors in columns 2
 #'  target1       "#2271b2"
 #'  target2       "#d55e00"
-
+#' @param  orientation Selection of the orientation of the bars in the graph. May be "horizontal" or "vertical". Actually anything other than "horizontal" will be interpreted as vertical.
 #'Gene Delta Ct Bestkeeper Normfinder Genorm Comprehensive Rank
 #' @return Creates a png file with the bar graph and put it in an Output folder in the working directory
 #'
@@ -178,7 +226,8 @@ rs_graph <- function(refseekerlist, filename = "",
 
 rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png",
                         width, height, units = "px", res = 250, ordering = "Comprehensive Rank",
-                        colors = c("")
+                        colors = c(""),
+                        orientation = "horizontal"
   ){                    #c("#2271b2",  "#d55e00", "#d55e00", "#d55e00", "#d55e00", "#d55e00", "#2271b2", "#359b73", "#2271b2", "#2271b2")
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
@@ -239,7 +288,7 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png",
 
 
   # Create a holder for the algorithms list
-  algorithmlist <- names(rftable[2:6])
+  algorithmlist <- c("Comprehensive Rank", "geNorm", "Normfinder", "delta-Ct", "BestKeeper")                 #   names(rftable[2:6])
 
   # Rename targets in each table by adding identifier (normally tissue type)
   ## necessary for arranging the graphs x-axis individually
@@ -268,7 +317,25 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png",
   #ghostframe$Stability <- 3
 
 
-  p <- ggplot2::ggplot(rftable, ggplot2::aes_string('TargetID', 'Stability', fill = "TargetID")) +
+if(orientation == "horizontal"){
+
+  p <- ggplot2::ggplot(rftable, ggplot2::aes_string('Stability', 'TargetID', fill = "TargetID")) +
+          ggplot2::geom_bar (stat = "identity") +
+          # Invisible layer, alpha set to 0
+          ggplot2::geom_point(aes_string('Stability', 'TargetID'), ghostframe, alpha = 0) +
+          ggplot2::facet_grid(dataID ~ algorithm,  scales = "free") +
+          ggplot2::scale_y_discrete(labels = function(x){gsub("__.+$", "", x)}) + # Remove prefix on target names
+          ggplot2::theme_bw() +
+          ggplot2::theme(axis.text.x = element_text(angle = 0, vjust = 0.5, hjust=0.5)) +
+          ggplot2::xlab("Stability value") +
+          ggplot2::ylab("Target") +
+          ggplot2::theme(legend.position="none")
+
+
+
+} else{
+
+    p <- ggplot2::ggplot(rftable, ggplot2::aes_string('TargetID', 'Stability', fill = "TargetID")) +
           ggplot2::geom_bar(stat = "identity") +
           # Invisible layer, alpha set to 0
           ggplot2::geom_point(aes_string('TargetID', 'Stability'), ghostframe, alpha = 0) +
@@ -280,6 +347,19 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png",
           ggplot2::xlab("Target") +
           ggplot2::theme(legend.position="none")
           #ggplot2::scale_fill_manual(values=c("#000000", "#000000",  "#2271b2", "#2271b2","#359b73", "#d55e00", "#d55e00", "#d55e00", "#d55e00", "#d55e00"))
+
+}
+
+############################################
+
+
+
+#############################################
+
+
+
+
+
 
 
   # A set of custom colors was provided as a vector
@@ -337,6 +417,7 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png",
 
 
   print( p )
+
   # color = ""
   # colors = "#000000"
   if(filename != "") {
@@ -354,7 +435,6 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png",
     if(filetype == "jpeg"){
       grDevices::jpeg(path, width = width, height = height, units = units, res = res)
     }
-
 
     print(p)
     grDevices::dev.off()

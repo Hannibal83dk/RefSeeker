@@ -1,12 +1,14 @@
-test_that("BasicDataset format ", {
-  expect_equal(2 * 2, 4)
-})
+
+
 
 
 test_that("missingDataIsCaughtWhenLoading", {
 
   expect_warning(
-    rs_load.table("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/csverrortest/Reffinder_Plasma_error_test.txt"),
+
+
+
+    rs_loaddata( paste0(testrefpath(), "/csverrortest/Reffinder_Plasma_error_test.txt") ),
     "Caution: Missing data located in: Reffinder_Plasma_error_test \nMissing data is discauraged and may lead to errors"
   )
 
@@ -17,7 +19,7 @@ test_that("missingDataIsCaughtWhenLoading", {
 test_that("missingDataIsCaughtWhenLoading", {
 
   expect_warning(
-    rs_load.table("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/csverrortest/Reffinder_FFPE_error_test.csv"),
+    rsload.table("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/csverrortest/Reffinder_FFPE_error_test.csv"),
     "Non numeric columns found in: Reffinder_FFPE_error_test \nPlease make sure columns represent target RNA species and rows represent samples"
   )
 
@@ -28,7 +30,7 @@ test_that("missingDataIsCaughtWhenLoading", {
 test_that("missingDataIsCaughtWhenLoading", {
 
   expect_warning(
-    expect_snapshot_warning(rs_loadexceldata("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/excel-ods-test/Reffinder_data_error_test.ods"))
+    expect_snapshot_warning(rsloadexceldata("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/excel-ods-test/Reffinder_data_error_test.ods"))
   )
 
 })

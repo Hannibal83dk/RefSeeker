@@ -2,7 +2,7 @@
 
 
 
-#' Perform stability analysis through interactive wizzard
+#' Perform stability analysis through interactive wizard
 #'
 #' @return Creates graphs and result export to
 #' @export
@@ -19,27 +19,8 @@ rs_wizard <- function(){
   outdir <- answer[2]
 
   # Load in the data
-  datalist <- list()
-  for (i in 7:length(answer)) {
 
-    filext <- sub('.*\\.', '', answer[i])
-
-    if(substring( filext, 1,3) ==  "xls" | filext == "ods"){ datalist <- c(datalist, rs_loadexceldata(answer[i])) }
-
-    if(filext == "csv" | filext == "tsv" | filext == "txt"){ datalist <- c(datalist, rs_load.table(answer[i])) }
-
-  }
-
-
-  # Renaming duplicated names in the data list.
-  if(any(duplicated(names(datalist)))){
-
-    names(datalist) <- make.unique(names(datalist), ".")
-    warning("Some datasets have douplicated names. Suffix has been added to douplicates")
-
-  }
-
-
+  datalist <- rs_loaddata(answer[7:length(answer)])
   results <- rs_reffinder(datalist)
 
   rs_graph(refseekerlist = results, filename = paste0(answer[2],"/testing"), forceSingle = (answer[3] == "individual"), ordering = answer[4])

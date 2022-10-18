@@ -71,7 +71,7 @@ This produces a list of two tables. A table containing target stability values f
 
 To create an excel file containing the tables:
 ```{r eval=FALSE}
-rs_exceltable(rs_results, "./output/folder/sample_excel_tables")
+rs_exporttable(rs_results, "./output/folder/sample_excel_tables", tabletype = "xlsx")
 ```
 
 The two tables will appear in the excel file as separate sheets with filter options.
@@ -102,7 +102,7 @@ Et voilà! Now you can select the targets with the lowest stability value as ref
 To analyse more sets in a batch, create an excel file containing one data set on each sheet, rename each sheet for easy identification of output files.
 run the following:
 ```{r eval=FALSE}
-rs_batchExcel()
+rs_wizard()
 ```
 
 No parameters are required, the wizard will guide you.

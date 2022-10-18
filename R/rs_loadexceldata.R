@@ -1,21 +1,73 @@
 
 
+#' Load data from a supported source
+#'
+#' @param files A character value or vector containing path(s) for files to be loaded into R. If left empty a dialog will allow for selection of files
+#'
+#' @return a list of data frames contain the selected data sets
+#' @export
+#'
+#' @import tcltk
+#'
+#' @examples
+#' \dontrun{
+#' rs_loaddata()
+#' }
+rs_loaddata <- function(files = ""){
+
+  filter <- c("{{Supported} {.txt}}",
+              "{{Supported} {.csv}}",
+              "{{Supported} {.tsv}}",
+              "{{Supported} {.xlsx}}",
+              "{{Supported} {.xls}}",
+              "{{Supported} {.ods}}",
+              "{{All files} {*}}")
+
+
+  if(any(files == "")){
+
+    files <- tclvalue( tkgetOpenFile(multiple = TRUE, initialdir = getwd(),  filetypes = paste(filter, collapse = " "))  )
+
+    if(files != ""){ files <- strsplit(files, " ")[[1]] }
+  }
+
+  if(any(files == "")) {
+    cat("No files found, terminating")
+    return()
+  }
 
 
 
+  datalist <- list()
+
+  for (i in 1:length(files)) {
+
+    filext <- sub('.*\\.', '', files[i])
+
+    if(substring( filext, 1,3) ==  "xls" | filext == "ods"){
+      datalist <- c(datalist, rsloadexceldata(files[i]))
+    } else {
+      datalist <- c(datalist, rsload.table(files[i]))
+    }
+
+  }
 
 
+  # Renaming duplicated names in the data list.
+  if(any(duplicated(names(datalist)))){
 
-#
-#
-# rs_loaddata() <- function(files = ""){
-#
-#
-#
-#
-#
-#
-# }
+    names(datalist) <- make.unique(names(datalist), ".")
+    warning("Some datasets have douplicated names. Suffix has been added to douplicates")
+
+  }
+
+  return(datalist)
+
+}
+
+
+#######################################################
+
 
 
 #' Load one or more datasets from an excel file
@@ -27,18 +79,17 @@
 #' @import readODS
 #'
 #'
-#' @export
 #'
-#' @aliases rs_loadodsdata()
+#' @aliases rsloadodsdata()
 #'
 #' @examples
 #'
 #' \dontrun{
-#' rs_loadexceldata()
+#' rsloadexceldata()
 #' }
 #'
 #'
-rs_loadexceldata <- function(filepath = ""){
+rsloadexceldata <- function(filepath = ""){
 
   datalist <- list()
 
@@ -86,13 +137,103 @@ rs_loadexceldata <- function(filepath = ""){
 }
 
 
-#' @rdname rs_loadexceldata
+#######################################################
+#' @rdname rsloadexceldata
 #' @examples
 #' \dontrun{
-#' rs_loadodsdata()
+#' rsloadodsdata()
 #' }
-#' @export
-rs_loadodsdata <- rs_loadexceldata
+rsloadodsdata <- rsloadexceldata
+
+
+#######################################################
+
+#' Load data from text based data files.
+#'
+#' Read in expression data from text based files (csv, tsv, txt, etc.) with auto delimiter detection.
+#' Please note that though the most common uses of the file types has been tested, some delimiter and file type combination may be incompatible.
+#'
+#' @param files An optional file path or a vector of file paths one or more data files.
+#' If no files are given a dialog will allow selection of files
+# #' @param batch The function will search the folder of the provided file path to find all files with same extension to load.
+#'
+#' @return A list or list of lists of input data tables
+#'
+#'
+#'
+#'
+#'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' rsload.table()
+#'
+#' rsload.table("filepath")
+#'
+#' rsload.table(c("fileone", "filetwo"))
+#'
+#' }
+#'
+#'
+#'
+rsload.table <- function(files = ""){
+
+
+  # filepath = "./inst/exdata/csvtest/FFPE.csv"
+
+  if(any(files == "")){
+    files <- tcltk::tk_choose.files()
+  }
+
+
+  inputdatalist <- list()
+  #filetype <- tools::file_ext(filepath)
+
+  ## File path is a file
+  ### get dir and extension
+  #### load these
+
+  # if(filetype != ""){
+  #   dir <- dirname(filepath)
+  # }
+
+  ## filepath is a folder
+  ### filepath is the dir
+  #### find files and load them
+
+
+  # if(filetype == ""){ # filepath is dir
+  #   dir <- filepath
+  #   filetype <- tools::file_ext(list.files(dir)[1])
+  # }
+
+
+  #files <- list.files(dir, pattern = paste0("*.", filetype))
+
+
+  for (i in 1:length(files)) {
+    inputdatalist[[i]] <- data.table::fread(files[i], check.names = F)
+
+  }
+
+  names(inputdatalist) <- tools::file_path_sans_ext(basename(files))
+
+
+
+
+  # test files for correct format
+  ## can they be evluated?
+
+  rsdatatest(inputdatalist)
+
+  return(inputdatalist)
+
+}
+
+
+
+#######################################################
 
 
 
@@ -127,3 +268,5 @@ rsdatatest <- function(expression){
   }
 }
 
+
+#######################################################

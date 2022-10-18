@@ -2,7 +2,7 @@
 % Please edit documentation in R/rswizard.R
 \name{rs_wizard}
 \alias{rs_wizard}
-\title{Perform stability analysis through interactive wizzard}
+\title{Perform stability analysis through interactive wizard}
 \usage{
 rs_wizard()
 }
@@ -10,7 +10,7 @@ rs_wizard()
 Creates graphs and result export to
 }
 \description{
-Perform stability analysis through interactive wizzard
+Perform stability analysis through interactive wizard
 }
 \examples{
 

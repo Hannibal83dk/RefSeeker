@@ -13,7 +13,8 @@ rsgraphdraw(
   units = "px",
   res = 250,
   ordering = "Comprehensive Rank",
-  colors = c("")
+  colors = c(""),
+  orientation = "horizontal"
 )
 }
 \arguments{
@@ -34,8 +35,10 @@ rsgraphdraw(
 \item{ordering}{Used to control sorting of the x axis, use "Target","Delta-Ct","BestKeeper","Normfinder","geNorm" or "Comprehensive Rank".}
 
 \item{colors}{A data frame mapping target names to a hex color with targets in column 1 and colors in columns 2
- target1       "#2271b2"
- target2       "#d55e00"
+target1       "#2271b2"
+target2       "#d55e00"}
+
+\item{orientation}{Selection of the orientation of the bars in the graph. May be "horizontal" or "vertical". Actually anything other than "horizontal" will be interpreted as vertical.
 Gene Delta Ct Bestkeeper Normfinder Genorm Comprehensive Rank}
 }
 \value{

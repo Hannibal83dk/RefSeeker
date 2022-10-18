@@ -1,8 +1,9 @@
 #
+# data <- rs_loaddata()
 #
+# data <- rs_loaddata("./inst/exdata/excel-ods-test/Reffinder_data_test.xlsx")
+# results <- rs_reffinder(data)
 #
-# data <- rs_loadexceldata("./inst/exdata/excel-ods-test/Reffinder_data_test.xlsx")
-# results <- rs_reffinder(data$Fresh_frozen)
 # rs_graph(res, "OC_miRNA_stabiltiy", ordering = "Comprehensive Rank")
 # rs_exceltable(res, "OC_miRNA_stabiltiy")
 #
@@ -15,7 +16,7 @@
 #
 # rs_graph2 <- function (refseekerlist, filename = "", filetype = "png",
 #           forceSingle = FALSE, width, height, units = "px", res = 250,
-#           ordering = "Comprehensive Rank", colors = "")
+#           ordering = "Comprehensive Rank", colors = "", orientation = "horizontal")
 # {
 #   if (!is.null(refseekerlist$stabilityTable)) {
 #     cat("simplelist, only one dataset\n")
@@ -32,15 +33,38 @@
 #     if (forceSingle == FALSE) {
 # #      if (filename != "") {
 #         if (missing(width)) {
-#           width = length(refseekerlist) * 675
+#
+#           ###
+#           if(orientation == "horizontal"){
+#
+#             width <- 2400
+#           } else { width = length(refseekerlist) * (nrow(refseekerlist[[1]][[1]]) * 67.5) }
+#           ###
+#
+#
 #           cat(paste("width set to", width, "\n"))
+#
 #         }
 #         if (missing(height)) {
 #           height = 2156
+#
+#           if(orientation == "horizontal"){
+#
+#             height <- length(refseekerlist) * (nrow(refseekerlist[[1]][[1]]) * 67.5) * 0.7
+#
+#           }
 #           cat(paste("height set to", height, "\n"))
 #         }
 # #      }
-#       return(list(refseekerlist, filename, width = width, height = height, units = units, res = res, ordering = ordering, filetype = filetype, colors = colors))
+#       return(list(refseekerlist, filename,
+#                   width = width,
+#                   height = height,
+#                   units = units,
+#                   res = res,
+#                   ordering = ordering,
+#                   filetype = filetype,
+#                   colors = colors,
+#                   orientation = orientation))
 #     }
 #     else {
 #       names <- names(refseekerlist)
@@ -62,15 +86,49 @@
 #   }
 # }
 #
-# params <- rs_graph2(res, colors = coldict)
 #
+# params <- rs_graph2(results, orientation = "")
 #
 # refseekerlist <- params[[1]]
 # filename <- params[[2]]
 # width <- params$width
 # height <- params$height
+# units = params$units
+# res = params$res
 # colors = params$colors
 # ordering = params$ordering
+# orientation = ""
+#filename = "~/Desktop/testin"
+# height
+# width
+#
+#
+# colorframe <- data.frame(matrix(nrow = 10, ncol = 2))
+# names(colorframe) <- c("target", "color")
+#
+# colorframe$Target <- results$Fresh_Frozen$stabilityTable$Target
+#
+# colorframe <- colorframe[order(colorframe$Target),]
+#
+# colorframe$color <- c("#cFcfcf", "#666666", "#0F0F0F", "#0F0F0F", "#0F0F0F", "#0F0F0F", "#0F0F0F", "#0F0F0F", "#0F0F0F", "#0F0F0F")
+#
+# colorframe$color <- c("#2271b2","#2271b2","#2271b2","#2271b2", "#359b73", "#d55e00" , "#d55e00", "#d55e00", "#d55e00", "#d55e00")
+#
+# colors <- colorframe
+#
+# rsgraphdraw(refseekerlist =  params[[1]],
+#          #filename = params[[2]],
+#          width = params$width,
+#          height = params$height,
+#          units = params$units,
+#          res = params$res,
+#          #colors = params$colors,
+#          ordering = params$ordering,
+#          orientation = "",
+#          filename = "~/Desktop/testin",
+#          colors = colorframe
+#          )
+#
 #
 # #
 # # rsgraphdraw2 <- function (refseekerlist, filename = "", filetype = "png",

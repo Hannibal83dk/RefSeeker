@@ -14,7 +14,8 @@ rs_graph(
   units = "px",
   res = 250,
   ordering = "Comprehensive Rank",
-  colors = ""
+  colors = "",
+  orientation = "horizontal"
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ rs_graph(
 \item{colors}{A data frame mapping target names to a hex color with targets in column 1 and colors in columns 2
 target1       "#2271b2"
 target2       "#d55e00"}
+
+\item{orientation}{Selection of the orientation of the bars in the graph. May be "horizontal" or "vertical". Actually anything other than "horizontal" will be interpreted as vertical.}
 }
 \value{
 Creates a plot shown in the active device, usually the plots pane. Optionally outputs the plot to a file if filename has been given.

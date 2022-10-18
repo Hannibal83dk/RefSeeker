@@ -49,8 +49,7 @@ Note that missing data is discouraged since this has not been tested and verifie
 If all is needed is a quick answer on what is most stable, the easiest is to use the interactive rs_batch functions. For example:
 
 ```{r eval = FALSE}
-rs_batchExcel3()
-rs_csvbatch() # may be used for tsv or txt files also
+rs_wizard()
 ```
 This will first bring up a dialog to choose the location of the input data. Then an output folder and finally the type og graph that is wanted.
 
@@ -80,7 +79,7 @@ To perform a manual or automatic analysis the easiest is to load in the data as 
 
 ```{r}
 
-inputData <- rs_loadexceldata("../inst/exdata/vignetteInputs/Reffinder_data_test.xlsx")
+inputData <- rs_loaddata("../inst/exdata/vignetteInputs/Reffinder_data_test.xlsx")
 ```
 
 The data can now be analysed by each algorithm or reffinder
@@ -117,7 +116,7 @@ As can be seen on the output two table are created from each data set.
 From here the results can be exported to new excel files, one excel file per data set will be created
 
 ```{r}
-rs_exceltable(rsresults$Fresh_Frozen, "../inst/exdata/VignettesOutputs/excel_results", addDate = TRUE)
+rs_exporttable(rsresults$Fresh_Frozen, "../inst/exdata/VignettesOutputs/excel_results", tabletype = "xlsx", addDate = TRUE)
 
 ```
 

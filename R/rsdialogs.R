@@ -1,6 +1,49 @@
 
 
-library(tcltk)
+#' File selectioin diolog for RefSeeker
+#'
+#' @return A character vector containing the selected files
+#'
+#' @import tcltk
+#'
+#'
+#'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' rsselectfiles()
+#' }
+#'
+#'
+#'
+rsselectfiles <- function(){
+
+
+    filter <- c("{{Supported} {.txt}}",
+              "{{Supported} {.csv}}",
+              "{{Supported} {.tsv}}",
+              "{{Supported} {.xlsx}}",
+              "{{Supported} {.xls}}",
+              "{{Supported} {.ods}}",
+              "{{All files} {*}}")
+
+
+    files <- tclvalue( tkgetOpenFile(multiple = TRUE, initialdir = getwd(),  filetypes = paste(filter, collapse = " "))  )
+
+    if(files != ""){ files <- strsplit(files, " ")[[1]] }
+
+    if(any(files == "")) {
+        return(cat("No files selected, terminating"))
+    }
+
+  return(files)
+
+}
+
+
+
+
 
 
 #' Dialog window to select a folder for output files
@@ -191,7 +234,9 @@ rsdialog <- function(){
 
 
   slctinfile <- function(){
-    inputfile <<- tk_choose.files()
+
+    inputfile <<- rsselectfiles()
+    #inputfile <<- tk_choose.files()
     tkconfigure(filelabel, text =  paste(basename(inputfile), sep = ", "))
   }
 
@@ -248,6 +293,7 @@ rsdialog <- function(){
 
 
   fileslct.but <- tkbutton(tt, text="Select input file(s)", command=slctinfile)
+
   fldrslct.but <- tkbutton(tt, text="Change output folder", command=slctfldr)
 
   # Graph type radio
@@ -308,7 +354,5 @@ rsdialog <- function(){
 
 
 }
-
-
 
 
