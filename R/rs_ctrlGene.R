@@ -68,37 +68,7 @@
 
 
 
-#' Determines stability of genes
-#'
-#' This function is a wrapper calling the bestKeeper function from the ctrlGene package which combines the results of rs_cpSta(), pearsonCor() and bki().
-#'
-#' @note This function was originally published by Shanliang Zhong as part of th ctrlGene package.
-#'
-#'
-#' @param expression A matrix of expression levels. Each row corresponds to a sample and each column to a gene.
-#' @param ctVal A logical value indicating data type. If ct-values are input, ctVal=TRUE, otherwise, ctVal=FALSE.
-#' @return A list containing CP.statistics, pair.Wise.cor and HKG.vs.BestKeeper, which are returned by cpSta(), pearsonCor() and bki(), respectively.
-#' @export
-#' @references
-#' Pfaffl MW, Tichopad A, Prgomet C, Neuvians TP. Biotechnol Lett (2004) <doi: 10.1023/B:BILE.0000019559.84305.47>
-#' @examples
-#'
-#' data(rs_miRNA)
-#'
-#'
-#' rs_bestkeeperFull(as.data.frame(rs_miRNA))
-#' rs_bestkeeperFull(rs_miRNA)
-#'
-#'
-rs_bestkeeperFull=function(expression,ctVal=TRUE)
-{
-  if(class(expression)[1] != "data.frame"){
-    expression <- as.data.frame(expression)
-  }
 
-  return(ctrlGene::bestKeeper(expression,ctVal))
-
-}
 
 #####################################3
 
