@@ -136,7 +136,7 @@ Allow for selection of graph type in function calls e.g. rs_batchExcel3 <- funct
 ################################
 
 Remove redundat rs_excelbatch functions. - DONE
-Remove import of readxl in rs_excelbatch functions
+Remove import of readxl in rs_excelbatch functions - transfered
 
 ################################
 
@@ -169,14 +169,14 @@ Create namingconvention on algorithms - geNorm, RefFinder, Normfinder, BestKeepe
 Create a quick single analysis function - use wizard or load -> reffinder
 
 
-Combine all batch analysis functions - include manual selection of one or more folders 
-				     - include option for output format
+Combine all batch analysis functions - include manual selection of one or more folders - DONE 
+				     - include option for output format - DONE
 
 
 #################################
 
 
-Make Readexcel package and readODS package required only if needed
+Make Readexcel package and readODS package required only if needed - Tranfered
 
 
 ##################################
@@ -190,13 +190,13 @@ a few standard colors like "red" "green" or a vector  of colors or a vector of c
 ###################################
 
 
-Add publishable table formats for outputs
+Add publishable table formats for outputs - Transfered
 
 
 ###################################
 
 
-Consider changing name to RefSeeker
+Consider changing name to RefSeeker - Transfered
 
 
 ###################################
@@ -232,7 +232,7 @@ Fix sorting based on targets, seems to change compaired to input file - DONE
 ##################################
 
 
-Fix csv, tsv, txt and ods export. Not working from at least from wizard. makes xlsx instead
+Fix csv, tsv, txt and ods export. Not working from at least from wizard. makes xlsx instead - DONE
 
 
 ##################################
@@ -251,7 +251,7 @@ wizard is spelled with one z - change wizzard function name - DONE
 
 ##################################
 
-Add a vignette for selecting colors on graph
+Add a vignette for selecting colors on graph - Transfered
 
 
 ##################################
@@ -269,7 +269,7 @@ Supress warning not to use rs_load.table() when using rs_loaddata - SOLVED new f
 ##################################
 
 
-Consider using comprehensive rank instead of reffinder and/or where this would be sensible.
+Consider using comprehensive rank instead of reffinder and/or where this would be sensible. - Not sure I meant with this.
 
 
 ##################################
