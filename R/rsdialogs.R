@@ -214,7 +214,7 @@ rsexltypeselect <- function(){
 #'
 rsdialog <- function(){
 
-  outdir <- "path"
+  outdir <- getwd()
   inputfile <- c("No selection")
 
   ok = FALSE
@@ -296,6 +296,8 @@ rsdialog <- function(){
 
   fldrslct.but <- tkbutton(tt, text="Change output folder", command=slctfldr)
 
+  #filename.field <- tktext(tt, "Header", command = )
+
   # Graph type radio
   graphradio1 <- tkradiobutton(tt, text = "Individual", variable = graph, value = "individual", command = radio1press)
   graphradio2 <- tkradiobutton(tt, text = "Multi", variable = graph, value = "multi", command = radio2press)
@@ -312,15 +314,20 @@ rsdialog <- function(){
   imgradio1 <- tkradiobutton(tt, text = "PNG", variable = image, value = "png", command = imgradio1press)
   imgradio2 <- tkradiobutton(tt, text = "TIFF", variable = image, value = "tiff", command = imgradio2press)
   imgradio3 <- tkradiobutton(tt, text = "JPEG", variable = image, value = "jpeg", command = imgradio3press)
-  imgradio4 <- tkradiobutton(tt, text = "None", variable = image, value = "none", command = imgradio4press, state = "disable")
+  imgradio4 <- tkradiobutton(tt, text = "None", variable = image, value = "none", command = imgradio4press)#, state = "disable")
+
+  # Graph orientation
+
+
+
 
 
   # Data output radio
   tabradio1 <- tkradiobutton(tt, text = "XLSX", variable = dataout, value = "xlsx", command = tabradio1press)
-  tabradio2 <- tkradiobutton(tt, text = "ODS", variable = dataout, value = "ods", command = tabradio2press, state = "disable")
-  tabradio3 <- tkradiobutton(tt, text = "CSV", variable = dataout, value = "csv", command = tabradio3press, state = "disable")
-  tabradio4 <- tkradiobutton(tt, text = "TSV", variable = dataout, value = "tsv", command = tabradio4press, state = "disable")
-  tabradio5 <- tkradiobutton(tt, text = "TXT", variable = dataout, value = "txt", command = tabradio5press, state = "disable")
+  tabradio2 <- tkradiobutton(tt, text = "ODS", variable = dataout, value = "ods", command = tabradio2press)#, state = "disable")
+  tabradio3 <- tkradiobutton(tt, text = "CSV", variable = dataout, value = "csv", command = tabradio3press)#, state = "disable")
+  tabradio4 <- tkradiobutton(tt, text = "TSV", variable = dataout, value = "tsv", command = tabradio4press)#, state = "disable")
+  tabradio5 <- tkradiobutton(tt, text = "TXT", variable = dataout, value = "txt", command = tabradio5press)#, state = "disable")
 
 
   q.but <- tkbutton(tt, text = "Quit", command = quit)

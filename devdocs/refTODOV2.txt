@@ -72,7 +72,7 @@ Consider package dhammarstrom/generefer from github for normfinder/geNorm
 ################################
 
 
-
+Add orientation as and option in wizard/rsdialog
 
 
 
@@ -80,7 +80,7 @@ Consider package dhammarstrom/generefer from github for normfinder/geNorm
 ################################
 
 
-
+Add text field for naming outputs in rsdialog/wizard
 
 
 

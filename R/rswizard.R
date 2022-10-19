@@ -23,10 +23,11 @@ rs_wizard <- function(){
   datalist <- rs_loaddata(answer[7:length(answer)])
   results <- rs_reffinder(datalist)
 
-  rs_graph(refseekerlist = results, filename = paste0(answer[2],"/testing"), forceSingle = (answer[3] == "individual"), ordering = answer[4])
+  if(answer[5] != "none"){
+    rs_graph(refseekerlist = results, filename = paste0(answer[2]), forceSingle = (answer[3] == "individual"), ordering = answer[4])
+  }
 
-
-  rs_exceltable(results, paste0(answer[2],"/testing"))
+  rs_exporttable(results, paste0(answer[2],"/testing"), tabletype = answer[6])
 
 }
 
