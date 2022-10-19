@@ -217,6 +217,9 @@ rsdialog <- function(){
   outdir <- getwd()
   inputfile <- c("No selection")
 
+  filename <- tclVar("type a prefix")
+  flnm <- ""
+
   ok = FALSE
 
   grph <- "multi"
@@ -227,6 +230,10 @@ rsdialog <- function(){
 
   img <- "png"
   image <- tclVar("png")
+
+  ori <- "horizontal"
+  orient <- tclVar("horizontal")
+
 
   datout <- "xlsx"
   dataout <- tclVar("xlsx")
@@ -262,7 +269,13 @@ rsdialog <- function(){
   imgradio1press <- function(){img <<- "png"}
   imgradio2press <- function(){img <<- "tiff"}
   imgradio3press <- function(){img <<- "jpeg"}
-  imgradio4press <- function(){img <<- "none"}
+  imgradio4press <- function(){img <<- "svg"}
+  imgradio5press <- function(){img <<- "none"}
+
+  # Orientation type radio functions
+  imgradio1press <- function(){ori <<- "horizontal"}
+  imgradio2press <- function(){ori <<- "vertical"}
+
 
   # table type radio functions
   tabradio1press <- function(){datout <<- "xlsx"}
@@ -280,6 +293,8 @@ rsdialog <- function(){
   okfunc <- function(){
     tkdestroy(tt)
     ok <<- TRUE
+    flnm <<- tclvalue( filename)
+
   }
 
   tt <- tktoplevel()
@@ -296,7 +311,7 @@ rsdialog <- function(){
 
   fldrslct.but <- tkbutton(tt, text="Change output folder", command=slctfldr)
 
-  #filename.field <- tktext(tt, "Header", command = )
+  filename.field <- tkentry(tt, textvariable = filename)
 
   # Graph type radio
   graphradio1 <- tkradiobutton(tt, text = "Individual", variable = graph, value = "individual", command = radio1press)
@@ -314,12 +329,12 @@ rsdialog <- function(){
   imgradio1 <- tkradiobutton(tt, text = "PNG", variable = image, value = "png", command = imgradio1press)
   imgradio2 <- tkradiobutton(tt, text = "TIFF", variable = image, value = "tiff", command = imgradio2press)
   imgradio3 <- tkradiobutton(tt, text = "JPEG", variable = image, value = "jpeg", command = imgradio3press)
-  imgradio4 <- tkradiobutton(tt, text = "None", variable = image, value = "none", command = imgradio4press)#, state = "disable")
-
+  imgradio4 <- tkradiobutton(tt, text = "SVG", variable = image, value = "svg", command = imgradio4press)#, state = "disable")
+  imgradio5 <- tkradiobutton(tt, text = "None", variable = image, value = "none", command = imgradio5press)
   # Graph orientation
 
-
-
+  orientradio1 <- tkradiobutton(tt, text = "Horizontal", variable = orient, value = "horizontal", command = imgradio1press)
+  orientradio2 <- tkradiobutton(tt, text = "Vertical", variable = orient, value = "vertical", command = imgradio2press)
 
 
   # Data output radio
@@ -337,18 +352,24 @@ rsdialog <- function(){
   tkgrid(tklabel(tt, text = "Input file(s):"), filelabel, fileslct.but, columnspan = 7, rowspan = 2, pady = 10, padx = 10)
   tkgrid(tklabel(tt, text = "Output directory:"), outdirlabel, fldrslct.but, columnspan = 7, pady = 10, padx = 10)
 
+  tkgrid(tklabel(tt, text = "File name prefix:"), filename.field, columnspan = 7, pady = 10, padx = 10)
+
   tkgrid(tklabel(tt, text = "Select type of graph:"), graphradio1, graphradio2, columnspan = 7, pady = 10, padx = 10, sticky = "w")
 
-  tkgrid(tklabel(tt, text = "Select ordering of x-axis:"), sortradio1, sortradio2, sortradio3, sortradio4, sortradio5, sortradio6, columnspan = 7, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tklabel(tt, text = "Select ordering of target-axis:"), sortradio1, sortradio2, sortradio3, sortradio4, sortradio5, sortradio6, columnspan = 7, pady = 10, padx = 10, sticky = "w")
+
+  tkgrid(tklabel(tt, text = "Select orientation of bars:"), orientradio1, orientradio2, columnspan = 7, pady = 10, padx = 10, sticky = "w")
+
+
 
   tkgrid(tklabel(tt, text = "Select graph output file format:"), imgradio1, imgradio2, imgradio3, imgradio4, columnspan = 7, pady = 10, padx = 10, sticky = "w")
   tkgrid(tklabel(tt, text = "Select data output format:"), tabradio1, tabradio2, tabradio3, tabradio4, tabradio5, columnspan = 7, pady = 10, padx = 10, sticky = "w")
 
   #tkgrid(q.but, spacerlabel, ok.but, columnspan = 10, pady= 20, padx = 10)
 
-  tkgrid(q.but, columnspan = 7, pady= 20, padx = 10, row = 7, column = 2, sticky = "w")
+  tkgrid(q.but, columnspan = 1, pady= 20, padx = 10, row = 10, column = 7, sticky = "w")
 
-  tkgrid(ok.but, columnspan = 7, pady= 20, padx = 10, row = 7, column = 7, sticky = "e")
+  tkgrid(ok.but, columnspan = 1, pady= 20, padx = 10, row = 10, column = 14, sticky = "e")
 
 
   #tkgrid(ok.but, column = 3, columnspan = 1, pady= 10, padx= 10)
@@ -357,9 +378,11 @@ rsdialog <- function(){
 
   tkwait.window(tt)
 
-  return(c(ok, outdir, grph, srt, img, datout, inputfile))
+  return(c(ok, outdir, flnm, grph, srt, ori, img, datout, inputfile))
 
 
 }
+
+
 
 

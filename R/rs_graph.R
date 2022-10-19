@@ -423,7 +423,7 @@ if(orientation == "horizontal"){
   if(filename != "") {
 
     path <- paste0(filename, "_", Sys.Date(),".", filetype)
-
+    cat(path)
     if(filetype == "tiff"){
       grDevices::tiff(path, width = width, height = height, units = units,  compression = "none", res = res)
     }
@@ -434,6 +434,11 @@ if(orientation == "horizontal"){
 
     if(filetype == "jpeg"){
       grDevices::jpeg(path, width = width, height = height, units = units, res = res)
+    }
+
+
+    if(filetype == "svg"){
+      grDevices::svg(path, width = width/210, height = height/210)
     }
 
     print(p)

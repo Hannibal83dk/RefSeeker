@@ -20,14 +20,19 @@ rs_wizard <- function(){
 
   # Load in the data
 
-  datalist <- rs_loaddata(answer[7:length(answer)])
+  datalist <- rs_loaddata(answer[9:length(answer)])
   results <- rs_reffinder(datalist)
 
   if(answer[5] != "none"){
-    rs_graph(refseekerlist = results, filename = paste0(answer[2]), forceSingle = (answer[3] == "individual"), ordering = answer[4])
+    rs_graph(refseekerlist = results,
+             filename = paste0(answer[2], "/", answer[3]),
+             filetype = answer[7],
+             forceSingle = (answer[4] == "individual"),
+             ordering = answer[5],
+             orientation = answer[6])
   }
 
-  rs_exporttable(results, paste0(answer[2],"/testing"), tabletype = answer[6])
+  rs_exporttable(results, filename = paste0(answer[2],"/", answer[3]), tabletype = answer[8])
 
 }
 
