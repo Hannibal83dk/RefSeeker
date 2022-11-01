@@ -19,7 +19,7 @@ test_that("missingDataIsCaughtWhenLoading", {
 test_that("missingDataIsCaughtWhenLoading", {
 
   expect_warning(
-    rsload.table("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/csverrortest/Reffinder_FFPE_error_test.csv"),
+    rsloadtable(paste0(testrefpath(), "/csverrortest/Reffinder_FFPE_error_test.csv")),
     "Non numeric columns found in: Reffinder_FFPE_error_test \nPlease make sure columns represent target RNA species and rows represent samples"
   )
 
@@ -30,7 +30,7 @@ test_that("missingDataIsCaughtWhenLoading", {
 test_that("missingDataIsCaughtWhenLoading", {
 
   expect_warning(
-    expect_snapshot_warning(rsloadexceldata("/home/patrick/OneDrive/Dokumenter/R/refSeeker/inst/exdata/excel-ods-test/Reffinder_data_error_test.ods"))
+    expect_snapshot_warning(rsloadspreadsheet(paste0(testrefpath(), "/excel-ods-test/Reffinder_data_error_test.ods")))
   )
 
 })

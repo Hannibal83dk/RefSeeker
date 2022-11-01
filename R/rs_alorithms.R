@@ -426,8 +426,6 @@ rs_normfinderFull <- function(expression, Groups=TRUE, ctVal=TRUE, pStabLim=0.25
 #' rffndr
 #'
 #' }
-
-#'
 #'
 #' @references F Xie, P Xiao, D Chen, L Xu, B Zhang. 2012. miRDeepFinder: a miRNA analysis tool for deep sequencing of plant small RNAs. Plant molecular biology 80 (1), 75-84.
 #'

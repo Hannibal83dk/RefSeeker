@@ -45,9 +45,9 @@ rs_loaddata <- function(files = ""){
     filext <- sub('.*\\.', '', files[i])
 
     if(substring( filext, 1,3) ==  "xls" | filext == "ods"){
-      datalist <- c(datalist, rsloadexceldata(files[i]))
+      datalist <- c(datalist, rsloadspreadsheet(files[i]))
     } else {
-      datalist <- c(datalist, rsload.table(files[i]))
+      datalist <- c(datalist, rsloadtable(files[i]))
     }
 
   }
@@ -72,7 +72,7 @@ rs_loaddata <- function(files = ""){
 
 #' Load one or more datasets from an excel file
 #'
-#' @param filepath a path to an excel or ods file. If left blank, a dialog will appear to select this interactivly.
+#' @param filepath a path to an excel or ods file. If left blank, a dialog will appear to select this interactively.
 #' @return A list containing expression data for each sheet in the excel file
 #'
 #' @import readxl
@@ -89,7 +89,7 @@ rs_loaddata <- function(files = ""){
 #' }
 #'
 #'
-rsloadexceldata <- function(filepath = ""){
+rsloadspreadsheet <- function(filepath = ""){
 
   datalist <- list()
 
@@ -138,12 +138,12 @@ rsloadexceldata <- function(filepath = ""){
 
 
 #######################################################
-#' @rdname rsloadexceldata
-#' @examples
-#' \dontrun{
-#' rsloadodsdata()
-#' }
-rsloadodsdata <- rsloadexceldata
+# #' @rdname rsloadexceldata
+# #' @examples
+# #' \dontrun{
+# #' rsloadodsdata()
+# #' }
+# rsloadodsdata <- rsloadexceldata
 
 
 #######################################################
@@ -159,25 +159,20 @@ rsloadodsdata <- rsloadexceldata
 #'
 #' @return A list or list of lists of input data tables
 #'
-#'
-#'
-#'
-#'
 #' @examples
 #'
 #' \dontrun{
 #'
-#' rsload.table()
+#' rsloadtable()
 #'
-#' rsload.table("filepath")
+#' rsloadtable("filepath")
 #'
-#' rsload.table(c("fileone", "filetwo"))
+#' rsloadtable(c("fileone", "filetwo"))
 #'
 #' }
 #'
 #'
-#'
-rsload.table <- function(files = ""){
+rsloadtable <- function(files = ""){
 
 
   # filepath = "./inst/exdata/csvtest/FFPE.csv"
@@ -188,28 +183,12 @@ rsload.table <- function(files = ""){
 
 
   inputdatalist <- list()
-  #filetype <- tools::file_ext(filepath)
 
   ## File path is a file
   ### get dir and extension
   #### load these
 
-  # if(filetype != ""){
-  #   dir <- dirname(filepath)
-  # }
 
-  ## filepath is a folder
-  ### filepath is the dir
-  #### find files and load them
-
-
-  # if(filetype == ""){ # filepath is dir
-  #   dir <- filepath
-  #   filetype <- tools::file_ext(list.files(dir)[1])
-  # }
-
-
-  #files <- list.files(dir, pattern = paste0("*.", filetype))
 
 
   for (i in 1:length(files)) {

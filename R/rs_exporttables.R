@@ -1,14 +1,11 @@
 
 
 
-
-
-
 #' Export RefSeeker results tables
 #'
 #' @param refseekerlist A RefSeeker list normally provided by rs_reffinder() function
 #' @param filename A filename for the output, may include relative path to desired folder
-#' @param tabletype Select type of output may be one of ; "xlsx", "csv", "tsv", "txt" or "png" (comming soon)
+#' @param tabletype Select type of output may be one of ; "xlsx", "ods, csv", "tsv", "txt",  "docx-stability",  "docx-rank" or  "docx-combi"
 #' @param addDate Should the current date be added to the file name
 #'
 #' @return Nothing but creates files containg table data
@@ -27,9 +24,7 @@
 #'
 #'
 #'
-#'
 rs_exporttable <- function(refseekerlist, filename = "Stability-table", tabletype = "xlsx", addDate = TRUE){
-
 
   if(tabletype == "xlsx"){
     rs_exceltable(refseekerlist = refseekerlist, filename = filename, addDate = addDate)
@@ -37,13 +32,12 @@ rs_exporttable <- function(refseekerlist, filename = "Stability-table", tabletyp
   }
 
   if(tabletype == "ods"){
-    rs_odstable(refseekerlist = refseekerlist, filename = filename, addDate = addDate)
+    rsodstable(refseekerlist = refseekerlist, filename = filename, addDate = addDate)
 
   }
 
   if(tabletype == "csv"){
 
-    #cat("runningcsvtable\n")
     rscsvtable(refseekerlist, filename, addDate = addDate)
 
   }
@@ -61,6 +55,23 @@ rs_exporttable <- function(refseekerlist, filename = "Stability-table", tabletyp
 
   }
 
+  if(tabletype == "docx-stability"){
+    #cat("running txttable\n")
+    rsdoctable(refseekerlist, filename = filename, tabletype = "stability", addDate = addDate)
+
+  }
+
+  if(tabletype == "docx-rank"){
+    #cat("running txttable\n")
+    rsdoctable(refseekerlist, filename = filename, tabletype = "rank", addDate = addDate)
+
+  }
+
+  if(tabletype == "docx-combi"){
+    #cat("running txttable\n")
+    rsdoctable(refseekerlist, filename = filename, tabletype = "both", addDate = addDate)
+
+  }
 
 }
 
@@ -217,11 +228,11 @@ rsexcelfile <- function(filename, ..., addFilter = TRUE, overwrite = FALSE){
 #' \dontrun{
 #' rffndr <- rs_reffinder(ct_vals)
 #'
-#' rs_odstable(rffndr)
+#' rsodstable(rffndr)
 #' }
 #'
 #'
-rs_odstable <- function(refseekerlist, filename = "Stability-table", addDate = TRUE){
+rsodstable <- function(refseekerlist, filename = "Stability-table", addDate = TRUE){
 
 
   if(!is.null(refseekerlist$stabilityTable)){ # Simple one dimensional list, just one data set (refseekerlist$stabilityTable exists)
@@ -277,16 +288,6 @@ rs_odstable <- function(refseekerlist, filename = "Stability-table", addDate = T
   }
 
 }
-
-
-
-
-
-
-
-#filename <- "~/Desktop/test/tester"
-
-
 
 
 
@@ -368,7 +369,6 @@ rscsvtable <- function(refseekerlist, filename, addDate = TRUE) {
 #' @param filename A file name to identify the data
 #' @param addDate Possibility to automatically add date to output file name
 #'
-#' @return Nothing, output an excel file in the working directory or an output folder selected by the file name
 #' @return Nothing but creates tsv files in selected directory
 #' @export
 #'
@@ -426,23 +426,6 @@ rstsvtable <- function(refseekerlist, filename, addDate = TRUE) {
   }
 
 }
-#
-# rstsvtable <- function(refseekerlist, outdir, filenameprefix = "") {
-#
-#   # Save the names of the datasets
-#   nms <- names(data)
-#
-#   # For each data set, print two csv files, stabiltiy value and stability ranking
-#   for (i in 1:length(data)) {
-#     utils::write.table(data[[i]][1], paste0(outdir, "/", filenameprefix, nms[i], "_StabilityTable_", Sys.Date(), ".tsv"), sep = "\t", row.names = FALSE)
-#     cat(paste("csv file created at: ", paste0(outdir, "/", filenameprefix, nms[i], "_StabilityTable_", Sys.Date(), ".tsv"), "\n"))
-#
-#     utils::write.table(data[[i]][2], paste0(outdir, "/", filenameprefix, nms[i] ,"_RankTable_",Sys.Date(), ".tsv"), sep = "\t", row.names = FALSE)
-#     cat(paste("csv file created at: ", paste0(outdir, "/", filenameprefix, nms[i], "_RankTable_", Sys.Date(), ".tsv"), "\n"))
-#
-#   }
-#
-# }
 
 
 
@@ -452,7 +435,6 @@ rstsvtable <- function(refseekerlist, filename, addDate = TRUE) {
 #' @param filename A file name to identify the data
 #' @param addDate Possibility to automatically add date to output file name
 #'
-#' @return Nothing, output an excel file in the working directory or an output folder selected by the file name
 #' @return Nothing but creates csv files in selected directory
 #' @export
 #'
@@ -488,13 +470,6 @@ rstxttable <- function(refseekerlist, filename, addDate = TRUE) {
     # Report absolute path of file.
     cat(paste0("txt file created at: ", absfilepath(newfilename), "\n"))
 
-    # if(dirname(filename) == "."){
-    #   cat(paste0("csv file created at: ", getwd(),"/", newfilename, "\n"))
-    # } else {
-    #   cat(paste("csv file created at: ", newfilename, "\n"))
-    # }
-
-
 
     # Create the file name with or without date
     if(addDate){
@@ -514,27 +489,245 @@ rstxttable <- function(refseekerlist, filename, addDate = TRUE) {
 
 
 
-#
-# rstxttable <- function(refseekerlist, outdir, filenameprefix = "") {
-#
-#   # Save the names of the datasets
-#   nms <- names(data)
-#
-#   # For each data set, print two csv files, stabiltiy value and stability ranking
-#   for (i in 1:length(data)) {
-#     utils::write.table(data[[i]][1], paste0(outdir, "/", filenameprefix, nms[i], "_StabilityTable_", Sys.Date(), ".txt"), row.names = FALSE)
-#     cat(paste("csv file created at: ", paste0(outdir, "/", filenameprefix, nms[i], "_StabilityTable_", Sys.Date(), ".txt"), "\n"))
-#
-#     utils::write.table(data[[i]][2], paste0(outdir, "/", filenameprefix, nms[i] ,"_RankTable_",Sys.Date(), ".txt"), row.names = FALSE)
-#     cat(paste("csv file created at: ", paste0(outdir, "/", filenameprefix, nms[i], "_RankTable_", Sys.Date(), ".txt"), "\n"))
-#
-#   }
-#
-# }
-#
+####################################################################################3
+
+
+#' Creates kable tables for refseeker results
+#'
+#' @param refseekerlist A RefSeekerlist created by the rs_reffinder function.
+#' @param filename A file name prefix. May contain a path to an output directory.
+#' @param tabletype A string representing the table to be printer can be; "stability", "rank" or "both".
+#' @param addDate Logical indicating whether or not to add the current date to the output file name.
+#'
+#' @return A kable object in the form of html code string.
+#' @export
+#'
+#' @examples
+#'
+#' \dontrun{
+#'   table <- rsdoctable(results, filename = "~/Desktop/test/doc2_", tabletype = "both")
+#' }
+#'
+#'
+rsdoctable <- function(refseekerlist, filename = "", tabletype = "stability",  addDate = "TRUE"){
+
+  tbls <- list()
+
+  if(!is.null(refseekerlist$stabilityTable)){ # Simple one dimensional list, just one data set (refseekerlist$stabilityTable exists)
+
+    head <- unlist(base::strsplit(deparse(substitute(refseekerlist)), "[$]"))
+
+    head <- head[length(head)]
+
+    head <- gsub("_", " ", head)
+
+    refseekerlist <- list(refseekerlist)
+
+    names(refseekerlist) <- head
+
+  }
+
+  if(!is.null(refseekerlist[[1]]$stabilityTable)){ # A list of lists of results tables (refseekerlist[[1]]$stabilityTable exists)
+
+
+    names(refseekerlist) <- gsub("_", " ", names(refseekerlist))
+
+  }
+
+
+  if(tabletype == "both"){
+
+    for (i in 1:length(refseekerlist)) {
+
+      tbls[[i]] <- rsdoctable2(refseekerlist[[i]],
+                               filename = paste0(filename, "_", names(refseekerlist)[i]),
+                               caption = names(refseekerlist)[i],
+                               addDate = addDate)
+    }
+
+  } else{
+
+    for (i in 1:length(refseekerlist)) {
+
+      #cat("test1")
+      tbls[[i]] <- rsdoctable1(refseekerlist[[i]],
+                               filename = paste0(filename, "_", names(refseekerlist)[i]),
+                               caption = names(refseekerlist)[i],
+                               addDate = addDate,
+                               type = tabletype)
+
+    }
+
+  }
+
+  return(tbls)
+
+}
 
 
 
+
+#' Creates tables based on aither stability or rank from a refseeker list.
+#'
+#' @param refseekerlist A RefSeekerlist created by the rs_reffinder function
+#' @param filename A file name prefix. May contain a path to an output directory.
+#' @param caption A string representing the header of the table.
+#' @param type A string determining which table to format can be; "stability" or "RankW"
+#' @param addDate Logical indicating whether or not to add the current date to the output file name.
+
+#' @return A kable object consisting of a html table of choice
+#' @export
+#'
+#' @import flextable
+#' @importFrom officer prop_section
+#' @importFrom officer page_size
+#' @importFrom officer page_mar
+#' @importFrom officer fp_par
+#' @importFrom officer fp_border
+#'
+#'
+#' @examples
+#' \dontrun{
+#'   rsdoctable1(results, filename = "Test1", caption = "Group1", type = "rank")
+#' }
+#'
+#'
+#'
+rsdoctable1 <- function(refseekerlist, filename = "", caption = "", type = "stability", addDate = TRUE){
+
+
+  if(type == "stability"){
+
+    table <- refseekerlist$stability
+    caption <- paste0(caption, " - Stability")
+
+
+  } else if (type == "rank"){
+    table <- refseekerlist$rank
+    caption <- paste0(caption, " - Rank")
+  }
+
+  my_header <- data.frame(
+    col_keys = c("Target", "blank1", "delta-Ct", "blank2", "BestKeeper", "blank3", "Normfinder", "blank4", "geNorm", "blank", "Comprehensive Rank"),
+    line1 = c("Target", "", "delta-Ct", "", "BestKeeper", "", "Normfinder", "", "geNorm", "", "Comprehensive Rank"),
+    line2 = c("Target", "",  "Avg. STDEV.", "", "MAD", "", "Stability", "", "Avg.M", "", "Geom. mean value")
+  )
+
+
+  ft <- flextable(table, col_keys = my_header$col_keys)
+
+  ft <- set_caption(ft, caption, fp_p = officer::fp_par(), align_with_table = FALSE)
+  ft <- set_header_df(ft, mapping = my_header, key = "col_keys")
+  ft <- theme_booktabs(ft)
+  ft <- merge_v(ft, part = "header")
+  ft <- merge_h(ft, part = "header")
+  ft <- align(ft, align = "center", part = "all")
+  ft <- autofit(ft)
+  ft <- hline_bottom(ft, border = officer::fp_border(width = 2), part = "header")
+  ft <- empty_blanks(ft, part = "header")
+  ft <- fix_border_issues(ft)
+  ft <- hline_top(ft, border = officer::fp_border(width = 2), part = "header")
+  ft
+
+  sect_properties <- officer::prop_section(
+    page_size = officer::page_size(orient = "landscape"),
+    type = "continuous",
+    page_margins = officer::page_mar())
+
+
+
+  if(addDate){filename <- paste0(filename, "_", Sys.Date())}
+
+  save_as_docx(ft, pr_section = sect_properties,  path = paste0(filename, ".docx"))
+
+  cat(paste0("A doc-table file was created at: ", paste0(filename, ".docx\n")))
+
+  return(ft)
+
+
+}
+
+
+
+#' Creates tables based on aither stability and rank from a refseeker list.
+#'
+#' @param refseekerlist A RefSeekerlist created by the rs_reffinder function
+#' @param filename A file name prefix. May contain a path to an output directory.
+#' @param caption A string representing the header of the table.
+#' @param addDate Logical indicating whether or not to add the current date to the output file name.
+#'
+#' @return A kable object consisting of a html code for a table showing rank and stabiltiy of each reffinder algorithm
+#' @export
+#'
+#' @import flextable
+#' @importFrom officer prop_section
+#' @importFrom officer page_size
+#' @importFrom officer page_mar
+#' @importFrom officer fp_par
+#' @importFrom officer fp_border
+#'
+#'
+#'
+#'
+#' @examples
+#' \dontrun{
+#'   rsdoctable(results, filename = "Test1", caption = "Group1")
+#' }
+#'
+#'
+#'
+rsdoctable2 <- function(refseekerlist, filename = "", caption = "", addDate = TRUE){
+
+  table <- data.frame( matrix(nrow = nrow(refseekerlist[[1]]), ncol = 11 ) )
+  table[1] <- refseekerlist[[1]][1]
+
+  for(i in 1:5){                    #       (ncol(results$Fresh_Frozen$stabilityTable))){
+
+    table[i*2] <- refseekerlist[[1]][i+1]
+
+    table[i*2+1] <- refseekerlist[[2]][i+1]
+
+  }
+
+  my_header <- data.frame(
+    col_keys = c('X1', 'X2', 'X3', 'blank1', 'X4', 'X5', 'blank2', 'X6', 'X7', 'blank', 'X8', 'X9', 'blank3', 'X10', 'X11'),
+    line2 = c(" ", "delta-Ct", "delta-Ct", "", "BestKeeper","BestKeeper", "", "Normfinder", "Normfinder", "", "geNorm", "geNorm", "", "Comprehensive Rank", "Comprehensive Rank"),
+    line3 = c("Target",  "Avg. STDEV.", "Rank", "", "MAD", "Rank", "", "Stability", "Rank", "", "Avg.M", "Rank", "", "Geom. mean value", "Rank" )
+  )
+
+  ft <- flextable(table, col_keys = my_header$col_keys)
+  ft <- set_caption(ft, caption = caption, fp_p = officer::fp_par(), align_with_table = FALSE)
+  ft <- set_header_df(ft, mapping = my_header, key = "col_keys")
+  ft <- theme_booktabs(ft)
+  ft <- merge_v(ft, part = "header")
+  ft <- merge_h(ft, part = "header")
+  ft <- align(ft, align = "center", part = "all")
+  ft <- autofit(ft)
+  ft <- hline_bottom(ft, border = officer::fp_border(width = 2), part = "header")
+  ft <- empty_blanks(ft, part = "header")
+  ft <- fix_border_issues(ft)
+  ft <- hline_top(ft, border = officer::fp_border(width = 2), part = "header")
+  ft
+
+  sect_properties <- officer::prop_section(
+    page_size = officer::page_size(orient = "landscape"),
+    type = "continuous",
+    page_margins = officer::page_mar())
+
+
+  if(addDate){filename <- paste0(filename, "_", Sys.Date())}
+
+  save_as_docx(ft, pr_section = sect_properties,  path = paste0(filename, ".docx"))
+
+  cat(paste0("A doc-table file was created at: ", paste0(filename, ".docx\n")))
+
+  return(ft)
+}
+
+
+
+
+#######################################################################
 
 
 #' Find avbsolute path of file

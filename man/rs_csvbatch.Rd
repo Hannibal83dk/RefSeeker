@@ -21,6 +21,9 @@ Nothing. Creates excel files and graphs with stabilities for each sheet of a sel
 \description{
 Creates batch output from selected comma separated txt files
 }
+\note{
+Use of this function is discouraged and will likely be deprecated in future versions. Please consider using rs_wizard()
+}
 \examples{
 \dontrun{
 rs_csvbatch()

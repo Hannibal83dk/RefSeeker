@@ -9,6 +9,8 @@
 
 #' Creates batch output from selected comma separated txt files
 #'
+#' @note Use of this function is discouraged and will likely be deprecated in future versions. Please consider using rs_wizard()
+#'
 #' @param input A path to a file txt-like files (txt, csv, tsv etc.) containing a properly formatted reffinder data table. All files with the same file extension in that folder will be loaded as a data set. (See vignette about preparing and loading txt-like files)
 #' @param outdir A selected output directory, if not set a dialog will appear to allow selection for output directory
 #' @param outtype type of data output can be "csv", "excel" or "tsv" - Have not been implemented yet
@@ -34,7 +36,7 @@ rs_csvbatch <- function(input = "", outdir = "", outtype = "csv",  printgraph = 
   # Read in the data from the files.
   ## A file is selected and all files in the folder matching the file extension will be loaded as a batch.
   ## The reffinder data is then calculated on these.
-  data <- rs_reffinder(rs_loadtxtdata())
+  data <- rs_reffinder(rsloadtable())
 
   # Selecting an output folder.
 

@@ -192,11 +192,20 @@ rsexltypeselect <- function(){
 
 #' Dialog window to select a folder for output files
 #'
+#' @param outdir A path to an folder to output graphs and tables
+#' @param inputfile One or more paths to files containing expression data
+#' @param filename A Prefix to use for file names.
+#' @param graphtype A Type of graph, may be "individual" for one graph per data set, or "multi" for a combined graph of all data sets.
+#' @param ordering Used to control sorting of the x axis, use "Target","delta-Ct","BestKeeper","Normfinder","geNorm" or "Comprehensive Rank".
+#' @param imagetype A string determining which image file type the graph should be saved to. can be one of; "png", "tiff", "jpeg" or "svg".
+#' @param orientation Selection of the orientation of the bars in the graph. May be "horizontal" or "vertical". Actually anything other than "horizontal" will be interpreted as vertical.
+#' @param tabletype Select type of output may be one of ; "xlsx", "ods, csv", "tsv", "txt",  "docx-stability",  "docx-rank" or  "docx-combi"
+#'
 #' @return A list of string representing answer given in the dialog
 #' 1) Was the ok button pressed? - TRUE/FALSE
 #' 2) Output directory selected
-#' 3) Graphtype selected - individual/multi
-#' 4) Sorting of targets on graph x-axis - reffinder/genorm/normfinder/bestkeeper/deltact/targets
+#' 3) Graph type selected - individual/multi
+#' 4) Ordering of targets on graph x-axis - reffinder/genorm/normfinder/bestkeeper/deltact/targets
 #' 4) File type selected for graph output - png/tiff/jpeg/none
 #' 5) File type for data output - xlsx/ods/csv/tsv/txt
 #' 6) One or more input data file paths
@@ -212,32 +221,33 @@ rsexltypeselect <- function(){
 #'}
 #'
 #'
-rsdialog <- function(){
+rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", graphtype = "multi", ordering = "Comprehensive Rank",  imagetype = "png", orientation = "horizontal", tabletype = "xlsx"){
 
-  outdir <- getwd()
-  inputfile <- c("No selection")
 
-  filename <- tclVar("type a prefix")
-  flnm <- ""
+  if(outdir == ""){outdir <- getwd()}
+
+  #inputfile <- c("No selection")
+
+  flnm <- tclVar(filename)
+  # filename <- ""
 
   ok = FALSE
 
-  grph <- "multi"
-  graph <- tclVar("multi")
+  # graphtype <- "multi"
+  grph <- tclVar(graphtype)
 
-  srt <- "Comprehensive Rank"
-  sort <- tclVar("Comprehensive Rank")
+  # ordering <- "Comprehensive Rank"
+  srt <- tclVar(ordering)
 
-  img <- "png"
-  image <- tclVar("png")
+  #imagetype <- "png"
+  img <- tclVar(imagetype)
 
-  ori <- "horizontal"
-  orient <- tclVar("horizontal")
+  # orientation <- "horizontal"
+  ori <- tclVar(orientation)
 
 
-  datout <- "xlsx"
-  dataout <- tclVar("xlsx")
-
+  # tabletype <- "xlsx"
+  tbltype <- tclVar(tabletype)
 
 
   slctinfile <- function(){
@@ -253,36 +263,9 @@ rsdialog <- function(){
   }
 
 
-  radio1press <- function(){grph <<- "individual"}
-  radio2press <- function(){grph <<- "multi"}
+  radio1press <- function(){graphtype <<- "individual"}
+  radio2press <- function(){graphtype <<- "multi"}
 
-  # Sort radio functions
-  sortradio1press <- function(){srt <<- "Comprehensive Rank"}
-  sortradio2press <- function(){srt <<- "geNorm"}
-  sortradio3press <- function(){srt <<- "Normfinder"}
-  sortradio4press <- function(){srt <<- "BestKeeper"}
-  sortradio5press <- function(){srt <<- "delta-Ct"}
-  sortradio6press <- function(){srt <<- "Targets"}
-
-
-  # Image type radio functions
-  imgradio1press <- function(){img <<- "png"}
-  imgradio2press <- function(){img <<- "tiff"}
-  imgradio3press <- function(){img <<- "jpeg"}
-  imgradio4press <- function(){img <<- "svg"}
-  imgradio5press <- function(){img <<- "none"}
-
-  # Orientation type radio functions
-  imgradio1press <- function(){ori <<- "horizontal"}
-  imgradio2press <- function(){ori <<- "vertical"}
-
-
-  # table type radio functions
-  tabradio1press <- function(){datout <<- "xlsx"}
-  tabradio2press <- function(){datout <<- "ods"}
-  tabradio3press <- function(){datout <<- "csv"}
-  tabradio4press <- function(){datout <<- "tsv"}
-  tabradio5press <- function(){datout <<- "txt"}
 
 
   quit <- function(){
@@ -293,7 +276,7 @@ rsdialog <- function(){
   okfunc <- function(){
     tkdestroy(tt)
     ok <<- TRUE
-    flnm <<- tclvalue( filename)
+    filename <<- tclvalue( flnm)
 
   }
 
@@ -311,38 +294,76 @@ rsdialog <- function(){
 
   fldrslct.but <- tkbutton(tt, text="Change output folder", command=slctfldr)
 
-  filename.field <- tkentry(tt, textvariable = filename)
+  flnm.field <- tkentry(tt, textvariable = flnm)
 
-  # Graph type radio
-  graphradio1 <- tkradiobutton(tt, text = "Individual", variable = graph, value = "individual", command = radio1press)
-  graphradio2 <- tkradiobutton(tt, text = "Multi", variable = graph, value = "multi", command = radio2press)
+  # graphtype type radio
+  graphtyperadio1 <- tkradiobutton(tt, text = "Individual", variable = grph, value = "individual", command = radio1press)
+  graphtyperadio2 <- tkradiobutton(tt, text = "Multi", variable = grph, value = "multi", command = radio2press)
 
-  #Graph sorting radio
-  sortradio1 <- tkradiobutton(tt, text = "Comprehensive Rank", variable = sort, value = "Comprehensive Rank", command = radio1press)
-  sortradio2 <- tkradiobutton(tt, text = "geNorm", variable = sort, value = "geNorm", command = radio2press)
-  sortradio3 <- tkradiobutton(tt, text = "Normfinder", variable = sort, value = "Normfinder", command = radio1press)
-  sortradio4 <- tkradiobutton(tt, text = "BestKeeper", variable = sort, value = "BestKeeper", command = radio2press)
-  sortradio5 <- tkradiobutton(tt, text = "delta-Ct", variable = sort, value = "delta-Ct", command = radio1press)
-  sortradio6 <- tkradiobutton(tt, text = "Targets", variable = sort, value = "Targets", command = radio2press)
 
-  # Image type radio
-  imgradio1 <- tkradiobutton(tt, text = "PNG", variable = image, value = "png", command = imgradio1press)
-  imgradio2 <- tkradiobutton(tt, text = "TIFF", variable = image, value = "tiff", command = imgradio2press)
-  imgradio3 <- tkradiobutton(tt, text = "JPEG", variable = image, value = "jpeg", command = imgradio3press)
-  imgradio4 <- tkradiobutton(tt, text = "SVG", variable = image, value = "svg", command = imgradio4press)#, state = "disable")
-  imgradio5 <- tkradiobutton(tt, text = "None", variable = image, value = "none", command = imgradio5press)
-  # Graph orientation
+  # ordering radio functions
+  orderingradio1press <- function(){ordering <<- "Comprehensive Rank"}
+  orderingradio2press <- function(){ordering <<- "geNorm"}
+  orderingradio3press <- function(){ordering <<- "Normfinder"}
+  orderingradio4press <- function(){ordering <<- "BestKeeper"}
+  orderingradio5press <- function(){ordering <<- "delta-Ct"}
+  orderingradio6press <- function(){ordering <<- "Targets"}
+  #graphtype ordering radio
+  orderingradio1 <- tkradiobutton(tt, text = "Comprehensive Rank", variable = srt, value = "Comprehensive Rank", command = orderingradio1press)
+  orderingradio2 <- tkradiobutton(tt, text = "geNorm", variable = srt, value = "geNorm", command = orderingradio2press)
+  orderingradio3 <- tkradiobutton(tt, text = "Normfinder", variable = srt, value = "Normfinder", command = orderingradio3press)
+  orderingradio4 <- tkradiobutton(tt, text = "BestKeeper", variable = srt, value = "BestKeeper", command = orderingradio4press)
+  orderingradio5 <- tkradiobutton(tt, text = "delta-Ct", variable = srt, value = "delta-Ct", command = orderingradio5press)
+  orderingradio6 <- tkradiobutton(tt, text = "Targets", variable = srt, value = "Targets", command = orderingradio6press)
 
-  orientradio1 <- tkradiobutton(tt, text = "Horizontal", variable = orient, value = "horizontal", command = imgradio1press)
-  orientradio2 <- tkradiobutton(tt, text = "Vertical", variable = orient, value = "vertical", command = imgradio2press)
 
+  # imagetype type radio functions
+  imgradio1press <- function(){imagetype <<- "png"}
+  imgradio2press <- function(){imagetype <<- "tiff"}
+  imgradio3press <- function(){imagetype <<- "jpeg"}
+  imgradio4press <- function(){imagetype <<- "svg"}
+  imgradio5press <- function(){imagetype <<- "none"}
+
+  # imagetype type radio
+  imgradio1 <- tkradiobutton(tt, text = "PNG", variable = img, value = "png", command = imgradio1press)
+  imgradio2 <- tkradiobutton(tt, text = "TIFF", variable = img, value = "tiff", command = imgradio2press)
+  imgradio3 <- tkradiobutton(tt, text = "JPEG", variable = img, value = "jpeg", command = imgradio3press)
+  imgradio4 <- tkradiobutton(tt, text = "SVG", variable = img, value = "svg", command = imgradio4press)#, state = "disable")
+  imgradio5 <- tkradiobutton(tt, text = "None", variable = img, value = "none", command = imgradio5press)
+
+
+
+
+  # Orientation type radio functions
+  orientradio1press <- function(){orientation <<- "horizontal"}
+  orientradio2press <- function(){orientation <<- "vertical"}
+  # graphtype orientation
+  orientradio1 <- tkradiobutton(tt, text = "Horizontal", variable = ori, value = "horizontal", command = orientradio1press)
+  orientradio2 <- tkradiobutton(tt, text = "Vertical", variable = ori, value = "vertical", command = orientradio2press)
+
+
+  # table type radio functions
+  tabradio1press <- function(){tabletype <<- "xlsx"}
+  tabradio2press <- function(){tabletype <<- "ods"}
+
+  tabradio3press <- function(){tabletype <<- "csv"}
+  tabradio4press <- function(){tabletype <<- "tsv"}
+  tabradio5press <- function(){tabletype <<- "txt"}
+
+  tabradio6press <- function(){tabletype <<- "docx-stability"}
+  tabradio7press <- function(){tabletype <<- "docx-rank"}
+  tabradio8press <- function(){tabletype <<- "docx-combi"}
 
   # Data output radio
-  tabradio1 <- tkradiobutton(tt, text = "XLSX", variable = dataout, value = "xlsx", command = tabradio1press)
-  tabradio2 <- tkradiobutton(tt, text = "ODS", variable = dataout, value = "ods", command = tabradio2press)#, state = "disable")
-  tabradio3 <- tkradiobutton(tt, text = "CSV", variable = dataout, value = "csv", command = tabradio3press)#, state = "disable")
-  tabradio4 <- tkradiobutton(tt, text = "TSV", variable = dataout, value = "tsv", command = tabradio4press)#, state = "disable")
-  tabradio5 <- tkradiobutton(tt, text = "TXT", variable = dataout, value = "txt", command = tabradio5press)#, state = "disable")
+  tabradio1 <- tkradiobutton(tt, text = "XLSX", variable = tbltype, value = "xlsx", command = tabradio1press)
+  tabradio2 <- tkradiobutton(tt, text = "ODS", variable = tbltype, value = "ods", command = tabradio2press)#, state = "disable")
+  tabradio3 <- tkradiobutton(tt, text = "CSV", variable = tbltype, value = "csv", command = tabradio3press)#, state = "disable")
+  tabradio4 <- tkradiobutton(tt, text = "TSV", variable = tbltype, value = "tsv", command = tabradio4press)#, state = "disable")
+  tabradio5 <- tkradiobutton(tt, text = "TXT", variable = tbltype, value = "txt", command = tabradio5press)#, state = "disable")
+  tabradio6 <- tkradiobutton(tt, text = "DOCX-Stability", variable = tbltype, value = "docx-stability", command = tabradio6press)#, state = "disable")
+  tabradio7 <- tkradiobutton(tt, text = "DOCX-Rank", variable = tbltype, value = "docx-rank", command = tabradio7press)#, state = "disable")
+  tabradio8 <- tkradiobutton(tt, text = "DOCX-Combi", variable = tbltype, value = "docx-combi", command = tabradio8press)#, state = "disable")
+
 
 
   q.but <- tkbutton(tt, text = "Quit", command = quit)
@@ -352,18 +373,17 @@ rsdialog <- function(){
   tkgrid(tklabel(tt, text = "Input file(s):"), filelabel, fileslct.but, columnspan = 7, rowspan = 2, pady = 10, padx = 10)
   tkgrid(tklabel(tt, text = "Output directory:"), outdirlabel, fldrslct.but, columnspan = 7, pady = 10, padx = 10)
 
-  tkgrid(tklabel(tt, text = "File name prefix:"), filename.field, columnspan = 7, pady = 10, padx = 10)
+  tkgrid(tklabel(tt, text = "File name prefix:"), flnm.field, columnspan = 7, pady = 10, padx = 10)
 
-  tkgrid(tklabel(tt, text = "Select type of graph:"), graphradio1, graphradio2, columnspan = 7, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tklabel(tt, text = "Select type of graph:"), graphtyperadio1, graphtyperadio2, columnspan = 7, pady = 10, padx = 10, sticky = "w")
 
-  tkgrid(tklabel(tt, text = "Select ordering of target-axis:"), sortradio1, sortradio2, sortradio3, sortradio4, sortradio5, sortradio6, columnspan = 7, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tklabel(tt, text = "Select ordering of target-axis:"), orderingradio1, orderingradio2, orderingradio3, orderingradio4, orderingradio5, orderingradio6, columnspan = 7, pady = 10, padx = 10, sticky = "w")
 
   tkgrid(tklabel(tt, text = "Select orientation of bars:"), orientradio1, orientradio2, columnspan = 7, pady = 10, padx = 10, sticky = "w")
 
 
-
   tkgrid(tklabel(tt, text = "Select graph output file format:"), imgradio1, imgradio2, imgradio3, imgradio4, columnspan = 7, pady = 10, padx = 10, sticky = "w")
-  tkgrid(tklabel(tt, text = "Select data output format:"), tabradio1, tabradio2, tabradio3, tabradio4, tabradio5, columnspan = 7, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tklabel(tt, text = "Select data output format:"), tabradio1, tabradio2, tabradio3, tabradio4, tabradio5, tabradio6, tabradio7, tabradio8, columnspan = 7, pady = 10, padx = 10, sticky = "w")
 
   #tkgrid(q.but, spacerlabel, ok.but, columnspan = 10, pady= 20, padx = 10)
 
@@ -372,13 +392,9 @@ rsdialog <- function(){
   tkgrid(ok.but, columnspan = 1, pady= 20, padx = 10, row = 10, column = 14, sticky = "e")
 
 
-  #tkgrid(ok.but, column = 3, columnspan = 1, pady= 10, padx= 10)
-  #tkgrid(q.but, pady = 10, padx = 10)
-
-
   tkwait.window(tt)
 
-  return(c(ok, outdir, flnm, grph, srt, ori, img, datout, inputfile))
+  return(c(ok, outdir, filename, graphtype, ordering, orientation, imagetype, tabletype, inputfile))
 
 
 }

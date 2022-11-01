@@ -5,7 +5,7 @@ Version: 0.9.6
 Author: Patrick H.D. Petersen
 Maintainer: Patrick H.D. Petersen <dalsbo83@gmail.com>
 Description: Simple calculation and extraction of expression stablity and stablity ranking based on the RefFinder method.
-License: MIT + file LICENSE
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.1
@@ -24,8 +24,10 @@ Imports:
     openxlsx,
     data.table,
     tcltk,
-    readODS
+    readODS,
+    flextable,
+    officer
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0)
 VignetteBuilder: knitr
 Config/testthat/edition: 3

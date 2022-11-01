@@ -1,110 +1,89 @@
-
-
-
-
-
-
-
-
+################################
+Add publishable table formats for output - DONE
+################################
+Add orientation as an option in wizard/rsdialog - DONE
+################################
+Add text field for naming outputs in rsdialog/wizard - DONE
+################################
+Add automatic control to graph width/Height to make sure data names (Fresh Frozen) is contained in the facet box. - DONE
+ - run 5 miRNA with Fresh frozen horizontal to see problem
+ - maybe find a maximum "width" for capitalized longest name e.g. Fresh frozen -> FRESH FROZEN. set height to this + a bit if orientation i horizontal
+################################
+Add svg to image output - DONE
+################################
+rename rs_doctaberl -> rsexportdoc - Will not be done at this point. This scheme follows the general naming for tables.
+################################
+rename rs_loadtable and rs_loadspreadsheet - remove "_" - DONE
+################################
+rs_wizard do not make graph horizontal for png tiff jpeg - SOLVED
+################################
+rs_wizard seems to create two graph figs - Think this is because it first creates the file then writes to it - Solved
+################################
+Add message of path to files created tables for doctables - DONE
 ################################
 
 
+
+################################################################################################
 
 Remove import of readxl in rs_excelbatch functions
 
-
-
 ################################
-
-
-
 
 Add multi data analysis to Normfinder
 
-
-
 ################################
-
-
 
 Write tests for betskeeper full and normfinder full
 
-
-
 ################################
-
 
 Make Readexcel package and readODS package required only if needed
-
-
-
-
-################################
-
-
-
-Add publishable table formats for output
-
-
 
 ################################
 
 Consider changing name to RefSeeker
 
-
-
-
-
 ################################
 
 Add a vignette for selecting colors on graph
-
-
-
-
 
 ################################
 
 Consider package dhammarstrom/generefer from github for normfinder/geNorm
 
+################################
 
+Consider using officer functions for excel import/export instead of readxl
 
 ################################
 
-
-Add orientation as and option in wizard/rsdialog
-
-
-
+add date to doctable2 filenameing - DONE
 
 ################################
 
-
-Add text field for naming outputs in rsdialog/wizard
-
-
+doctable filenames add underscore after given filename testFFPE.docx -> test_FFPE_date.docx - DONE
 
 ################################
 
-
-
-
-
-
+doctable1 and 2 make caption appear in a top row to align properly
 
 ################################
 
-
-
-
+allow for inputing preselected data selection in the wizard.
+So users can use R generated data and preselected output folder and so on
 
 ################################
 
+handle canceling and shutdown of dialogs more gracefully than a shitload of error messages
 
+################################
 
+save wizard selections in a global variable or file or something to easyly change output
 
+################################
 
-
+Add printing citation to console txt word or odt
 
 ################################
 
@@ -113,10 +92,3 @@ Add text field for naming outputs in rsdialog/wizard
 
 ################################
 
-
-
-
-
-
-
-################################

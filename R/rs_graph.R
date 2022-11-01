@@ -74,10 +74,8 @@ rs_graph <- function(refseekerlist, filename = "",
 
     cat("\nrefseekerlist converted\n")
 
-
     cat(name)
     names(refseekerlist) <- gsub("_", " ", name)
-
 
     cat("\nrefseekerlist renamed\n")
 
@@ -108,6 +106,17 @@ rs_graph <- function(refseekerlist, filename = "",
 
           if(orientation == "horizontal"){
             height <- length(refseekerlist) * (nrow(refseekerlist[[1]][[1]]) * 67.5) * 0.7
+
+            #make sure names of data can fit into the vertical name bar.
+            ## Base drawings takes 240 px. Each character measured as capital X takes 60 px.
+            ### If height is set to smaller than the longest name the height is set to this value (nchar * 60 + 240).´
+            if(height < max(nchar(names(refseekerlist))) *60 + 240){
+
+              height = max(nchar(names(refseekerlist))) *60 + 240
+            }
+
+            #cat(      max(nchar(names(refseekerlist))) *60 + 240       )
+
           } else { height = 2156 }
 
           cat(paste("height set to", height, "\n"))
@@ -269,9 +278,6 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png",
       # Add the tables to the rftable
       rftable <- rbind(rftable, refseekerlist[[i]]$stabilityTable)
 
-
-
-
     }
 
   } else{ # Target names have been provided
@@ -302,7 +308,6 @@ rsgraphdraw <- function(refseekerlist, filename = "", filetype = "png",
                             variable.name = "algorithm",
                             value.name = "Stability"
   )
-
 
   # Factorize the algorithms for ordering in the graph
   rftable$algorithm <- factor(rftable$algorithm, algorithmlist)
@@ -347,7 +352,6 @@ if(orientation == "horizontal"){
           ggplot2::xlab("Target") +
           ggplot2::theme(legend.position="none")
           #ggplot2::scale_fill_manual(values=c("#000000", "#000000",  "#2271b2", "#2271b2","#359b73", "#d55e00", "#d55e00", "#d55e00", "#d55e00", "#d55e00"))
-
 }
 
 ############################################
@@ -355,11 +359,6 @@ if(orientation == "horizontal"){
 
 
 #############################################
-
-
-
-
-
 
 
   # A set of custom colors was provided as a vector
@@ -394,7 +393,6 @@ if(orientation == "horizontal"){
 
     #colors <- colors[ order(colors$target) , ]
 
-
     colors <- temp$color
 
   }
@@ -416,23 +414,27 @@ if(orientation == "horizontal"){
   }
 
 
-  print( p )
+  # print( p )
 
   # color = ""
   # colors = "#000000"
   if(filename != "") {
 
     path <- paste0(filename, "_", Sys.Date(),".", filetype)
-    cat(path)
+    #cat(path)
     if(filetype == "tiff"){
       grDevices::tiff(path, width = width, height = height, units = units,  compression = "none", res = res)
     }
 
     if(filetype == "png"){
+
+      #cat(strwidth("Fresh frozen"))
+
       grDevices::png(path, width = width, height = height, units = units, res = res)
     }
 
     if(filetype == "jpeg"){
+      #cat(strwidth("Fresh frozen"))
       grDevices::jpeg(path, width = width, height = height, units = units, res = res)
     }
 
@@ -442,6 +444,7 @@ if(orientation == "horizontal"){
     }
 
     print(p)
+
     grDevices::dev.off()
     cat( paste0("A ", filetype, " file was created at: ", normalizePath(path)) )
     cat("\n")
