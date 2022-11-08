@@ -7,7 +7,7 @@
 rs_wizard(
   outdir = "",
   inputfile = c("No selection"),
-  filename = "",
+  filename = "RefSeeker",
   graphtype = "multi",
   ordering = "Comprehensive Rank",
   imagetype = "png",

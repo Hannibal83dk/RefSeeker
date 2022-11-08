@@ -18,8 +18,8 @@ knitr::opts_chunk$set(
 
 
 
-The refSeeker package provides a convenient way of analyzing target stabilities from raw Cp/Ct/Cq values expression data of set of samples.
-It uses the refSeeker method which includes a stabilities calculated by four different algorithms: Normfinder, geNorm, bestKeeper and delta-Ct.
+The RefSeeker package provides a convenient way of analyzing target stabilities from raw Cp/Ct/Cq values expression data of set of samples.
+It uses the RefFinder method which includes a stabilities calculated by four different algorithms: Normfinder, geNorm, bestKeeper and delta-Ct.
 The target stabilities are then ranked and a geometric mean of the ranking from each algorithm is then calculated as the comprehensive ranking.
 
 The package include functions for easy import of raw data, extraction of stability values for each algorithm and an easy way of exporting these data either for further use. Either in the form of excel files or as csv files.
@@ -31,7 +31,7 @@ library(refSeeker)
 ```
 
 
-The function contained in the refSeeker package has all been given the prefix "rs". Function that are meant to be used by user has the prefix "rs_".
+The function contained in the RefSeeker package has all been given the prefix "rs". Function that are meant to be used by user has the prefix "rs_".
 The "rs" without the underscore are mostly helpers for the other functions.
 
 

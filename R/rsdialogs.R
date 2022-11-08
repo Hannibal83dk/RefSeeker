@@ -259,7 +259,9 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
 
   slctfldr <- function(){
     outdir <<- tk_choose.dir()
-    tkconfigure(outdirlabel, text = outdir)
+
+    ifelse(nchar(outdir) > 40, anch <- "e", anch <- "w")
+    tkconfigure(outdirlabel, text = outdir, anchor = anch)
   }
 
 
@@ -286,19 +288,19 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
 
   spacerlabel <- tklabel(tt, text = "")
 
-  filelabel <- tklabel(tt, text = inputfile)
-  outdirlabel <- tklabel(tt, text = outdir)
+  filelabel <- tklabel(tt, text = inputfile, font = "size 10 bold")
+  outdirlabel <- tklabel(tt, text = outdir, width = 40, font = "size 10 bold", anchor = "e")
 
 
-  fileslct.but <- tkbutton(tt, text="Select input file(s)", command=slctinfile)
+  fileslct.but <- tkbutton(tt, text="Select input file(s)", font = "size 10 bold", command=slctinfile)
 
-  fldrslct.but <- tkbutton(tt, text="Change output folder", command=slctfldr)
+  fldrslct.but <- tkbutton(tt, text="Change output folder", font = "size 10 bold", command=slctfldr)
 
-  flnm.field <- tkentry(tt, textvariable = flnm)
+  flnm.field <- tkentry(tt, textvariable = flnm, width = 40)
 
   # graphtype type radio
-  graphtyperadio1 <- tkradiobutton(tt, text = "Individual", variable = grph, value = "individual", command = radio1press)
-  graphtyperadio2 <- tkradiobutton(tt, text = "Multi", variable = grph, value = "multi", command = radio2press)
+  graphtyperadio1 <- tkradiobutton(tt, text = "Individual", font = "size 10 bold", variable = grph, value = "individual", command = radio1press)
+  graphtyperadio2 <- tkradiobutton(tt, text = "Multi", font = "size 10 bold", variable = grph, value = "multi", command = radio2press)
 
 
   # ordering radio functions
@@ -309,12 +311,12 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
   orderingradio5press <- function(){ordering <<- "delta-Ct"}
   orderingradio6press <- function(){ordering <<- "Targets"}
   #graphtype ordering radio
-  orderingradio1 <- tkradiobutton(tt, text = "Comprehensive Rank", variable = srt, value = "Comprehensive Rank", command = orderingradio1press)
-  orderingradio2 <- tkradiobutton(tt, text = "geNorm", variable = srt, value = "geNorm", command = orderingradio2press)
-  orderingradio3 <- tkradiobutton(tt, text = "Normfinder", variable = srt, value = "Normfinder", command = orderingradio3press)
-  orderingradio4 <- tkradiobutton(tt, text = "BestKeeper", variable = srt, value = "BestKeeper", command = orderingradio4press)
-  orderingradio5 <- tkradiobutton(tt, text = "delta-Ct", variable = srt, value = "delta-Ct", command = orderingradio5press)
-  orderingradio6 <- tkradiobutton(tt, text = "Targets", variable = srt, value = "Targets", command = orderingradio6press)
+  orderingradio1 <- tkradiobutton(tt, text = "Comprehensive Rank", font = "size 10 bold", variable = srt, value = "Comprehensive Rank", command = orderingradio1press)
+  orderingradio2 <- tkradiobutton(tt, text = "geNorm", font = "size 10 bold", variable = srt, value = "geNorm", command = orderingradio2press)
+  orderingradio3 <- tkradiobutton(tt, text = "Normfinder", font = "size 10 bold", variable = srt, value = "Normfinder", command = orderingradio3press)
+  orderingradio4 <- tkradiobutton(tt, text = "BestKeeper", font = "size 10 bold", variable = srt, value = "BestKeeper", command = orderingradio4press)
+  orderingradio5 <- tkradiobutton(tt, text = "delta-Ct", font = "size 10 bold", variable = srt, value = "delta-Ct", command = orderingradio5press)
+  orderingradio6 <- tkradiobutton(tt, text = "Targets", font = "size 10 bold", variable = srt, value = "Targets", command = orderingradio6press)
 
 
   # imagetype type radio functions
@@ -325,11 +327,11 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
   imgradio5press <- function(){imagetype <<- "none"}
 
   # imagetype type radio
-  imgradio1 <- tkradiobutton(tt, text = "PNG", variable = img, value = "png", command = imgradio1press)
-  imgradio2 <- tkradiobutton(tt, text = "TIFF", variable = img, value = "tiff", command = imgradio2press)
-  imgradio3 <- tkradiobutton(tt, text = "JPEG", variable = img, value = "jpeg", command = imgradio3press)
-  imgradio4 <- tkradiobutton(tt, text = "SVG", variable = img, value = "svg", command = imgradio4press)#, state = "disable")
-  imgradio5 <- tkradiobutton(tt, text = "None", variable = img, value = "none", command = imgradio5press)
+  imgradio1 <- tkradiobutton(tt, text = "PNG", font = "size 10 bold", variable = img, value = "png", command = imgradio1press)
+  imgradio2 <- tkradiobutton(tt, text = "TIFF", font = "size 10 bold", variable = img, value = "tiff", command = imgradio2press)
+  imgradio3 <- tkradiobutton(tt, text = "JPEG", font = "size 10 bold", variable = img, value = "jpeg", command = imgradio3press)
+  imgradio4 <- tkradiobutton(tt, text = "SVG", font = "size 10 bold", variable = img, value = "svg", command = imgradio4press)#, state = "disable")
+  imgradio5 <- tkradiobutton(tt, text = "None", font = "size 10 bold", variable = img, value = "none", command = imgradio5press)
 
 
 
@@ -338,8 +340,8 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
   orientradio1press <- function(){orientation <<- "horizontal"}
   orientradio2press <- function(){orientation <<- "vertical"}
   # graphtype orientation
-  orientradio1 <- tkradiobutton(tt, text = "Horizontal", variable = ori, value = "horizontal", command = orientradio1press)
-  orientradio2 <- tkradiobutton(tt, text = "Vertical", variable = ori, value = "vertical", command = orientradio2press)
+  orientradio1 <- tkradiobutton(tt, text = "Horizontal", font = "size 10 bold", variable = ori, value = "horizontal", command = orientradio1press)
+  orientradio2 <- tkradiobutton(tt, text = "Vertical", font = "size 10 bold", variable = ori, value = "vertical", command = orientradio2press)
 
 
   # table type radio functions
@@ -355,41 +357,111 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
   tabradio8press <- function(){tabletype <<- "docx-combi"}
 
   # Data output radio
-  tabradio1 <- tkradiobutton(tt, text = "XLSX", variable = tbltype, value = "xlsx", command = tabradio1press)
-  tabradio2 <- tkradiobutton(tt, text = "ODS", variable = tbltype, value = "ods", command = tabradio2press)#, state = "disable")
-  tabradio3 <- tkradiobutton(tt, text = "CSV", variable = tbltype, value = "csv", command = tabradio3press)#, state = "disable")
-  tabradio4 <- tkradiobutton(tt, text = "TSV", variable = tbltype, value = "tsv", command = tabradio4press)#, state = "disable")
-  tabradio5 <- tkradiobutton(tt, text = "TXT", variable = tbltype, value = "txt", command = tabradio5press)#, state = "disable")
-  tabradio6 <- tkradiobutton(tt, text = "DOCX-Stability", variable = tbltype, value = "docx-stability", command = tabradio6press)#, state = "disable")
-  tabradio7 <- tkradiobutton(tt, text = "DOCX-Rank", variable = tbltype, value = "docx-rank", command = tabradio7press)#, state = "disable")
-  tabradio8 <- tkradiobutton(tt, text = "DOCX-Combi", variable = tbltype, value = "docx-combi", command = tabradio8press)#, state = "disable")
+  tabradio1 <- tkradiobutton(tt, text = "XLSX", font = "size 10 bold", variable = tbltype, value = "xlsx", command = tabradio1press)
+  tabradio2 <- tkradiobutton(tt, text = "ODS", font = "size 10 bold", variable = tbltype, value = "ods", command = tabradio2press)#, state = "disable")
+  tabradio3 <- tkradiobutton(tt, text = "CSV", font = "size 10 bold", variable = tbltype, value = "csv", command = tabradio3press)#, state = "disable")
+  tabradio4 <- tkradiobutton(tt, text = "TSV", font = "size 10 bold", variable = tbltype, value = "tsv", command = tabradio4press)#, state = "disable")
+  tabradio5 <- tkradiobutton(tt, text = "TXT", font = "size 10 bold", variable = tbltype, value = "txt", command = tabradio5press)#, state = "disable")
+  tabradio6 <- tkradiobutton(tt, text = "DOCX-Stability", font = "size 10 bold", variable = tbltype, value = "docx-stability", command = tabradio6press)#, state = "disable")
+  tabradio7 <- tkradiobutton(tt, text = "DOCX-Rank", font = "size 10 bold", variable = tbltype, value = "docx-rank", command = tabradio7press)#, state = "disable")
+  tabradio8 <- tkradiobutton(tt, text = "DOCX-Combi", font = "size 10 bold", variable = tbltype, value = "docx-combi", command = tabradio8press)#, state = "disable")
 
 
 
-  q.but <- tkbutton(tt, text = "Quit", command = quit)
-  ok.but <- tkbutton(tt, text = "Ok", command = okfunc)
+  q.but <- tkbutton(tt, text = "Quit", font = "size 10 bold", command = quit)
+  ok.but <- tkbutton(tt, text = "Ok", font = "size 10 bold", command = okfunc)
+
+  # Set the style of the separator
+  styl <- tcl("ttk::style", "configure", "TSeparator", "background", "yellow")
+
+  # tkgrid(tklabel(tt, text = "Input file(s):", font = "size 10 bold"), filelabel, fileslct.but, column = 1, row = 1, columnspan = 5, rowspan = 1, pady = 10, padx = 10, sticky = "w")
+
+  tkgrid(tklabel(tt, text = "Input file(s):", font = "size 10 bold"), column = 0, row = 0, columnspan = 1, rowspan = 1, pady = 10, padx = 10 , sticky = "w")
+  tkgrid(filelabel, column = 1, row = 0, columnspan = 2, rowspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(fileslct.but, column = 3, row = 0, columnspan = 1, rowspan = 1, pady = 10, padx = 10)
+  #
+  # ###############33
+  tkgrid(tklabel(tt, text = "Output directory:", font = "size 10 bold"), column = 0, row = 1, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  #
+  tkgrid(outdirlabel, column = 1, row = 1, columnspan = 2, pady = 10, padx = 10, sticky = "w")
+  #
+  #
+  tkgrid(fldrslct.but, column = 3, row = 1, columnspan = 1, pady = 10, padx = 10)
+  #
+  # # tkgrid(tklabel(tt, text = "Output directory:"), outdirlabel, fldrslct.but, columnspan = 10, pady = 10, padx = 10)
+  # ########################
+  tkgrid(tklabel(tt, text = "File name prefix:", font = "size 10 bold"), flnm.field, column = 0, row = 2, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(flnm.field, column = 1, row = 2, columnspan = 2, pady = 10, padx = 10, sticky = "w")
+  #
+  #tkgrid(ttkseparator(tt, orient = "horizontal", style = "TSeparator", class = "ttk.Separator", takefocus ="1", cursor = ""),
+         #row = 8, column = 1, columnspan = 4, padx = 20, pady = 0, sticky = "ew")
+  #
+  tkgrid(tklabel(tt, text = "Select type of graph:", font = "size 10 bold"), row = 4, column = 0,  columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(graphtyperadio1, row = 4, column = 1, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(graphtyperadio2, row = 4, column = 2, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  #
+  tkgrid(ttkseparator(tt, orient = "horizontal", style = "TSeparator", class = "ttk.Separator", takefocus ="1", cursor = ""),
+         row = 5, column = 1, columnspan = 4, padx = 20, pady = 0, sticky = "ew")
+  #
+  tkgrid(tklabel(tt, text = "Select ordering of target-axis:", font = "size 10 bold"), row = 6, column = 0, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(orderingradio1, row = 6, column = 1, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(orderingradio2, row = 6, column = 2, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(orderingradio3, row = 6, column = 3, columnspan = 1, pady = 10, padx = 40, sticky = "w")
+  tkgrid(orderingradio4, row = 7, column = 1, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(orderingradio5, row = 7, column = 2, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(orderingradio6, row = 7, column = 3, columnspan = 1, pady = 10, padx = 40, sticky = "w")
+  #
+  tkgrid(ttkseparator(tt, orient = "horizontal", style = "TSeparator", class = "ttk.Separator", takefocus ="1", cursor = ""),
+         row = 8, column = 1, columnspan = 4, padx = 20, pady = 0, sticky = "ew")
+  #
+  tkgrid(tklabel(tt, text = "Select orientation of bars:", font = "size 10 bold"), row = 9, column = 0, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(orientradio1, row = 9, column = 1, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(orientradio2, row = 9, column = 2, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  #
+  tkgrid(ttkseparator(tt, orient = "horizontal", style = "TSeparator", class = "ttk.Separator", takefocus ="1", cursor = ""),
+         row = 10, column = 1, columnspan = 4, padx = 20, pady = 0, sticky = "ew")
+  #
+  tkgrid(tklabel(tt, text = "Select graph output file format:", font = "size 10 bold"), row = 11, column = 0, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(imgradio1, row = 11, column = 1, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(imgradio2, row = 11, column = 2, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(imgradio3, row = 11, column = 3, columnspan = 1, pady = 10, padx = 40, sticky = "w")
+  tkgrid(imgradio4, row = 11, column = 4, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  #
+  # #tkgrid(tklabel(tt, text = "Select data output format:"), tabradio1, tabradio2, tabradio3, tabradio4, tabradio5, tabradio6, tabradio7, tabradio8, row = 9, columnspan = 7, rowspan = 1, pady = 10, padx = 10, sticky = "w")
+  #
+  # themes <- as.character(tcl("ttk::style", "theme", "names"))
+  # tcl("ttk::style", "theme", "use", themes[1])
+
+  #styl <- as.character(tcl("ttk::style", "configure", "background", "black"))
+  # styl <- as.character(tcl("ttk::style", "configure", "TSeparator", "background", "black"))
+  #
+  # tcl("ttk::style", "element", "names")
 
 
-  tkgrid(tklabel(tt, text = "Input file(s):"), filelabel, fileslct.but, columnspan = 7, rowspan = 2, pady = 10, padx = 10)
-  tkgrid(tklabel(tt, text = "Output directory:"), outdirlabel, fldrslct.but, columnspan = 7, pady = 10, padx = 10)
 
-  tkgrid(tklabel(tt, text = "File name prefix:"), flnm.field, columnspan = 7, pady = 10, padx = 10)
+  tkgrid(ttkseparator(tt, orient = "horizontal", style = "TSeparator", class = "ttk.Separator", takefocus ="1", cursor = ""),
+         row = 12, column = 1, columnspan = 4, padx = 20, pady = 0, sticky = "ew")
 
-  tkgrid(tklabel(tt, text = "Select type of graph:"), graphtyperadio1, graphtyperadio2, columnspan = 7, pady = 10, padx = 10, sticky = "w")
-
-  tkgrid(tklabel(tt, text = "Select ordering of target-axis:"), orderingradio1, orderingradio2, orderingradio3, orderingradio4, orderingradio5, orderingradio6, columnspan = 7, pady = 10, padx = 10, sticky = "w")
-
-  tkgrid(tklabel(tt, text = "Select orientation of bars:"), orientradio1, orientradio2, columnspan = 7, pady = 10, padx = 10, sticky = "w")
-
-
-  tkgrid(tklabel(tt, text = "Select graph output file format:"), imgradio1, imgradio2, imgradio3, imgradio4, columnspan = 7, pady = 10, padx = 10, sticky = "w")
-  tkgrid(tklabel(tt, text = "Select data output format:"), tabradio1, tabradio2, tabradio3, tabradio4, tabradio5, tabradio6, tabradio7, tabradio8, columnspan = 7, pady = 10, padx = 10, sticky = "w")
-
-  #tkgrid(q.but, spacerlabel, ok.but, columnspan = 10, pady= 20, padx = 10)
-
-  tkgrid(q.but, columnspan = 1, pady= 20, padx = 10, row = 10, column = 7, sticky = "w")
-
-  tkgrid(ok.but, columnspan = 1, pady= 20, padx = 10, row = 10, column = 14, sticky = "e")
+  tkgrid(tklabel(tt, text = "Select data output format:", font = "size 10 bold"), row = 13, column = 0, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tabradio1, row = 13, column = 1, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tabradio2, row = 13, column = 2, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tabradio3, row = 13, column = 3, columnspan = 1, pady = 10, padx = 40, sticky = "w")
+  tkgrid(tabradio4, row = 13, column = 4, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tabradio5, row = 14, column = 1, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tabradio6, row = 14, column = 2, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  tkgrid(tabradio7, row = 14, column = 3, columnspan = 1, pady = 10, padx = 40, sticky = "w")
+  tkgrid(tabradio8, row = 14, column = 4, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  #
+  # #tkgrid(tklabel(tt, text = "Select data output format:"), tabradio1, tabradio2, tabradio3, tabradio4, tabradio5, tabradio6, tabradio7, tabradio8, row = 9, columnspan = 7, rowspan = 1, pady = 10, padx = 10, sticky = "w")
+  #
+  # #tkgrid(q.but, spacerlabel, ok.but, columnspan = 10, pady= 20, padx = 10)
+  #
+  #
+  #
+  # ####
+  tkgrid(q.but, row = 15, column = 1, columnspan = 1, pady = 10, padx = 10, sticky = "w")
+  #
+  tkgrid(ok.but, row = 15, column = 3, columnspan = 1, pady= 20, padx = 40, sticky = "e")
 
 
   tkwait.window(tt)
@@ -401,4 +473,5 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
 
 
 
+rsdialog()
 

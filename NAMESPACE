@@ -2,7 +2,6 @@
 
 export(rs_bestkeeper)
 export(rs_bestkeeperFull)
-export(rs_csvbatch)
 export(rs_deltact)
 export(rs_exceltable)
 export(rs_exporttable)

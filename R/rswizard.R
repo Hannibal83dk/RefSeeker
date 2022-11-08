@@ -9,6 +9,7 @@
 #' @param imagetype A string determining which image file type the graph should be saved to. can be one of; "png", "tiff", "jpeg" or "svg".
 #' @param orientation Selection of the orientation of the bars in the graph. May be "horizontal" or "vertical". Actually anything other than "horizontal" will be interpreted as vertical.
 #' @param tabletype Select type of output may be one of ; "xlsx", "ods, csv", "tsv", "txt",  "docx-stability",  "docx-rank" or  "docx-combi"
+# #' @param ... Extra parameters passed to rs_graph. Namely width, height, units, res and colors.
 #'
 #' @return Creates graphs and result export to
 #' @export
@@ -26,6 +27,7 @@ rs_wizard <- function(outdir = "",
                       imagetype = "png",
                       orientation = "horizontal",
                       tabletype = "xlsx"){
+
 
   answer <- rsdialog(outdir = outdir,
                      inputfile = inputfile,
@@ -68,11 +70,21 @@ rs_wizard <- function(outdir = "",
 # ,         height = 240)
 
 
-
-
-
-
-
+# rs_wizard(outdir = "",
+#                       inputfile = "/home/phdp/OneDrive/Dokumenter/R/refSeeker/inst/exdata/excel-ods-test/Reffinder_data_test.xlsx",
+#                       filename = "RefSeeker",
+#                       graphtype = "multi",
+#                       ordering = "Comprehensive Rank",
+#                       imagetype = "png",
+#                       orientation = "horizontal",
+#                       tabletype = "xlsx",
+#                       ...)
+#
+#
+#
+# file.choose(
+#
+# )
 
 
 
