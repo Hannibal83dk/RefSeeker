@@ -71,7 +71,7 @@ rs_wizard <- function(outdir = "",
 
 
 # rs_wizard(outdir = "",
-#                       inputfile = "/home/phdp/OneDrive/Dokumenter/R/refSeeker/inst/exdata/excel-ods-test/Reffinder_data_test.xlsx",
+#                       inputfile = "/home/phdp/OneDrive/Dokumenter/R/RefSeeker/inst/exdata/excel-ods-test/Reffinder_data_test.xlsx",
 #                       filename = "RefSeeker",
 #                       graphtype = "multi",
 #                       ordering = "Comprehensive Rank",

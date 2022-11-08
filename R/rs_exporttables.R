@@ -492,7 +492,7 @@ rstxttable <- function(refseekerlist, filename, addDate = TRUE) {
 ####################################################################################3
 
 
-#' Creates kable tables for refseeker results
+#' Creates kable tables for RefSeeker results
 #'
 #' @param refseekerlist A RefSeekerlist created by the rs_reffinder function.
 #' @param filename A file name prefix. May contain a path to an output directory.
@@ -567,7 +567,7 @@ rsdoctable <- function(refseekerlist, filename = "", tabletype = "stability",  a
 
 
 
-#' Creates tables based on aither stability or rank from a refseeker list.
+#' Creates tables based on aither stability or rank from a RefSeeker list.
 #'
 #' @param refseekerlist A RefSeekerlist created by the rs_reffinder function
 #' @param filename A file name prefix. May contain a path to an output directory.
@@ -649,9 +649,9 @@ rsdoctable1 <- function(refseekerlist, filename = "", caption = "", type = "stab
 
 
 
-#' Creates tables based on aither stability and rank from a refseeker list.
+#' Creates tables based on aither stability and rank from a RefSeeker list.
 #'
-#' @param refseekerlist A RefSeekerlist created by the rs_reffinder function
+#' @param refseekerlist A RefSeeker list created by the rs_reffinder function
 #' @param filename A file name prefix. May contain a path to an output directory.
 #' @param caption A string representing the header of the table.
 #' @param addDate Logical indicating whether or not to add the current date to the output file name.

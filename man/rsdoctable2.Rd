@@ -2,12 +2,12 @@
 % Please edit documentation in R/rs_exporttables.R
 \name{rsdoctable2}
 \alias{rsdoctable2}
-\title{Creates tables based on aither stability and rank from a refseeker list.}
+\title{Creates tables based on aither stability and rank from a RefSeeker list.}
 \usage{
 rsdoctable2(refseekerlist, filename = "", caption = "", addDate = TRUE)
 }
 \arguments{
-\item{refseekerlist}{A RefSeekerlist created by the rs_reffinder function}
+\item{refseekerlist}{A RefSeeker list created by the rs_reffinder function}
 
 \item{filename}{A file name prefix. May contain a path to an output directory.}
 
@@ -19,7 +19,7 @@ rsdoctable2(refseekerlist, filename = "", caption = "", addDate = TRUE)
 A kable object consisting of a html code for a table showing rank and stabiltiy of each reffinder algorithm
 }
 \description{
-Creates tables based on aither stability and rank from a refseeker list.
+Creates tables based on aither stability and rank from a RefSeeker list.
 }
 \examples{
 \dontrun{

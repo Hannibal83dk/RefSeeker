@@ -274,18 +274,18 @@ rs_normfinder <- function(expression){
   # Look for the exdata folder check if r.NormOldStab5.txt exists in this folder, if not download it to that location
 
   if(!file.exists(
-    paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt")
+    paste0(dir(find.package("RefSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt")
 
   )){
 
     utils::download.file("https://moma.dk/files/r.NormOldStab5.txt",
-                         paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"),
+                         paste0(dir(find.package("RefSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"),
                          quiet = FALSE)
 
     rsadjustnmfRounding(decimals = 3)
   }
   # source the r.NormOldStab5.txt
-  source(paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
+  source(paste0(dir(find.package("RefSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
 
 
   ###################################################################################################################
@@ -324,7 +324,7 @@ rs_normfinder <- function(expression){
 rsadjustnmfRounding <- function(decimals = 3) {
 
   decimals <- as.character(decimals)
-  tx <- readLines(paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
+  tx <- readLines(paste0(dir(find.package("RefSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
 
   substring(tx[193], 41, 41) <- decimals
 
@@ -352,7 +352,7 @@ rsadjustnmfRounding <- function(decimals = 3) {
 
   substring(tx[196], 38, 38) <- decimals
 
-  writeLines(tx, con = paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
+  writeLines(tx, con = paste0(dir(find.package("RefSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
 
 }
 
@@ -376,18 +376,18 @@ rsadjustnmfRounding <- function(decimals = 3) {
 # #' @examples
 rs_normfinderFull <- function(expression, Groups=TRUE, ctVal=TRUE, pStabLim=0.25){
   if(!file.exists(
-    paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt")
+    paste0(dir(find.package("RefSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt")
 
   )){
 
     utils::download.file("https://moma.dk/files/r.NormOldStab5.txt",
-                         paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"),
+                         paste0(dir(find.package("RefSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"),
                          quiet = FALSE)
 
     rsadjustnmfRounding(decimals = 3)
   }
   # source the r.NormOldStab5.txt
-  source(paste0(dir(find.package("refSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
+  source(paste0(dir(find.package("RefSeeker", lib.loc=NULL, quiet = TRUE), pattern = "exdata", recursive = TRUE, full.names = TRUE, include.dirs = TRUE), "/r.NormOldStab5.txt"))
 
   ###################################################################################################################
 

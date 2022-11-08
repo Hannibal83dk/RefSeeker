@@ -6,81 +6,81 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-data <- rs_loaddata()
-
-
-
-
-res <- rs_reffinder(data)
-
-
-
-
-
-# colors <- data.frame(target = names(data$FFPE),
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# data <- rs_loaddata()
+#
+#
+#
+#
+# res <- rs_reffinder(data)
+#
+#
+#
+#
+#
+# # colors <- data.frame(target = names(data$FFPE),
+# #
+# #                      color = c("#2271b2",
+# #                                "#2271b2",
+# #                                "#2271b2",
+# #                                "#2271b2",
+# #                                "#359b73",
+# #                                "#d55e00",
+# #                                "#d55e00",
+# #                                "#d55e00",
+# #                                "#d55e00",
+# #                                "#d55e00"))
+#
+# colors <- data.frame(target = c("UniSp2",
+#                                 "UniSp4",
+#                                 "UniSp6",
+#                                 "cel-miR-39-3p",
+#                                 "UniSp3_IPC",
+#                                 "hsa-miR-30c-5p",
+#                                 "hsa-miR-103a-3p",
+#                                 "hsa-miR-191-5p",
+#                                 "hsa-miR-23a-3p",
+#                                 "hsa-miR-451a"),
 #
 #                      color = c("#2271b2",
-#                                "#2271b2",
-#                                "#2271b2",
-#                                "#2271b2",
-#                                "#359b73",
-#                                "#d55e00",
-#                                "#d55e00",
-#                                "#d55e00",
-#                                "#d55e00",
-#                                "#d55e00"))
-
-colors <- data.frame(target = c("UniSp2",
-                                "UniSp4",
-                                "UniSp6",
-                                "cel-miR-39-3p",
-                                "UniSp3_IPC",
-                                "hsa-miR-30c-5p",
-                                "hsa-miR-103a-3p",
-                                "hsa-miR-191-5p",
-                                "hsa-miR-23a-3p",
-                                "hsa-miR-451a"),
-
-                     color = c("#2271b2",
-                                "#2271b2",
-                                "#2271b2",
-                                "#2271b2",
-                                "#359b73",
-                                "#d55e00",
-                                "#d55e00",
-                                "#d55e00",
-                                "#d55e00",
-                                "#d55e00"))
-
-
-
-
-
-
-
-
-
-rs_graph(res, colors = colors)
-
+#                                 "#2271b2",
+#                                 "#2271b2",
+#                                 "#2271b2",
+#                                 "#359b73",
+#                                 "#d55e00",
+#                                 "#d55e00",
+#                                 "#d55e00",
+#                                 "#d55e00",
+#                                 "#d55e00"))
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# rs_graph(res, colors = colors)
+#
 
 
 # #' Creates kable tables for refseeker results

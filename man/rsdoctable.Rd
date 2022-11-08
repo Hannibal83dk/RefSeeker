@@ -2,7 +2,7 @@
 % Please edit documentation in R/rs_exporttables.R
 \name{rsdoctable}
 \alias{rsdoctable}
-\title{Creates kable tables for refseeker results}
+\title{Creates kable tables for RefSeeker results}
 \usage{
 rsdoctable(
   refseekerlist,
@@ -24,7 +24,7 @@ rsdoctable(
 A kable object in the form of html code string.
 }
 \description{
-Creates kable tables for refseeker results
+Creates kable tables for RefSeeker results
 }
 \examples{
 

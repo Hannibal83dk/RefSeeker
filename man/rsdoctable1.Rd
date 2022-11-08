@@ -2,7 +2,7 @@
 % Please edit documentation in R/rs_exporttables.R
 \name{rsdoctable1}
 \alias{rsdoctable1}
-\title{Creates tables based on aither stability or rank from a refseeker list.}
+\title{Creates tables based on aither stability or rank from a RefSeeker list.}
 \usage{
 rsdoctable1(
   refseekerlist,
@@ -27,7 +27,7 @@ rsdoctable1(
 A kable object consisting of a html table of choice
 }
 \description{
-Creates tables based on aither stability or rank from a refseeker list.
+Creates tables based on aither stability or rank from a RefSeeker list.
 }
 \examples{
 \dontrun{
