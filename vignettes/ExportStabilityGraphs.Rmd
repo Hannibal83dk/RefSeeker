@@ -1,0 +1,22 @@
+---
+title: "Export Stability Graphs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ExportStabilityGraphs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RefSeeker)
+```
+
+
+This vignette has not been written yet

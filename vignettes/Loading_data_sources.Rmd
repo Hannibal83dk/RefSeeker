@@ -23,7 +23,7 @@ Data can be imported from several different file types, however, some requiremen
 Once data has been successfully loaded the stability analysis can be performed. Please refer to the <<INSERT NAME OF ANALYSIS VIGNETTE>> for further help with performing the stability analysis.
 
 ```{r setup}
-library(refSeeker)
+library(RefSeeker)
 ```
 
 ## Loading data from spreadsheetes (excel or ODS) or text based (csv, tsv, txt) files.
@@ -57,7 +57,7 @@ csv, tsv or txt:
 - Row names must be excluded.
 
 
-Note that missing data is discouraged since this has not been tested and verified
+Note that missing data is incompatible with the RefSeeker stability calculations and will break the analysis.
 
 
 <img src="excelsheetdata.png" title="Excel file data structure example" alt="Excel example" width="99%" style="display: block; margin: auto;" />
@@ -76,7 +76,7 @@ If no file path is provided, a dialog window will appear, allowing for selecting
 
 Excel data can also be loaded via provided file path
 ```{r }
-exceldata <- rs_loaddata("../inst/exdata/vignetteInputs/Reffinder_data_test.xlsx")
+exceldata <- rs_loaddata("../inst/exdata/vignetteInputs/RefSeeker_data_test.xlsx")
 
 exceldata
 ```

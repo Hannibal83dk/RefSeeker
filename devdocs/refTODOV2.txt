@@ -88,7 +88,18 @@ Add printing citation to console txt word or odt
 ################################
 
 
+vignettes to update:
 
+loading data sources
+Stability analysis (maybe remove??)
 
 ################################
 
+
+
+vignettes to write:
+ "Export stability graphs"
+
+
+
+################################

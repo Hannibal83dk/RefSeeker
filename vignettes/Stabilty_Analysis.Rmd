@@ -1,5 +1,5 @@
 ---
-title: "Stabilty Analysis"
+title: "Stabilty Analysis - This article is outdated and need to be updated"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Stabilty_Analysis}
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(refSeeker)
+library(RefSeeker)
 ```
 
 
@@ -59,14 +59,14 @@ This will first bring up a dialog to choose the location of the input data. Then
 Single graph means one graph per data set, if the input data consist of only one data set it does not matter what is selected, they will give the same output.
 If more data sets are in the inout data a multigraph will print them all side by side for comparison.
 
-Keep in mind that by default, the x-axis is arranged using the RefFinder stabilty ranking, meaning that the sequence og targets on the x-axis will be arranged from most to least stable and might not be in the same order even in a multigraph, to change this default behaviour, see below for manual analysis and graph printing.
+Keep in mind that by default, the x-axis is arranged using the RefFinder stability ranking, meaning that the sequence of targets on the x-axis will be arranged from most to least stable and might not be in the same order even in a multigraph, to change this default behaviour, see below for manual analysis and graph printing.
 
 
 The output consist of an excel file for each data set containing two sheets, one with stabilty values and another with stabilty rankings together aither a single multihgraph or single graphs for each data set.
 
 
 ![](./exceloutexample.png){width=30%} 
-![](../inst/exdata/VignettesOutputs/Reffinder_data_test_2022-09-12.png){width=30%}
+![](../inst/exdata/VignettesOutputs/RefSeeker_data_test_2022-09-12.png){width=30%}
 ![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Fresh_Frozen_2022-09-12.png){width=15%}
 
 
@@ -79,10 +79,10 @@ To perform a manual or automatic analysis the easiest is to load in the data as 
 
 ```{r}
 
-inputData <- rs_loaddata("../inst/exdata/vignetteInputs/Reffinder_data_test.xlsx")
+inputData <- rs_loaddata("../inst/exdata/vignetteInputs/RefSeeker_data_test.xlsx")
 ```
 
-The data can now be analysed by each algorithm or reffinder
+The data can now be analysed by each algorithm or RefFinder Comprehensive Rank
 
 ```{r}
 rs_normfinder(inputData$Fresh_Frozen)
