@@ -1,8 +1,10 @@
 ---
 title: "Intro to RefSeeker - Obtain stability ranking from raw expression data"
 output: rmarkdown::html_vignette
+bibliography: references.bib
+csl: softwarex.csl
 vignette: >
-  %\VignetteIndexEntry{Obtain stability ranking from raw expression data}
+  %\VignetteIndexEntry{Intro to RefSeeker - Obtain stability ranking from raw expression data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,7 +21,7 @@ knitr::opts_chunk$set(
 
 
 The RefSeeker package provides a convenient way of analyzing target stabilities from raw Cp/Ct/Cq values expression data of set of samples.
-It uses the RefFinder method which includes a stabilities calculated by four different algorithms: Normfinder, geNorm, bestKeeper and delta-Ct.
+It uses the RefFinder[@Xie2012a] method which includes stability values calculated by four different algorithms: Normfinder[@Andersen2004], geNorm[@Vandesompele2002a], BestKeeper[@Pfaffl2004] and the comparative delta-Ct method[@Silver2006].
 The target stabilities are then ranked and a geometric mean of the ranking from each algorithm is then calculated as the comprehensive ranking.
 
 The package include functions for easy import of raw data, extraction of stability values for each algorithm and an easy way of exporting these data either for further use. Either in the form of excel files or as csv files.
