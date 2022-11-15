@@ -54,7 +54,7 @@ No matter the input source, the following requirements are the same:
 
 - Row names must be excluded
 
-- No missing data is allowed¨k
+- No missing data is allowed
 
 
 ### Load data from file

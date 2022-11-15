@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 
 
-This vignette will show you how to prepare and import expression data into R using the refSeeker package.
+This vignette will show you how to prepare and import expression data into R using the RefSeeker package.
 
 Data can be imported from several different file types, however, some requirements and limitations will be discussed for each type of file.
 
@@ -34,7 +34,7 @@ Behind the scenes separate functions exist for importing from different sources 
 
 ### Prepare Data
 
-Before loading data from any file first need to be prepared:
+Before loading data from any file, first the files need to be prepared:
 
 Excel and ods files:
 
