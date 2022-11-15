@@ -340,6 +340,9 @@ if(orientation == "horizontal"){
 
 } else{
 
+    #return(rftable)
+    rftable$algorithm <- factor(rftable$algorithm, unique(rftable$algorithm[order(rftable$algorithm, decreasing = T)]))
+
     p <- ggplot2::ggplot(rftable, ggplot2::aes_string('TargetID', 'Stability', fill = "TargetID")) +
           ggplot2::geom_bar(stat = "identity") +
           # Invisible layer, alpha set to 0

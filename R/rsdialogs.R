@@ -309,7 +309,7 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
   orderingradio3press <- function(){ordering <<- "Normfinder"}
   orderingradio4press <- function(){ordering <<- "BestKeeper"}
   orderingradio5press <- function(){ordering <<- "delta-Ct"}
-  orderingradio6press <- function(){ordering <<- "Targets"}
+  orderingradio6press <- function(){ordering <<- "Target"}
   #graphtype ordering radio
   orderingradio1 <- tkradiobutton(tt, text = "Comprehensive Rank", font = "size 10 bold", variable = srt, value = "Comprehensive Rank", command = orderingradio1press)
   orderingradio2 <- tkradiobutton(tt, text = "geNorm", font = "size 10 bold", variable = srt, value = "geNorm", command = orderingradio2press)
