@@ -2,7 +2,7 @@
 % Please edit documentation in R/rs_exporttables.R
 \name{rsdoctable}
 \alias{rsdoctable}
-\title{Creates kable tables for RefSeeker results}
+\title{Creates flextable tables for RefSeeker results}
 \usage{
 rsdoctable(
   refseekerlist,
@@ -21,10 +21,10 @@ rsdoctable(
 \item{addDate}{Logical indicating whether or not to add the current date to the output file name.}
 }
 \value{
-A kable object in the form of html code string.
+A flextable object in the form of html code string.
 }
 \description{
-Creates kable tables for RefSeeker results
+Creates flextable tables for RefSeeker results
 }
 \examples{
 

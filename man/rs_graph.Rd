@@ -23,7 +23,7 @@ rs_graph(
 
 \item{filename}{String. A name of the output file. Can contain an optional relative path.}
 
-\item{filetype}{Selection of image file type may be "png", "tiff", "jpeg".}
+\item{filetype}{Selection of image file type may be "png", "tiff", "jpeg" or "svg".}
 
 \item{forceSingle}{If TRUE will make a single graph for each data set provided.}
 

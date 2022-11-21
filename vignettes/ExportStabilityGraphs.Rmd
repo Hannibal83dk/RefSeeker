@@ -3,8 +3,11 @@ title: "Export Stability Graphs"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{ExportStabilityGraphs}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+# editor_options: 
+#   markdown: 
+#     wrap: 72
 ---
 
 ```{r, include = FALSE}
@@ -17,6 +20,173 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(RefSeeker)
 ```
+## Intro to the rs_graph function
+
+In This vignette we will explore different options for creating and exporting a graphical representation of the RefSeeker results.
+
+So far the only option is a bar graph depicting the stabilies from each algorithm.
+
+The rs_graph function is available for creating the graph.
+
+The function require a "refseekerlist", this is the output from the
+rs_reffinder function and is a list of lists containing stability values
+and rank values from each algorithm. See the RefSeeker Intro vignette
+for more info.
+
+Lets import three sample data set contained in an xlsx file and create
+some results.
+
+```{r}
+rs_data <- rs_loaddata("../inst/exdata/vignetteInputs/RefSeeker_data_test.xlsx")
+rs_results <- rs_reffinder(rs_data)
+
+rs_results
+```
+
+<br> 
+As seen, three sets of results populate this list; Fresh Frozen,
+FFPE and Plasma. Each set of results contain two tables; one with
+stability values and one with stability rankings.
+<br>
 
 
-This vignette has not been written yet
+## Simple quick view
+The simplest way to visualize the results is to just run:
+<br>
+```{r quick-view-graph, fig.asp = 0.5, fig.height = 6, fig.width = 9, out.width="99%", fig.align='center'}
+multigraph <- rs_graph(rs_results)
+```
+<br>
+This will return the graph to the variable which will be drawn in the plots pane.
+
+To modify the graph, several option are possible.
+
+
+## individual single graphs
+As seen, the graph contains all three data sets, if individual graphs is wanted the forceSingle switch can be set to TRUE. Now three different graphs are made, one for each data set.
+<br>
+```{r individual-graphs, fig.asp = 0.3, fig.height = 6, fig.width = 9, out.width="99%", fig.align='center'}
+singlegraphs <- rs_graph(rs_results, forceSingle = TRUE)
+```
+
+<br>
+
+## Ordering
+
+As a default the target axis will be arrange based on the Comprehensive Rank. However, if any of the other algorithms are desired these can be selected by setting the ordering parameter.
+
+There are six possibilities; "Target","delta-Ct","BestKeeper","Normfinder","geNorm" or "Comprehensive Rank". These are more or less self explanatory, bar will be arranged with from lowest to highest stability based on the selected algorithm.
+
+A custom arrangement can also be achieved by selecting the "Target" option. In this case the targets will be arranged based on the appearance in the imported data set. So if a specific ordering is wanted the target columns can be rearranged in the import data and then set ordering to "Target".
+<br>
+```{r demoing-target, fig.asp = 0.5, fig.height = 6, fig.width = 9, out.width="99%", fig.align='center'}
+singlegraphs <- rs_graph(rs_results, ordering = "Target")
+```
+<br>
+## Colors
+
+Colors can be added in several ways and is controlled by the "colors" parameter. If a single color for all bars is wanted then a single hexadecimal color value can the provided. It should be in the form of a character value such as; "#2271b2" giving a blue color to all bars.
+<br>
+```{r demoing-singlecolor, fig.asp = 0.5, fig.height = 6, fig.width = 9, out.width="99%", fig.align='center'}
+singlegraphs <- rs_graph(rs_results, colors = "#2271b2")
+```
+<br>
+
+Colors can also be controlled for each target by providing a data frame mapping specific colors to specific targets. Targets should appear in the first column and color hex value in the second column.
+
+The names could be extracted from the data set itself:
+<br>
+```{r}
+colors <- data.frame(target = names(rs_data$FFPE),
+
+                     color = c("#2271b2",
+                               "#2271b2",
+                               "#2271b2",
+                               "#2271b2",
+                               "#359b73",
+                               "#d55e00",
+                               "#d55e00",
+                               "#d55e00",
+                               "#d55e00",
+                               "#d55e00"))
+colors
+```
+<br>
+Target and color pairs could also be set explicitly:
+<br>
+```{r}
+
+colors <- data.frame(target = c("UniSp2",
+                                "UniSp4",
+                                "UniSp6",
+                                "cel-miR-39-3p",
+                                "UniSp3_IPC",
+                                "hsa-miR-30c-5p",
+                                "hsa-miR-103a-3p",
+                                "hsa-miR-191-5p",
+                                "hsa-miR-23a-3p",
+                                "hsa-miR-451a"), 
+                      
+                     color = c("#2271b2",
+                                "#2271b2",
+                                "#2271b2",
+                                "#2271b2",
+                                "#359b73",
+                                "#d55e00",
+                                "#d55e00",
+                                "#d55e00",
+                                "#d55e00",
+                                "#d55e00")
+)
+colors
+```
+
+<br>
+The colors data frame can now be passed to the rs_graph functions colors parameter:
+<br>
+
+```{r demoing-multicolor, fig.asp = 0.5, fig.height = 6, fig.width = 9, out.width="99%", fig.align='center'}
+singlegraphs <- rs_graph(rs_results, colors = colors)
+```
+
+<br>
+## Orientaion
+
+The default orientation of the bars is horizontal. This seems to ease the readability of the target names. However, a vertical orientation is desired this is easily done by setting the orientation to "vertical"
+<br>
+```{r demoing-vertical, fig.asp = 1.25, fig.height = 12, fig.width = 8, out.width="75%", fig.align='center'}
+singlegraphs <- rs_graph(rs_results, colors = colors, orientation = "vertical")
+```
+<br>
+
+## Exporting the graph
+
+When all desired aspects of the graph has been satisfied, the graph can be exported by providing a file name. This name can also contain an absolute or a relative path to selected folder.
+While adding the file name will give a destination for the file, "filetype" parameter can be used to select different file formats and can be any of; "png", "tiff", "jpeg" or "svg".
+
+Adding the file extension manually to the end of the file name is not recommended since the function adds this it self.
+<br>
+```{r  eval=FALSE}
+singlegraphs <- rs_graph(rs_results, filename = "Demo-graph", filetype = "svg", colors = colors, orientation = "vertical")
+```
+<br>
+
+The width, height, units and resolution of the resulting image is normally set automatically. These will be reported when a graph is created. Manual override can be selected by setting these parameters.
+
+Note that these values only affects the exported image and not the plot pane within R itself.
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+

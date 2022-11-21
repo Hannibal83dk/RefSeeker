@@ -26,6 +26,21 @@
 #'
 rs_exporttable <- function(refseekerlist, filename = "Stability-table", tabletype = "xlsx", addDate = TRUE){
 
+  #print(substitute(refseekerlist)[[3]])
+
+  if(!is.null(refseekerlist$stabilityTable)){
+
+    templist <- list(refseekerlist)
+
+    names(templist)  <- as.character(substitute(refseekerlist)[[3]])
+
+    refseekerlist <- templist
+
+    print(refseekerlist)
+
+  }
+
+
   if(tabletype == "xlsx"){
     rs_exceltable(refseekerlist = refseekerlist, filename = filename, addDate = addDate)
 
@@ -75,7 +90,7 @@ rs_exporttable <- function(refseekerlist, filename = "Stability-table", tabletyp
 
 }
 
-
+#rs_exporttable(results$Fresh_Frozen, "txttest", tabletype = "csv")
 
 #'
 #'
@@ -329,7 +344,7 @@ rscsvtable <- function(refseekerlist, filename, addDate = TRUE) {
       newfilename <- paste0(filename, "_", nms[i], "_StabilityTable_", ".csv")
     }
 
-    utils::write.csv(refseekerlist[[i]][1], newfilename, row.names = FALSE)
+    utils::write.csv(refseekerlist[[i]][[1]], newfilename, row.names = FALSE)
 
 
 
@@ -351,7 +366,7 @@ rscsvtable <- function(refseekerlist, filename, addDate = TRUE) {
       newfilename <- paste0(filename, "_", nms[i], "_RankTable_", ".csv")
     }
 
-    utils::write.csv(refseekerlist[[i]][2], newfilename, row.names = FALSE)
+    utils::write.csv(refseekerlist[[i]][[2]], newfilename, row.names = FALSE)
 
     # Report absolute path of file.
     cat(paste0("csv file created at: ", absfilepath(newfilename), "\n"))
@@ -360,7 +375,10 @@ rscsvtable <- function(refseekerlist, filename, addDate = TRUE) {
 
 }
 
-
+# refseekerlist <- results$Fresh_Frozen
+# filename <- "~/Desktop/test/csvfix"
+#
+# addDate = TRUE
 
 
 #' Creates two tsv files containing stabiltiy and rankings using tab as separator
@@ -396,7 +414,7 @@ rstsvtable <- function(refseekerlist, filename, addDate = TRUE) {
       newfilename <- paste0(filename, "_", nms[i], "_StabilityTable_", ".tsv")
     }
 
-    utils::write.table(refseekerlist[[i]][1], newfilename, sep = "\t", row.names = FALSE)
+    utils::write.table(refseekerlist[[i]][[1]], newfilename, sep = "\t", row.names = FALSE)
 
 
 
@@ -418,7 +436,7 @@ rstsvtable <- function(refseekerlist, filename, addDate = TRUE) {
       newfilename <- paste0(filename, "_", nms[i], "_RankTable_", ".tsv")
     }
 
-    utils::write.table(refseekerlist[[i]][2], newfilename, sep = "\t", row.names = FALSE)
+    utils::write.table(refseekerlist[[i]][[2]], newfilename, sep = "\t", row.names = FALSE)
 
     # Report absolute path of file.
     cat(paste0("tsv file created at: ", absfilepath(newfilename), "\n"))
@@ -463,7 +481,7 @@ rstxttable <- function(refseekerlist, filename, addDate = TRUE) {
       newfilename <- paste0(filename, "_", nms[i], "_StabilityTable_", ".txt")
     }
 
-    utils::write.table(refseekerlist[[i]][1], newfilename, row.names = FALSE)
+    utils::write.table(refseekerlist[[i]][[1]], newfilename, row.names = FALSE)
 
 
 
@@ -478,7 +496,7 @@ rstxttable <- function(refseekerlist, filename, addDate = TRUE) {
       newfilename <- paste0(filename, "_", nms[i], "_RankTable_", ".txt")
     }
 
-    utils::write.table(refseekerlist[[i]][2], newfilename, row.names = FALSE)
+    utils::write.table(refseekerlist[[i]][[2]], newfilename, row.names = FALSE)
 
     # Report absolute path of file.
     cat(paste0("txt file created at: ", absfilepath(newfilename), "\n"))
@@ -492,14 +510,14 @@ rstxttable <- function(refseekerlist, filename, addDate = TRUE) {
 ####################################################################################3
 
 
-#' Creates kable tables for RefSeeker results
+#' Creates flextable tables for RefSeeker results
 #'
 #' @param refseekerlist A RefSeekerlist created by the rs_reffinder function.
 #' @param filename A file name prefix. May contain a path to an output directory.
 #' @param tabletype A string representing the table to be printer can be; "stability", "rank" or "both".
 #' @param addDate Logical indicating whether or not to add the current date to the output file name.
 #'
-#' @return A kable object in the form of html code string.
+#' @return A flextable object in the form of html code string.
 #' @export
 #'
 #' @examples

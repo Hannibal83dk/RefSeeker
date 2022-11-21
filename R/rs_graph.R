@@ -5,7 +5,7 @@
 #' @param refseekerlist A refseekerlist list or a list of refseekerlist lists obtained frpm rs_reffinder() function
 #' @param filename String. A name of the output file. Can contain an optional relative path.
 #' @param forceSingle If TRUE will make a single graph for each data set provided.
-#' @param filetype Selection of image file type may be "png", "tiff", "jpeg".
+#' @param filetype Selection of image file type may be "png", "tiff", "jpeg" or "svg".
 #' @param width Integer value parameter passed to the PNG graphics device. Width of the output png. True width is dependent on the selected units-type.
 #' @param height Integer value parameter passed to the PNG graphics device. Height of the output png. True Height is dependent on the selected units-type
 #' @param units Integer value parameter passed to the PNG graphics device. The units in which height and width are given. Can be "px" (pixels, the default), "in" (inches), "cm" or "mm".
@@ -135,13 +135,13 @@ rs_graph <- function(refseekerlist, filename = "",
       #             orientation = orientation))
 
 
-      rsgraphdraw(refseekerlist, filename, width = width, height = height, units = units, res = res,  ordering = ordering, filetype = filetype, colors = colors, orientation = orientation)
-
+      graphs <- rsgraphdraw(refseekerlist, filename, width = width, height = height, units = units, res = res,  ordering = ordering, filetype = filetype, colors = colors, orientation = orientation)
+      print(graphs)
 
     } else { # forceSingle is TRUE
 
       names <- names(refseekerlist)
-
+      graphs <- list()
 
       for (i in 1:length(names)) {
 
@@ -183,13 +183,23 @@ rs_graph <- function(refseekerlist, filename = "",
         #             filetype = filetype,
         #             colors = colors,
         #             orientation = orientation))
+        if(filename != ""){ filename <- paste0(filename, "_", gsub(" ", "_", names[i])) }
 
-        rsgraphdraw(refseekerlist[i], paste0(filename, "_", gsub(" ", "_", names[i])), width = width, height = height, units = units, res = res, ordering = ordering, filetype = filetype, colors = colors, orientation = orientation)
+        # temp <- list(refseekerlist[i])
+        # print(refseekerlist)
+        p <- rsgraphdraw(refseekerlist[i], filename, width = width, height = height, units = units, res = res, ordering = ordering, filetype = filetype, colors = colors, orientation = orientation)
+
+        graphs[[i]] <- print(p)
+
+
+
       }
 
     }
 
   }
+#print(graphs)
+return(graphs)
 
 }
 

@@ -1,6 +1,8 @@
 ---
-title: "Stabilty Analysis - This article is outdated and need to be updated"
+title: "Stabilty Analysis"
 output: rmarkdown::html_vignette
+bibliography: references.bib
+csl: softwarex.csl
 vignette: >
   %\VignetteIndexEntry{Stabilty_Analysis}
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,7 +21,7 @@ library(RefSeeker)
 ```
 
 
-In this vignette we will explore how to perform stability analysis by the RefFinder method. In doing so, stability will be calculated using the four different algorithms; delta Ct, GeNorm, BestKeeper and Normfinder. These stabilties will be ranked for each algorithm and a geometric mean of these ranks is used to arrive at Comprehensive Rank for each target/gene/miRNA.
+In this vignette we will explore how to perform stability analysis by the RefFinder method[@Xie2012a]. In doing so, stability will be calculated using the four different algorithms; delta Ct[@Silver2006], geNorm[@Vandesompele2002a], BestKeeper[@Pfaffl2004]  and Normfinder[@Andersen2004]. These stabilties will be ranked for each algorithm and a geometric mean of these ranks is used to arrive at Comprehensive Rank for each target/gene/miRNA.
 
 
 
@@ -39,10 +41,10 @@ Before loading data from excel, the file first need to be prepared:
 
 - Row names must be excluded
 
-Note that missing data is discouraged since this has not been tested and verified
+Note that missing data is not allowed and will brake some functions.
 
 
-<img src="excelsheetdata.png" title="Excel file data structure example" alt="Excel example" width="99%" style="display: block; margin: auto;" />
+<img src="./Stability_Analysis/inputxl.png" title="Excel file data structure example" alt="Excel example" width="90%" align = "center" style="display: block; margin: auto;" />
 
 ## Quick and easy analysis
 
@@ -53,23 +55,28 @@ rs_wizard()
 ```
 This will first bring up a dialog to choose the location of the input data. Then an output folder and finally the type og graph that is wanted.
 
-![](./selectexcelfile.png){width=30%}
-![](./Outdirselect.png){width=30%}
-![](./graphTypeSelect.png){width=30%}
-Single graph means one graph per data set, if the input data consist of only one data set it does not matter what is selected, they will give the same output.
+![](./Stability_Analysis/rs_dialog.png){width=90% align="center"}
+<br>
+<br>Single graph means one graph per data set, if the input data consist of only one data set it does not matter what is selected, they will give the same output.
 If more data sets are in the inout data a multigraph will print them all side by side for comparison.
 
-Keep in mind that by default, the x-axis is arranged using the RefFinder stability ranking, meaning that the sequence of targets on the x-axis will be arranged from most to least stable and might not be in the same order even in a multigraph, to change this default behaviour, see below for manual analysis and graph printing.
+Keep in mind that by default, the x-axis is arranged using the RefFinder Comprehensive  Rank stabilities, meaning that the sequence of targets on the x-axis will be arranged from most to least stable and might not be in the same order even in a multigraph, this behavior can be changed selecting a different ordering in the dialog. To keep the same arrangements on all graphs "Targets" can be selected. This will arrange the targets based on the appearance in the imported data set.
 
 
-The output consist of an excel file for each data set containing two sheets, one with stabilty values and another with stabilty rankings together aither a single multihgraph or single graphs for each data set.
+The output consist of an excel file for each data set containing two sheets, one with stabilty values and another with stabilty rankings together either a single multihgraph or single graphs for each data set.
 
 
-![](./exceloutexample.png){width=30%} 
-![](../inst/exdata/VignettesOutputs/RefSeeker_data_test_2022-09-12.png){width=30%}
-![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Fresh_Frozen_2022-09-12.png){width=15%}
+![](./Stability_Analysis/xlresults.png){width=100%} 
+![](./Stability_Analysis/multigraph_2022-11-18.png){width=100%}
+![](./Stability_Analysis/Fresh_Frozen_graph_2022-11-18.png){width=100%}
+<br> 
+From This figure it is clear that not all algorithms agree on the stability ranging. As a user you can rely on the results of a selected algorithm of choice. In this case we could use the Comprehensive Rank since it take them all into account.
+According to this, the two most stable miRNAs is hsa-miR-23a-3p and hsa-miR-30c-5p. These could then be used as reference genes for normalization of the expression data.
 
+<br>A formatted table can be output to a docx document. Selecting the "DOCX-Combi" will result in following table
+<br>
 
+![](./Stability_Analysis/doctable.png){width=100%} 
 
 
 ## Manual analysis
@@ -79,7 +86,7 @@ To perform a manual or automatic analysis the easiest is to load in the data as 
 
 ```{r}
 
-inputData <- rs_loaddata("../inst/exdata/vignetteInputs/RefSeeker_data_test.xlsx")
+inputData <- rs_loaddata("../inst/exdata/vignetteInputs/RefSeeker_data_vignetteSample.xlsx")
 ```
 
 The data can now be analysed by each algorithm or RefFinder Comprehensive Rank
@@ -91,6 +98,7 @@ rs_normfinder(inputData$Fresh_Frozen)
 ```{r}
 rs_genorm(inputData$Fresh_Frozen)
 ```
+
 ```{r}
 rs_bestkeeper(inputData$Fresh_Frozen)
 ```
@@ -115,10 +123,11 @@ As can be seen on the output two table are created from each data set.
 
 From here the results can be exported to new excel files, one excel file per data set will be created
 
-```{r}
+```{r eval = FALSE}
 rs_exporttable(rsresults$Fresh_Frozen, "../inst/exdata/VignettesOutputs/excel_results", tabletype = "xlsx", addDate = TRUE)
 
 ```
+
 
 To create graphical representations of the data the rs_graph() function can be used.
 
@@ -129,16 +138,16 @@ rs_graph(rsresults)
 ```
 
 To create graph for each of the data sets use the forceSingle switch.
-To create a png file containing the graph, the outputPng must be set to TRUE. A file name can be provided to direct the output to a selected location.
+To create a png file containing the graph, a file name must be provided. This may contain an absolute or relative path to direct the output to a selected location.
 The height and width of the graphs can be controlled by the arguments to rs_graph(): height and width 
 Also note that the file name provided will be used as a base name such that sub files will inherent the base and sub names is added as well as file extensions. 
-```{r fig.show='hide'}
+```{r eval = FALSE}
 
-rs_graph(rsresults, "../inst/exdata/VignettesOutputs/refSeeker_excel_results", forceSingle = TRUE, width = 1024)
+rs_graph(rsresults, "../inst/exdata/VignettesOutputs/refSeeker_excel_results", forceSingle = TRUE)
 
 ```
 
-![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Fresh_Frozen_2022-09-12.png){width=30%} ![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_FFPE_2022-09-12.png){width=30%} ![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Plasma_2022-09-12.png){width=30%}
+![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Fresh_Frozen_2022-11-18.png){width=90%} ![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_FFPE_2022-11-18.png){width=90%} ![](../inst/exdata/VignettesOutputs/refSeeker_excel_results_Plasma_2022-11-18.png){width=90%}
 <br>
 <br>
 <br>

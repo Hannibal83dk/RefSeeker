@@ -1,8 +1,8 @@
 ---
-title: "Loading_data_sources"
+title: "Loading data sources"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Loading_data_sources}
+  %\VignetteIndexEntry{Loading data sources}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,7 +20,7 @@ This vignette will show you how to prepare and import expression data into R usi
 
 Data can be imported from several different file types, however, some requirements and limitations will be discussed for each type of file.
 
-Once data has been successfully loaded the stability analysis can be performed. Please refer to the <<INSERT NAME OF ANALYSIS VIGNETTE>> for further help with performing the stability analysis.
+Once data has been successfully loaded the stability analysis can be performed. Please refer to the Stability Analysis for further help with performing the stability analysis.
 
 ```{r setup}
 library(RefSeeker)
@@ -60,56 +60,58 @@ csv, tsv or txt:
 Note that missing data is incompatible with the RefSeeker stability calculations and will break the analysis.
 
 
-<img src="excelsheetdata.png" title="Excel file data structure example" alt="Excel example" width="99%" style="display: block; margin: auto;" />
+<img src="excelexample.png" title="Excel file data structure example" alt="Excel example" width="99%" style="display: block; margin: auto;" />
 
 
-To load data one or more files use rsloaddata().
+To load data one or more files use rs_loaddata().
+
+
 
 
 ```{r eval=FALSE}
-exceldata <- rsloaddata()
+rs_data <- rs_loaddata()
 ```
 
 If no file path is provided, a dialog window will appear, allowing for selecting one or more files.
 
+
+
+
+
 <img src="selectexcelfile.png" title="Selecting file dialog" alt="Excel example" width="99%" style="display: block; margin: auto;" />
 
-Excel data can also be loaded via provided file path
-```{r }
-exceldata <- rs_loaddata("../inst/exdata/vignetteInputs/RefSeeker_data_test.xlsx")
 
-exceldata
+
+
+Data can also be loaded via provided file path
+```{r }
+rs_data <- rs_loaddata("../inst/exdata/vignetteInputs/RefSeeker_data_test.xlsx")
+
+rs_data
+```
+If more files need to be loaded simultaneously these need to present in the same folder to allow for selection of the multiple files.
+
+An alternative is to provide the function with a character vector containing the paths to the desired data sets.
+
+```{r eval=FALSE}
+rs_data <- rs_loaddata(c("/path/to/file1", "/another/path/to/file2"))
 ```
 
+Different file types can be loaded simultaneously so mixing csv and xlsx file is not a problem. If the names of the data sets are the same this will be handled by adding a numeric identifier to the name.
 
+Data set names are derived from the sheetnames of spreadsheet data and from the filename of text based data.
 
 The result returned from a successful loading of data is a list containing the data sets loaded from each sheet.
 
 Each individual data set can be selected using the list index or name.
 
 ```{r eval=FALSE}
-exceldata$Fresh_Frozen
+rs_data$Fresh_Frozen
 ```
 or
 ```{r}
-exceldata[[1]]
+rs_data[[1]]
 ```
-
-
-
-## Loading data from csv, tsv or txt files
-
-# Prepare data
-
-To prepare data for import using text file based files it is recommended to create a separate folder to hold the data files.
-
-When loading data the load function will look for all the files of the same type in the folder containing the selected/provided file. This means that if a csv file is selected for import the function will try to import all csv files in that folder. This could lead to unwanted results if the wrong csv file is imported alongside the correct ones.
-
-
-
-
-
-
 <br>
 <br>
 <br>

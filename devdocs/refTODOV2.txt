@@ -95,11 +95,20 @@ Stability analysis (maybe remove??)
 
 ################################
 
-
-
 vignettes to write:
  "Export stability graphs"
 
+################################
 
+
+rs_graph creates graph image when  forcesingle = True
+
+Does not send graph to plotviewer
+
+rs_graph(res, colors = colors, forceSingle = T)
+
+################################
+
+Fix minimum height on single graph, fresh frozen is cropped when only 5 miRNAs
 
 ################################
