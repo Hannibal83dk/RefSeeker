@@ -15,7 +15,6 @@ knitr::opts_chunk$set(
 ```
 
 
-
 This vignette will show you how to prepare and import expression data into R using the RefSeeker package.
 
 Data can be imported from several different file types, however, some requirements and limitations will be discussed for each type of file.
@@ -65,17 +64,11 @@ Note that missing data is incompatible with the RefSeeker stability calculations
 
 To load data one or more files use rs_loaddata().
 
-
-
-
 ```{r eval=FALSE}
 rs_data <- rs_loaddata()
 ```
 
 If no file path is provided, a dialog window will appear, allowing for selecting one or more files.
-
-
-
 
 
 <img src="selectexcelfile.png" title="Selecting file dialog" alt="Excel example" width="99%" style="display: block; margin: auto;" />
