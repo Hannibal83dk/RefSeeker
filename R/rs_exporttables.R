@@ -26,19 +26,28 @@
 #'
 rs_exporttable <- function(refseekerlist, filename = "Stability-table", tabletype = "xlsx", addDate = TRUE){
 
-  #print(substitute(refseekerlist)[[3]])
-
+  # Single datasets are converted to to list of one dataset. Names are extracted from input variable
   if(!is.null(refseekerlist$stabilityTable)){
 
+    # The list is created and the data set is the first and only object in the list
     templist <- list(refseekerlist)
 
-    names(templist)  <- as.character(substitute(refseekerlist)[[3]])
+    # If the data set provided was not part of a list of data sets then the name is not a subset and the substitute value can be used as the name directly
+    if(typeof(substitute(refseekerlist)) == "symbol"){
+      names(templist)  <- as.character(substitute(refseekerlist))
+    }
+
+
+
+    # If the data set originally came from a list but only the single subset was provided, then the name is derived from a subset
+    if(typeof(substitute(refseekerlist)) == "language"){
+      names(templist)  <- as.character(substitute(refseekerlist)[[3]])
+    }
 
     refseekerlist <- templist
 
-    print(refseekerlist)
-
   }
+
 
 
   if(tabletype == "xlsx"){

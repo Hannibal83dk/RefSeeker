@@ -1,3 +1,93 @@
+
+#
+# rs_exporttable2 <- function(refseekerlist, filename = "Stability-table", tabletype = "xlsx", addDate = TRUE){
+#
+#   #print(substitute(refseekerlist)[[3]])
+#
+#   #return(substitute(refseekerlist))
+#
+#   if(!is.null(refseekerlist$stabilityTable)){
+#
+#     templist <- list(refseekerlist)
+#
+#     #print(typeof(substitute(refseekerlist)) == "symbol")
+#     if(typeof(substitute(refseekerlist)) == "symbol"){
+#       names(templist)  <- as.character(substitute(refseekerlist))
+#     }
+#
+#
+#
+#     #print(typeof(substitute(refseekerlist)) == "language")
+#     if(typeof(substitute(refseekerlist)) == "language"){
+#       names(templist)  <- as.character(substitute(refseekerlist)[[3]])
+#     }
+#
+#
+#
+#     #print(typeof(substitute(refseekerlist)))
+#
+#     #return(names(templist))
+#
+#     #names(templist)  <- as.character(substitute(refseekerlist))
+#
+#     refseekerlist <- templist
+#
+#     #print(refseekerlist)
+#
+#   }
+#
+#
+#   if(tabletype == "xlsx"){
+#     rs_exceltable(refseekerlist = refseekerlist, filename = filename, addDate = addDate)
+#
+#   }
+#
+#   if(tabletype == "ods"){
+#     rsodstable(refseekerlist = refseekerlist, filename = filename, addDate = addDate)
+#
+#   }
+#
+#   if(tabletype == "csv"){
+#
+#     rscsvtable(refseekerlist, filename, addDate = addDate)
+#
+#   }
+#
+#   if(tabletype == "tsv"){
+#     #cat("running tsvtable\n")
+#     rstsvtable(refseekerlist, filename, addDate = addDate)
+#
+#   }
+#
+#
+#   if(tabletype == "txt"){
+#     #cat("running txttable\n")
+#     rstxttable(refseekerlist, filename, addDate = addDate)
+#
+#   }
+#
+#   if(tabletype == "docx-stability"){
+#     #cat("running txttable\n")
+#     rsdoctable(refseekerlist, filename = filename, tabletype = "stability", addDate = addDate)
+#
+#   }
+#
+#   if(tabletype == "docx-rank"){
+#     #cat("running txttable\n")
+#     rsdoctable(refseekerlist, filename = filename, tabletype = "rank", addDate = addDate)
+#
+#   }
+#
+#   if(tabletype == "docx-combi"){
+#     #cat("running txttable\n")
+#     rsdoctable(refseekerlist, filename = filename, tabletype = "both", addDate = addDate)
+#
+#   }
+#
+# }
+#
+#
+
 #
 #
 #
