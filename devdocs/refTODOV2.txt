@@ -21,7 +21,13 @@ rs_wizard seems to create two graph figs - Think this is because it first create
 ################################
 Add message of path to files created tables for doctables - DONE
 ################################
-
+Fix not able to load data from p drev
+Loaddata have problem with spaces in filepaths - DONE
+################################
+Consider changing name to RefSeeker - DONE
+################################
+add date to doctable2 filenameing - DONE
+################################
 
 
 ################################################################################################
@@ -42,10 +48,6 @@ Make Readexcel package and readODS package required only if needed
 
 ################################
 
-Consider changing name to RefSeeker
-
-################################
-
 Add a vignette for selecting colors on graph
 
 ################################
@@ -56,9 +58,7 @@ Consider package dhammarstrom/generefer from github for normfinder/geNorm
 
 Consider using officer functions for excel import/export instead of readxl
 
-################################
 
-add date to doctable2 filenameing - DONE
 
 ################################
 
@@ -87,7 +87,6 @@ Add printing citation to console txt word or odt
 
 ################################
 
-
 vignettes to update:
 
 loading data sources
@@ -100,7 +99,6 @@ vignettes to write:
 
 ################################
 
-
 rs_graph creates graph image when  forcesingle = True
 
 Does not send graph to plotviewer
@@ -110,5 +108,18 @@ rs_graph(res, colors = colors, forceSingle = T)
 ################################
 
 Fix minimum height on single graph, fresh frozen is cropped when only 5 miRNAs
+
+################################
+
+
+Check for possible row names in import of table. Warn if sequence seem like an index
+
+
+################################
+
+
+adjust graph bars to be equal width when more candidate are present in one dataset
+ - Check 04-Normalization.R in the MeltCurveQuality R project.
+
 
 ################################
