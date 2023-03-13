@@ -1,6 +1,6 @@
 
 
-#' File selectioin diolog for RefSeeker
+#' File selection dialog for RefSeeker
 #'
 #' @return A character vector containing the selected files
 #'
@@ -31,10 +31,27 @@ rsselectfiles <- function(){
 
     files <- tclvalue( tkgetOpenFile(multiple = TRUE, initialdir = getwd(),  filetypes = paste(filter, collapse = " "))  )
 
-    if(files != ""){ files <- strsplit(files, " ")[[1]] }
+
+    if(files != ""){
+
+      # A single string is returned to files with either space as file separator or each file is contained in {} if spaces are found in paths
+        if(grepl("\\{", files[1])){
+
+          # if there were spaces in the file paths
+          files <- strsplit(files, "\\} \\{")[[1]]
+          files <- gsub("\\{", "", files)
+          files <- gsub("\\}", "", files)
+
+        } else {files <- strsplit(files, " ")[[1]]}
+
+        # files <- strsplit(files, " ")[[1]]
+
+    }
 
     if(any(files == "")) {
-        return(cat("No files selected, terminating"))
+
+      cat("No files selected")
+      return("")
     }
 
   return(files)
@@ -278,7 +295,7 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
   okfunc <- function(){
     tkdestroy(tt)
     ok <<- TRUE
-    filename <<- tclvalue( flnm)
+    filename <<- tclvalue(flnm)
 
   }
 
@@ -465,6 +482,13 @@ rsdialog <- function(outdir = "", inputfile = c("No selection"), filename = "", 
 
 
   tkwait.window(tt)
+
+
+
+
+
+  #return(inputfile)
+
 
   return(c(ok, outdir, filename, graphtype, ordering, orientation, imagetype, tabletype, inputfile))
 

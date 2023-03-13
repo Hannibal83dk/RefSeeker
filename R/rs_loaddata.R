@@ -23,19 +23,11 @@ rs_loaddata <- function(files = ""){
               "{{Supported} {.ods}}",
               "{{All files} {*}}")
 
-
-  if(any(files == "")){
-
-    files <- tclvalue( tkgetOpenFile(multiple = TRUE, initialdir = getwd(),  filetypes = paste(filter, collapse = " "))  )
-
-    if(files != ""){ files <- strsplit(files, " ")[[1]] }
+  if(files == ""){
+    files <- rsselectfiles()
   }
 
-  if(any(files == "")) {
-    cat("No files found, terminating")
-    return()
-  }
-
+  if(files != ""){
 
 
   datalist <- list()
@@ -62,6 +54,9 @@ rs_loaddata <- function(files = ""){
   }
 
   return(datalist)
+
+  }
+
 
 }
 

@@ -38,26 +38,31 @@ rs_wizard <- function(outdir = "",
                      orientation = orientation,
                      tabletype = tabletype)
 
-  outdir <- answer[2]
 
-  # Load in the data
+  if(answer[1]){
 
-  datalist <- rs_loaddata(answer[9:length(answer)])
-  results <- rs_reffinder(datalist)
+    outdir <- answer[2]
+
+    # Load in the data
+    datalist <- rs_loaddata(answer[9:length(answer)])
+    results <- rs_reffinder(datalist)
 
 
-  if(answer[3] == ""){answer[3] == "RefSeeker"}
+    if(answer[3] == ""){answer[3] == "RefSeeker"}
 
-  if(answer[5] != "none"){
-    rs_graph(refseekerlist = results,
-             filename = paste0(answer[2], "/", answer[3]),
-             filetype = answer[7],
-             forceSingle = (answer[4] == "individual"),
-             ordering = answer[5],
-             orientation = answer[6])
+    if(answer[5] != "none"){
+      rs_graph(refseekerlist = results,
+               filename = paste0(answer[2], "/", answer[3]),
+               filetype = answer[7],
+               forceSingle = (answer[4] == "individual"),
+               ordering = answer[5],
+               orientation = answer[6])
+    }
+
+    rs_exporttable(results, filename = paste0(answer[2],"/", answer[3]), tabletype = answer[8])
+
+
   }
-
-  rs_exporttable(results, filename = paste0(answer[2],"/", answer[3]), tabletype = answer[8])
 
 }
 

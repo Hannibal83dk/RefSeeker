@@ -557,7 +557,7 @@ rsfinder <- function(expression){
 #
 rs_reffinder <- function(expression){
 
-  message("Please note that the target names has been factorized based on the appearance in the input dataset")
+  message("Please note that the target names has been factorized based on the appearance in the input dataset. \nThis effects sorting of the target column and target sorting during graph creation if sorting by target is chosen.")
 
   if(class(expression)[1] == "list"){
 

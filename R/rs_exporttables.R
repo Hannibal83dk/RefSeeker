@@ -633,11 +633,16 @@ rsdoctable1 <- function(refseekerlist, filename = "", caption = "", type = "stab
     table <- refseekerlist$rank
     caption <- paste0(caption, " - Rank")
   }
+  # my_header <- data.frame(
+  #   col_keys = c("Target", "blank1", "delta-Ct", "blank2", "BestKeeper", "blank3", "Normfinder", "blank4", "geNorm", "blank", "Comprehensive Rank"),
+  #   line1 = c("Target", "", "delta-Ct", "", "BestKeeper", "", "Normfinder", "", "geNorm", "", "Comprehensive Rank"),
+  #   line2 = c("Target", "",  "Avg. STDEV.", "", "MAD", "", "Stability", "", "Avg.M", "", "Geom. mean value")
+  # )
 
   my_header <- data.frame(
-    col_keys = c("Target", "blank1", "delta-Ct", "blank2", "BestKeeper", "blank3", "Normfinder", "blank4", "geNorm", "blank", "Comprehensive Rank"),
-    line1 = c("Target", "", "delta-Ct", "", "BestKeeper", "", "Normfinder", "", "geNorm", "", "Comprehensive Rank"),
-    line2 = c("Target", "",  "Avg. STDEV.", "", "MAD", "", "Stability", "", "Avg.M", "", "Geom. mean value")
+    col_keys = c("Target", "delta-Ct", "BestKeeper", "Normfinder", "geNorm", "Comprehensive Rank"),
+    line1 = c("Target", "delta-Ct", "BestKeeper", "Normfinder", "geNorm", "Comprehensive Rank"),
+    line2 = c("Target",  "Avg. STDEV.", "MAD", "Stability", "Avg.M", "Geom. mean value")
   )
 
 
@@ -649,17 +654,62 @@ rsdoctable1 <- function(refseekerlist, filename = "", caption = "", type = "stab
   ft <- merge_v(ft, part = "header")
   ft <- merge_h(ft, part = "header")
   ft <- align(ft, align = "center", part = "all")
+
+  ft <- font(ft, j = NULL, fontname = "Calibri", part = "all")
+  ft <- fontsize(ft, i = NULL, j = NULL, size = 9, part = "all")
+  ft <- bold(ft, i = c(1), part = "header")
+  ft <- padding(ft, j=NULL, padding.top = 3, part = "all")
+  ft <- padding(ft, j=NULL, padding.bottom = 1, part = "all")
+  ft <- padding(ft, j=NULL, padding.right = 0, part = "all")
+  ft <- padding(ft, j=NULL, padding.left = 0, part = "all")
+  ft <- padding(ft, j=NULL, padding.left = 3, part = "all")
+  ft <- line_spacing(ft, space = 0.6, part = "all")
+
+
   ft <- autofit(ft)
   ft <- hline_bottom(ft, border = officer::fp_border(width = 2), part = "header")
-  ft <- empty_blanks(ft, part = "header")
-  ft <- fix_border_issues(ft)
+  #ft <- empty_blanks(ft, part = "header")
+
   ft <- hline_top(ft, border = officer::fp_border(width = 2), part = "header")
+  ft <- vline(ft, i = c(1,2), border = officer::fp_border(color = "white", width = 3), part = "header")
+  ft <- vline(ft, i = c(1), border = officer::fp_border(color = "white", width = 3), part = "body")
+
+  ft <- fix_border_issues(ft2)
+
+
   ft
 
   sect_properties <- officer::prop_section(
-    page_size = officer::page_size(orient = "landscape"),
+    page_size = officer::page_size(orient = "portrait"),
     type = "continuous",
     page_margins = officer::page_mar())
+
+
+  #save_as_docx(ft2, pr_section = sect_properties,  path = paste0("StabilityTableTest1", Sys.Date(), ".docx"))
+
+
+  # ft <- flextable(table, col_keys = my_header$col_keys)
+  #
+  # ft <- set_caption(ft, caption, fp_p = officer::fp_par(), align_with_table = FALSE)
+  # ft <- set_header_df(ft, mapping = my_header, key = "col_keys")
+  # ft <- theme_booktabs(ft)
+  # ft <- merge_v(ft, part = "header")
+  # ft <- merge_h(ft, part = "header")
+  # ft <- align(ft, align = "center", part = "all")
+  # ft <- autofit(ft)
+  # ft <- hline_bottom(ft, border = officer::fp_border(width = 2), part = "header")
+  # ft <- empty_blanks(ft, part = "header")
+  # ft <- fix_border_issues(ft)
+  # ft <- hline_top(ft, border = officer::fp_border(width = 2), part = "header")
+  # ft
+  #
+  # sect_properties <- officer::prop_section(
+  #   page_size = officer::page_size(orient = "landscape"),
+  #   type = "continuous",
+  #   page_margins = officer::page_mar())
+
+
+
 
 
 
@@ -717,9 +767,9 @@ rsdoctable2 <- function(refseekerlist, filename = "", caption = "", addDate = TR
   }
 
   my_header <- data.frame(
-    col_keys = c('X1', 'X2', 'X3', 'blank1', 'X4', 'X5', 'blank2', 'X6', 'X7', 'blank', 'X8', 'X9', 'blank3', 'X10', 'X11'),
-    line2 = c(" ", "delta-Ct", "delta-Ct", "", "BestKeeper","BestKeeper", "", "Normfinder", "Normfinder", "", "geNorm", "geNorm", "", "Comprehensive Rank", "Comprehensive Rank"),
-    line3 = c("Target",  "Avg. STDEV.", "Rank", "", "MAD", "Rank", "", "Stability", "Rank", "", "Avg.M", "Rank", "", "Geom. mean value", "Rank" )
+    col_keys = c('X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7', 'X8', 'X9', 'X10', 'X11'),
+    line2 = c(" ", "delta-Ct", "delta-Ct", "BestKeeper","BestKeeper", "Normfinder", "Normfinder", "geNorm", "geNorm", "Comprehensive Rank", "Comprehensive Rank"),
+    line3 = c("Target",  "Avg. STDEV.", "Rank", "MAD", "Rank", "Stability", "Rank", "Avg.M", "Rank", "Geom. mean value", "Rank" )
   )
 
   ft <- flextable(table, col_keys = my_header$col_keys)
@@ -729,15 +779,45 @@ rsdoctable2 <- function(refseekerlist, filename = "", caption = "", addDate = TR
   ft <- merge_v(ft, part = "header")
   ft <- merge_h(ft, part = "header")
   ft <- align(ft, align = "center", part = "all")
+
+
+
+
+  ft <- font(ft, j = NULL, fontname = "Calibri", part = "all")
+  ft <- fontsize(ft, i = NULL, j = NULL, size = 9, part = "all")
+  ft <- bold(ft, i = c(1), part = "header")
+  ft <- padding(ft, j=NULL, padding.top = 3, part = "all")
+  ft <- padding(ft, j=NULL, padding.bottom = 1, part = "all")
+  ft <- padding(ft, j=NULL, padding.right = 0, part = "all")
+  ft <- padding(ft, j=NULL, padding.left = 0, part = "all")
+  ft <- padding(ft, j=NULL, padding.left = 3, part = "all")
+  ft <- line_spacing(ft, space = 0.6, part = "all")
+
+
+
   ft <- autofit(ft)
   ft <- hline_bottom(ft, border = officer::fp_border(width = 2), part = "header")
-  ft <- empty_blanks(ft, part = "header")
-  ft <- fix_border_issues(ft)
+  #ft <- empty_blanks(ft, part = "header")
   ft <- hline_top(ft, border = officer::fp_border(width = 2), part = "header")
+
+  ft <- vline(ft, i = c(1,2), j = c(1,3,5,7,9), border = officer::fp_border(color = "white", width = 3), part = "header")
+  ft <- vline(ft, i = c(1), j = c(1,3,5,7,9),  border = officer::fp_border(color = "white", width = 3), part = "body")
+
+
+  ft <- fix_border_issues(ft)
+
+
+
   ft
 
+  # sect_properties <- officer::prop_section(
+  #   page_size = officer::page_size(orient = "landscape"),
+  #   type = "continuous",
+  #   page_margins = officer::page_mar())
+
+
   sect_properties <- officer::prop_section(
-    page_size = officer::page_size(orient = "landscape"),
+    page_size = officer::page_size(orient = "portrait"),
     type = "continuous",
     page_margins = officer::page_mar())
 
