@@ -10,12 +10,6 @@
 # BestKeeper <- GetPubMedByID("15127793")
 # Normfinder <- GetPubMedByID("15289330")
 
-
-
-
-
-
-
 #' Cite to cite when using this package.
 #'
 #' @return No return value
