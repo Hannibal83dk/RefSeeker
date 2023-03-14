@@ -2,7 +2,7 @@
 % Please edit documentation in R/rsdialogs.R
 \name{rsselectfiles}
 \alias{rsselectfiles}
-\title{File selectioin diolog for RefSeeker}
+\title{File selection dialog for RefSeeker}
 \usage{
 rsselectfiles()
 }
@@ -10,7 +10,7 @@ rsselectfiles()
 A character vector containing the selected files
 }
 \description{
-File selectioin diolog for RefSeeker
+File selection dialog for RefSeeker
 }
 \examples{
 

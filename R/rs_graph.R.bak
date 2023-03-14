@@ -38,19 +38,6 @@
 #' }
 #'
 
-
-# refseekerlist
-# filename = "Tester"
-# filetype = "png"
-# forceSingle = TRUE
-# units = "px"
-# res = 250
-# ordering = "Comprehensive Rank"
-# colors = ""
-# orientation = "horizontal"
-
-
-
 rs_graph <- function(refseekerlist, filename = "",
                      filetype = "png",
                      forceSingle = FALSE,
@@ -58,13 +45,26 @@ rs_graph <- function(refseekerlist, filename = "",
                      ordering = "Comprehensive Rank",
                      colors = "",
                      orientation = "horizontal"){
-  isSingle = NA
+  # 2048, 2156, units = "px", res = 250
 
+  # names <- names(refseekerlist)
+
+  # if(filename==""){
+  #   cat("No file name provided, attempting to substract name\n")
+  #   filename <- deparse(substitute(refseekerlist))
+  #   cat("New file name given\n")
+  # }
+
+
+  # refseekerlist = rfres
+  # filename <- paste0(outdir, "/")
+  # forceSingle = TRUE
 
   # Check to see if the provided list is a list of list or "just" a list (one data set).
   ## Will evaluate to TRUE if we are dealing with a simple list (one data set).
   if(!is.null(refseekerlist$stabilityTable)){
     cat("simplelist, only one dataset\n")
+
 
     # name <- deparse(substitute(refseekerlist))
     # cat(name)
@@ -78,11 +78,9 @@ rs_graph <- function(refseekerlist, filename = "",
     names(refseekerlist) <- gsub("_", " ", name)
 
     cat("\nrefseekerlist renamed\n")
-    print(names(refseekerlist))
+
 
   }
-
-
 
 
   if(!is.null(refseekerlist[[1]]$stabilityTable)){
@@ -90,11 +88,6 @@ rs_graph <- function(refseekerlist, filename = "",
     cat("list of lists, maybe more than one dataset\n")
 
     names(refseekerlist) <- gsub("_", " ", names(refseekerlist))
-
-    if(length(refseekerlist) == 1){
-      forceSingle = FALSE
-      isSingle = TRUE
-    }
 
 
     if (forceSingle == FALSE) {
@@ -157,7 +150,7 @@ rs_graph <- function(refseekerlist, filename = "",
 
           if(orientation == "horizontal") {
 
-            width = 2400
+            width = 2156
 
           } else {  width = 70 * nrow( refseekerlist[[i]][[1]] ) }
 
@@ -171,15 +164,6 @@ rs_graph <- function(refseekerlist, filename = "",
           if(orientation == "horizontal") {
 
             height = 70 * nrow( refseekerlist[[i]][[1]] )
-
-
-            #make sure names of data can fit into the vertical name bar.
-            ## Base drawings takes 240 px. Each character measured as capital X takes 60 px.
-            ### If height is set to smaller than the longest name the height is set to this value (nchar * 60 + 240).´
-            if(height < max(nchar(names(refseekerlist))) *60 + 240){
-
-              height = max(nchar(names(refseekerlist))) *60 + 240
-            }
 
           } else { height = 2156 }
         }
@@ -199,12 +183,11 @@ rs_graph <- function(refseekerlist, filename = "",
         #             filetype = filetype,
         #             colors = colors,
         #             orientation = orientation))
-        if(filename != ""){ flnm <- paste0(filename, "_", gsub(" ", "_", names[i]))
-        } else flnm <- filename
+        if(filename != ""){ filename <- paste0(filename, "_", gsub(" ", "_", names[i])) }
 
         # temp <- list(refseekerlist[i])
         # print(refseekerlist)
-        p <- rsgraphdraw(refseekerlist[i], flnm, width = width, height = height, units = units, res = res, ordering = ordering, filetype = filetype, colors = colors, orientation = orientation)
+        p <- rsgraphdraw(refseekerlist[i], filename, width = width, height = height, units = units, res = res, ordering = ordering, filetype = filetype, colors = colors, orientation = orientation)
 
         graphs[[i]] <- print(p)
 

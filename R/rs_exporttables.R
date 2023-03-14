@@ -674,7 +674,7 @@ rsdoctable1 <- function(refseekerlist, filename = "", caption = "", type = "stab
   ft <- vline(ft, i = c(1,2), border = officer::fp_border(color = "white", width = 3), part = "header")
   ft <- vline(ft, i = c(1), border = officer::fp_border(color = "white", width = 3), part = "body")
 
-  ft <- fix_border_issues(ft2)
+  ft <- fix_border_issues(ft)
 
 
   ft
