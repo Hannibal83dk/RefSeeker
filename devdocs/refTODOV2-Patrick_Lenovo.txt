@@ -21,28 +21,12 @@ rs_wizard seems to create two graph figs - Think this is because it first create
 ################################
 Add message of path to files created tables for doctables - DONE
 ################################
-Fix not able to load data from p drev
-Loaddata have problem with spaces in filepaths - DONE
-################################
-Consider changing name to RefSeeker - DONE
-################################
-add date to doctable2 filenameing - DONE
-################################
-Fix minimum height on single graph, fresh frozen is cropped when only 5 miRNAs - DONE
-################################
-rs_graph creates graph image when  forcesingle = True
-Does not send graph to plotviewer
-rs_graph(res, colors = colors, forceSingle = T) - Could not replicate
-###############################################################################################
-doctable filenames add underscore after given filename testFFPE.docx -> test_FFPE_date.docx - DONE
-################################
-handle canceling and shutdown of dialogs more gracefully than a shitload of error messages - DONE
-################################
 
 
+
+################################################################################################
 
 Remove import of readxl in rs_excelbatch functions
-
 
 ################################
 
@@ -58,6 +42,10 @@ Make Readexcel package and readODS package required only if needed
 
 ################################
 
+Consider changing name to RefSeeker
+
+################################
+
 Add a vignette for selecting colors on graph
 
 ################################
@@ -66,12 +54,17 @@ Consider package dhammarstrom/generefer from github for normfinder/geNorm
 
 ################################
 
-
 Consider using officer functions for excel import/export instead of readxl
-
 
 ################################
 
+add date to doctable2 filenameing - DONE
+
+################################
+
+doctable filenames add underscore after given filename testFFPE.docx -> test_FFPE_date.docx - DONE
+
+################################
 
 doctable1 and 2 make caption appear in a top row to align properly
 
@@ -79,6 +72,10 @@ doctable1 and 2 make caption appear in a top row to align properly
 
 allow for inputing preselected data selection in the wizard.
 So users can use R generated data and preselected output folder and so on
+
+################################
+
+handle canceling and shutdown of dialogs more gracefully than a shitload of error messages
 
 ################################
 
@@ -90,6 +87,7 @@ Add printing citation to console txt word or odt
 
 ################################
 
+
 vignettes to update:
 
 loading data sources
@@ -100,12 +98,30 @@ Stability analysis (maybe remove??)
 vignettes to write:
  "Export stability graphs"
 
+################################
+
+
+rs_graph creates graph image when  forcesingle = True
+
+Does not send graph to plotviewer
+
+rs_graph(res, colors = colors, forceSingle = T)
+
+################################
+
+Fix minimum height on single graph, fresh frozen is cropped when only 5 miRNAs
+
+################################
+
+
+Check for possible row names in import of table. Warn if sequence seem like an index
 
 
 ################################
 
-Check for possible row names in import of table. Warn if sequence seem like an index
 
+Fix not able to load data from p drev
+Loaddata have problem with spaces in filepaths
 
 ################################
 
@@ -115,46 +131,3 @@ adjust graph bars to be equal width when more candidate are present in one datas
 
 
 ################################
-
-
-Add a help message if rs_normfinder is run with wrong data.
- - suggest running rs_reffinder
-
-
-################################
-
-input <- rs_loaddata("../RefSeeker\\inst\\exdata\\vignetteInputs\\RefSeeker_data_vignetteSample.xlsx")
-rs_wizard(inputfile = input)
-
-rs_wizard opens window but failes to continue due to the input not being a file but an R-object.
-
-window should be closed and error handeled properly.
-
-implementation of adding internal data set(s) to wizard.
-
-
-################################
-
-allow input of multiple datasets.
-
-
-input <- rs_loaddata("../RefSeeker\\inst\\exdata\\vignetteInputs\\RefSeeker_data_vignetteSample.xlsx")
-
-rs_bestkeeper(input)
-
- Error in (function (..., row.names = NULL, check.rows = FALSE, check.names = TRUE,  : 
-  argumenter antyder forskelligt antal rækker: 19, 20
-
-
-Fix error handeling - check input validity, give tips if not correct
-
-################################
-
-Set normfinderFull Groups = FALSE as default
-
-################################
-
-doctable left allign first row (targets/genes)
-
-################################
-
