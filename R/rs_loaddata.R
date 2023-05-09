@@ -23,12 +23,11 @@ rs_loaddata <- function(files = ""){
               "{{Supported} {.ods}}",
               "{{All files} {*}}")
 
-  if(files == ""){
+  if(files[1] == ""){
     files <- rsselectfiles()
   }
 
-  if(files != ""){
-
+  if(files[1] != ""){
 
   datalist <- list()
 
