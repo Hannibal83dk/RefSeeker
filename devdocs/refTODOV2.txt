@@ -38,7 +38,9 @@ doctable filenames add underscore after given filename testFFPE.docx -> test_FFP
 ################################
 handle canceling and shutdown of dialogs more gracefully than a shitload of error messages - DONE
 ################################
-
+Fix warning for rs_loaddata when a vector of files is given.
+warning occurs when checking if file  == "" and file !="". Only first elements is checked. DONE
+################################
 
 
 Remove import of readxl in rs_excelbatch functions
@@ -157,4 +159,5 @@ Set normfinderFull Groups = FALSE as default
 doctable left allign first row (targets/genes)
 
 ################################
+
 
