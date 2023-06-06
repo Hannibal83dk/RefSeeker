@@ -3,16 +3,18 @@ RefSeeker
 
 DESCRIPTION
 
-	RefSeeker is a package developed for the R statistical programming language. It provides a convenient way of analyzing 
-	candidate target expression stabilities from raw Cp/Ct/Cq values obtained normally from RT-qPCR experiments.
+	RefSeeker is a package developed for the R statistical programming language. It provides a convenient
+	way of analyzing candidate target expression stabilities from raw Cp/Ct/Cq values obtained normally
+	from RT-qPCR experiments.
 
-	It uses the RefFinder method(Xie et. al. 2012), which includes stability values calculated by four different
-	algorithms: Normfinder(Andersen et. al. 2004), geNorm(Vandesompele et. al. 2002), BestKeeper(Pfaffl et. al. 2004) and
-	the comparative delta-Ct method(Silver et. al. 2006). The target stabilities are then ranked and a geometric mean of
-	the ranking from each algorithm is then calculated as the comprehensive ranking.
+	It uses the RefFinder method(Xie et. al. 2012), which includes stability values calculated by four
+	different algorithms: Normfinder(Andersen et. al. 2004), geNorm(Vandesompele et. al. 2002),
+	BestKeeper(Pfaffl et. al. 2004) and the comparative delta-Ct method(Silver et. al. 2006). The target
+	stabilities are then ranked and a geometric mean of the ranking from each algorithm is then calculated
+	as the comprehensive ranking.
 	
-	The package include functions for easy import of raw data, calculatiion of stability values for each algorithm and an
-	easy way of exporting these data to graphs and tabular file formats.
+	The package include functions for easy import of raw data, calculatiion of stability values for each
+	algorithm and an easy way of exporting these data to graphs and tabular file formats.
 
 
 INSTALLATION
