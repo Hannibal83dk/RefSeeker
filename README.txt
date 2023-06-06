@@ -3,15 +3,18 @@ RefSeeker
 
 DESCRIPTION
 
-	RefSeeker is a package developed for the R statistical programming language. It provides a convenient way of analyzing candidate target expression
-	stabilities from raw Cp/Ct/Cq values obtained normally from RT-qPCR experiments.
+	RefSeeker is a package developed for the R statistical programming language. It provides a convenient
+	way of analyzing candidate target expression stabilities from raw Cp/Ct/Cq values obtained normally
+	from RT-qPCR experiments.
 
-	It uses the RefFinder method(Xie et. al. 2012), which includes stability values calculated by four different algorithms: Normfinder(Andersen et. al. 2004),
-	geNorm(Vandesompele et. al. 2002), BestKeeper(Pfaffl et. al. 2004) and the comparative delta-Ct method(Silver et. al. 2006).
-	The target stabilities are then ranked and a geometric mean of the ranking from each algorithm is then calculated as the comprehensive ranking.
-
-	The package include functions for easy import of raw data, calculatiion of stability values for each algorithm and an easy way of exporting these data to
-	graphs and tabular file formats.
+	It uses the RefFinder method(Xie et. al. 2012), which includes stability values calculated by four
+	different algorithms: Normfinder(Andersen et. al. 2004), geNorm(Vandesompele et. al. 2002),
+	BestKeeper(Pfaffl et. al. 2004) and the comparative delta-Ct method(Silver et. al. 2006). The target
+	stabilities are then ranked and a geometric mean of the ranking from each algorithm is then calculated
+	as the comprehensive ranking.
+	
+	The package include functions for easy import of raw data, calculatiion of stability values for each
+	algorithm and an easy way of exporting these data to graphs and tabular file formats.
 
 
 INSTALLATION
@@ -21,14 +24,14 @@ The package can be installed in two ways:
 	1. Download Package Archive:
 
 		a) Download the RefSeeker_1.0.0.tar.gz file to your computer:
-		https://github.com/Hannibal83dk/RefSeeker/blob/main/RefSeeker_1.0.0.tar.gz
+		https://github.com/Hannibal83dk/RefSeeker/releases/latest/download/RefSeeker_latest.tar.gz
 		
 		b) Open R
 		
 		c) In the R Console type:
 		{ install.packages("<PATH/TO/RefSeeker_1.0.0.tar.gz>", repos = NULL, type = "source") }
 		
-		Note: Please note that the entire part of <PATH/TO/RefSeeker_1.0.0.tar.gz> needs to be changed to the specific location of the downloaded
+		Note: Please note that the entire part of <PATH/TO/RefSeeker_latest.tar.gz> needs to be changed to the specific location of the downloaded
 		file on your computer
 		
 		Alternatively, if RStudio is being used: 
@@ -44,7 +47,7 @@ The package can be installed in two ways:
 			{ install.packages("devtools") }
 
 		b) In the R Console type:
-		{ devtools::install_github("Hannibal83dk/RefSeeker") }
+		{ devtools::install_github("Hannibal83dk/RefSeeker", build_vignettes = TRUE) }
 
 
 		After installation the library can be loaded by typing
