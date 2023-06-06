@@ -161,3 +161,5 @@ doctable left allign first row (targets/genes)
 ################################
 
 
+
+https://github.com/Hannibal83dk/RefSeeker/releases/download/latest/RefSeeker_latest.tar.gz

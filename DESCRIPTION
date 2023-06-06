@@ -1,7 +1,7 @@
 Package: RefSeeker
 Type: Package
 Title: A RefFinder stability ranking tool
-Version: 1.0.3
+Version: 1.0.4
 Author: Patrick H.D. Petersen
 Maintainer: Patrick H.D. Petersen <dalsbo83@gmail.com>
 Description: Simple calculation and extraction of expression stability and stability ranking based on the RefFinder method.
