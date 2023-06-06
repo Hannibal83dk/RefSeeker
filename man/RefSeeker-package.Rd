@@ -6,6 +6,6 @@
 \alias{RefSeeker-package}
 \title{RefSeeker: A RefFinder stability ranking tool}
 \description{
-Simple calculation and extraction of expression stablity and stablity ranking based on the RefFinder method.
+Simple calculation and extraction of expression stability and stability ranking based on the RefFinder method.
 }
 \keyword{internal}

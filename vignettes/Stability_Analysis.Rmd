@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 bibliography: references.bib
 csl: softwarex.csl
 vignette: >
-  %\VignetteIndexEntry{Stabilty_Analysis}
+  %\VignetteIndexEntry{Stabilty Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

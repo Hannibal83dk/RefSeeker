@@ -63,7 +63,7 @@ essentially will be the same.
 rs_exporttable(rs_results, filename = "cohort1", tabletype = "ods")
 ```
 
-<img src="xlout.png" title="Selecting file dialog" alt="Excel example" width="99%" style="display: block; margin: auto;"/>
+<img src="./VignetteImages/xlout.png" title="Selecting file dialog" alt="Excel example" width="99%" style="display: block; margin: auto;"/>
 
 <br> What is seen in this figure is the results from the Fresh Frozen
 data set.
@@ -112,19 +112,19 @@ with either stability values, stability ranks or a combination of these.
 rs_exporttable(rs_results, filename = "cohort1", tabletype = "docx-stability")
 ```
 
-<img src="./Export/docx-stab.png" title="docx-stability" alt="docx example" width="99%" style="display: block; margin: auto;"/>
+<img src="./VignetteImages/docx-stab.png" title="docx-stability" alt="docx example" width="99%" style="display: block; margin: auto;"/>
 
 ```{R eval = FALSE}
 rs_exporttable(rs_results, filename = "./cohort1", tabletype = "docx-rank")
 ```
 
-<img src="./Export/docx-rank.png" title="docx-rank" alt="docx example" width="99%" style="display: block; margin: auto;"/>
+<img src="./VignetteImages/docx-rank.png" title="docx-rank" alt="docx example" width="99%" style="display: block; margin: auto;"/>
 
 ```{R eval = FALSE}
 rs_exporttable(rs_results, filename = "cohort1", tabletype = "docx-combi")
 ```
 
-<img src="./Export/docx-combi.png" title="docx-combi" alt="docx example" width="99%" style="display: block; margin: auto;"/>
+<img src="./VignetteImages/docx-combi.png" title="docx-combi" alt="docx example" width="99%" style="display: block; margin: auto;"/>
 
 <br>
 

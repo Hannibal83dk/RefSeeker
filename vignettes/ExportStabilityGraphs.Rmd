@@ -2,7 +2,7 @@
 title: "Export Stability Graphs"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ExportStabilityGraphs}
+  %\VignetteIndexEntry{Export Stability Graphs}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 # editor_options: 

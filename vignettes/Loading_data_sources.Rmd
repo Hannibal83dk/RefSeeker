@@ -59,7 +59,7 @@ csv, tsv or txt:
 Note that missing data is incompatible with the RefSeeker stability calculations and will break the analysis.
 
 
-<img src="excelexample.png" title="Excel file data structure example" alt="Excel example" width="99%" style="display: block; margin: auto;" />
+<img src="./VignetteImages/excelexample.png" title="Excel file data structure example" alt="Excel example" width="99%" style="display: block; margin: auto;" />
 
 
 To load data one or more files use rs_loaddata().
@@ -71,7 +71,7 @@ rs_data <- rs_loaddata()
 If no file path is provided, a dialog window will appear, allowing for selecting one or more files.
 
 
-<img src="selectexcelfile.png" title="Selecting file dialog" alt="Excel example" width="99%" style="display: block; margin: auto;" />
+<img src="./VignetteImages/selectexcelfile.png" title="Selecting file dialog" alt="Excel example" width="99%" style="display: block; margin: auto;" />
 
 
 
