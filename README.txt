@@ -12,7 +12,7 @@ DESCRIPTION
 	BestKeeper(Pfaffl et. al. 2004) and the comparative delta-Ct method(Silver et. al. 2006). The target
 	stabilities are then ranked and a geometric mean of the ranking from each algorithm is then calculated
 	as the comprehensive ranking.
-	
+
 	The package include functions for easy import of raw data, calculatiion of stability values for each
 	algorithm and an easy way of exporting these data to graphs and tabular file formats.
 
@@ -23,21 +23,21 @@ The package can be installed in two ways:
 
 	1. Download Package Archive:
 
-		a) Download the RefSeeker_1.0.0.tar.gz file to your computer:
+		a) Download the RefSeeker_latests.tar.gz file to your computer:
 		https://github.com/Hannibal83dk/RefSeeker/releases/latest/download/RefSeeker_latest.tar.gz
-		
+
 		b) Open R
-		
+
 		c) In the R Console type:
 		{ install.packages("<PATH/TO/RefSeeker_1.0.0.tar.gz>", repos = NULL, type = "source") }
-		
+
 		Note: Please note that the entire part of <PATH/TO/RefSeeker_latest.tar.gz> needs to be changed to the specific location of the downloaded
 		file on your computer
-		
-		Alternatively, if RStudio is being used: 
-		open Tools -> Install Packages -> 
+
+		Alternatively, if RStudio is being used:
+		open Tools -> Install Packages ->
 		Select Package from Archive File in the Install from drop down	menu.
-		Browse for the downloaded Package archive -> press Install 
+		Browse for the downloaded Package archive -> press Install
 
 
 	2. Use devtools to download from github:
@@ -52,7 +52,7 @@ The package can be installed in two ways:
 
 		After installation the library can be loaded by typing
 		{ library(RefSeeker) }
-		
+
 
 USAGE
 
@@ -91,11 +91,11 @@ Calculate stabilities:
 	To calculate stabilities use the rs_reffinder function. This will calculate stabilities using all the available algorithms.
 
 	{ results <- rs_reffinder(data) }
-	
+
 	Create a graph:
 
 	To create a simple graph of the results use rs_graph. Several option exists for tweaking the graph including adding color changing size and orientation, see the package vignettes for more.
-	
+
 	{ rs_graph(results, filename = "DemoStabilities") }
 
 
@@ -103,11 +103,11 @@ Calculate stabilities:
 Export tables
 
 	Several types of tables can be exported here is a quick example, please see the Exporting Stability Tables vignette in the package.
-	
+
 	To save the the data in a cross compatible format:
 	{ rs_exporttable(results, filename = "DemoStabilities", tabletype = "csv") }
-	
-	To create a docx formatted table for publication 
+
+	To create a docx formatted table for publication
 	{ rs_exporttable(results, filename = "DemoStabilities", tabletype = "docx-combi") }
 
 
@@ -115,8 +115,8 @@ SUPPORT
 
 	For bug reports or please use the github repository bug tracker
 	For support regarding installation and use, or to report issues or bugs please open an issue through github: https://github.com/Hannibal83dk/RefSeeker/issues
-	
-	
+
+
 LICENSE
 
 	RefSeeker is made available under the GPL ≥ 2
