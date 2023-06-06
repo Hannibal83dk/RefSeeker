@@ -21,14 +21,14 @@ The package can be installed in two ways:
 	1. Download Package Archive:
 
 		a) Download the RefSeeker_1.0.0.tar.gz file to your computer:
-		https://github.com/Hannibal83dk/RefSeeker/blob/main/RefSeeker_1.0.0.tar.gz
+		https://github.com/Hannibal83dk/RefSeeker/releases/latest/download/RefSeeker_latest.tar.gz
 		
 		b) Open R
 		
 		c) In the R Console type:
 		{ install.packages("<PATH/TO/RefSeeker_1.0.0.tar.gz>", repos = NULL, type = "source") }
 		
-		Note: Please note that the entire part of <PATH/TO/RefSeeker_1.0.0.tar.gz> needs to be changed to the specific location of the downloaded
+		Note: Please note that the entire part of <PATH/TO/RefSeeker_latest.tar.gz> needs to be changed to the specific location of the downloaded
 		file on your computer
 		
 		Alternatively, if RStudio is being used: 
@@ -44,7 +44,7 @@ The package can be installed in two ways:
 			{ install.packages("devtools") }
 
 		b) In the R Console type:
-		{ devtools::install_github("Hannibal83dk/RefSeeker") }
+		{ devtools::install_github("Hannibal83dk/RefSeeker", build_vignettes = TRUE) }
 
 
 		After installation the library can be loaded by typing
