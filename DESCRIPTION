@@ -4,7 +4,7 @@ Title: A RefFinder stability ranking tool
 Version: 1.0.2
 Author: Patrick H.D. Petersen
 Maintainer: Patrick H.D. Petersen <dalsbo83@gmail.com>
-Description: Simple calculation and extraction of expression stablity and stablity ranking based on the RefFinder method.
+Description: Simple calculation and extraction of expression stability and stability ranking based on the RefFinder method.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true

@@ -149,7 +149,7 @@ Note that some functionalities are limited. It is so far only possible to import
 ```{r eval=FALSE}
 rs_wizard()
 ```
-![](./Loading_data_scources-rs_dialog.png){width=100%} 
+![](./VignetteImages/rs_dialog.png){width=100%} 
  
 
 <br>

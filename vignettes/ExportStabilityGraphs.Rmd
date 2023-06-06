@@ -24,7 +24,7 @@ library(RefSeeker)
 
 In This vignette we will explore different options for creating and exporting a graphical representation of the RefSeeker results.
 
-So far the only option is a bar graph depicting the stabilies from each algorithm.
+So far the only option is a bar graph depicting the stabilities from each algorithm.
 
 The rs_graph function is available for creating the graph.
 
@@ -152,7 +152,7 @@ singlegraphs <- rs_graph(rs_results, colors = colors)
 <br>
 ## Orientaion
 
-The default orientation of the bars is horizontal. This seems to ease the readability of the target names. However, a vertical orientation is desired this is easily done by setting the orientation to "vertical"
+The default orientation of the bars is horizontal. This seems to ease the readability of the target names. However, if a vertical orientation is desired this is easily done by setting the orientation to "vertical"
 <br>
 ```{r demoing-vertical, fig.asp = 1.25, fig.height = 12, fig.width = 8, out.width="75%", fig.align='center'}
 singlegraphs <- rs_graph(rs_results, colors = colors, orientation = "vertical")

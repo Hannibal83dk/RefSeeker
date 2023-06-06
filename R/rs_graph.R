@@ -164,8 +164,6 @@ rs_graph <- function(refseekerlist, filename = "",
         }
 
 
-
-
         if (missing(height)) {
 
           if(orientation == "horizontal") {
