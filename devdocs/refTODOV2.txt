@@ -164,6 +164,9 @@ doctable left allign first row (targets/genes)
 Permanent link to latest  version:
 https://github.com/Hannibal83dk/RefSeeker/releases/latest/download/RefSeeker_latest.tar.gz
 
+Permanent link to sample data:
+https://github.com/Hannibal83dk/RefSeeker/blob/main/SampleData/RefSeekerSampleData.xlsx
+https://github.com/Hannibal83dk/RefSeeker/blob/c04d39296d64bbc7918513dafcfb9e870f51de4c/SampleData/RefSeekerSampleData.xlsx
 
 Add build_vignettes to
 devtools::install_github("Hannibal83dk/RefSeeker", build_vignettes = TRUE)

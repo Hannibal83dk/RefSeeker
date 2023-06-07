@@ -554,13 +554,11 @@ rsdoctable <- function(refseekerlist, filename = "", tabletype = "stability",  a
 
   }
 
+
+
   if(!is.null(refseekerlist[[1]]$stabilityTable)){ # A list of lists of results tables (refseekerlist[[1]]$stabilityTable exists)
-
-
     names(refseekerlist) <- gsub("_", " ", names(refseekerlist))
-
   }
-
 
   if(tabletype == "both"){
 
@@ -654,6 +652,8 @@ rsdoctable1 <- function(refseekerlist, filename = "", caption = "", type = "stab
   ft <- merge_v(ft, part = "header")
   ft <- merge_h(ft, part = "header")
   ft <- align(ft, align = "center", part = "all")
+  ft <- align(ft, j = 1, align = "left", part = "all")
+
 
   ft <- font(ft, j = NULL, fontname = "Calibri", part = "all")
   ft <- fontsize(ft, i = NULL, j = NULL, size = 9, part = "all")
@@ -667,10 +667,10 @@ rsdoctable1 <- function(refseekerlist, filename = "", caption = "", type = "stab
 
 
   ft <- autofit(ft)
-  ft <- hline_bottom(ft, border = officer::fp_border(width = 2), part = "header")
+  ft <- hline_bottom(ft, border = officer::fp_border(width = 1.5), part = "header")
   #ft <- empty_blanks(ft, part = "header")
 
-  ft <- hline_top(ft, border = officer::fp_border(width = 2), part = "header")
+  ft <- hline_top(ft, border = officer::fp_border(width = 1.5), part = "header")
   ft <- vline(ft, i = c(1,2), border = officer::fp_border(color = "white", width = 3), part = "header")
   ft <- vline(ft, i = c(1), border = officer::fp_border(color = "white", width = 3), part = "body")
 
@@ -709,10 +709,6 @@ rsdoctable1 <- function(refseekerlist, filename = "", caption = "", type = "stab
   #   page_margins = officer::page_mar())
 
 
-
-
-
-
   if(addDate){filename <- paste0(filename, "_", Sys.Date())}
 
   save_as_docx(ft, pr_section = sect_properties,  path = paste0(filename, ".docx"))
@@ -720,7 +716,6 @@ rsdoctable1 <- function(refseekerlist, filename = "", caption = "", type = "stab
   cat(paste0("A doc-table file was created at: ", paste0(filename, ".docx\n")))
 
   return(ft)
-
 
 }
 
@@ -779,8 +774,7 @@ rsdoctable2 <- function(refseekerlist, filename = "", caption = "", addDate = TR
   ft <- merge_v(ft, part = "header")
   ft <- merge_h(ft, part = "header")
   ft <- align(ft, align = "center", part = "all")
-
-
+  ft <- align(ft, j = 1, align = "left", part = "all")
 
 
   ft <- font(ft, j = NULL, fontname = "Calibri", part = "all")
@@ -793,8 +787,6 @@ rsdoctable2 <- function(refseekerlist, filename = "", caption = "", addDate = TR
   ft <- padding(ft, j=NULL, padding.left = 3, part = "all")
   ft <- line_spacing(ft, space = 0.6, part = "all")
 
-
-
   ft <- autofit(ft)
   ft <- hline_bottom(ft, border = officer::fp_border(width = 2), part = "header")
   #ft <- empty_blanks(ft, part = "header")
@@ -803,10 +795,7 @@ rsdoctable2 <- function(refseekerlist, filename = "", caption = "", addDate = TR
   ft <- vline(ft, i = c(1,2), j = c(1,3,5,7,9), border = officer::fp_border(color = "white", width = 3), part = "header")
   ft <- vline(ft, i = c(1), j = c(1,3,5,7,9),  border = officer::fp_border(color = "white", width = 3), part = "body")
 
-
   ft <- fix_border_issues(ft)
-
-
 
   ft
 
@@ -821,7 +810,6 @@ rsdoctable2 <- function(refseekerlist, filename = "", caption = "", addDate = TR
     type = "continuous",
     page_margins = officer::page_mar())
 
-
   if(addDate){filename <- paste0(filename, "_", Sys.Date())}
 
   save_as_docx(ft, pr_section = sect_properties,  path = paste0(filename, ".docx"))
@@ -830,9 +818,6 @@ rsdoctable2 <- function(refseekerlist, filename = "", caption = "", addDate = TR
 
   return(ft)
 }
-
-
-
 
 #######################################################################
 
